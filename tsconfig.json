@@ -21,6 +21,9 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
   },
-  "include": ["src"],
+  "include": [
+    ".eslinrc.cjs",
+    "src",  
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
