@@ -1,7 +1,9 @@
 **Task**: [link](https://github.com/)
 
 ### PR Type
+
 What kind of change does this PR introduce?
+
 - [ ] Feature
 - [ ] Bugfix
 - [ ] Code style update (formatting, local variables)
@@ -12,7 +14,9 @@ What kind of change does this PR introduce?
 - [ ] Other
 
 ### What's new?
+
 -
 
 ### Screenshots
+
 N/A
