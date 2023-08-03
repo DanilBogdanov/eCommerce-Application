@@ -12,6 +12,8 @@ Users can browse through a vast range of products 📚👗👟, view detailed de
 
 An important aspect of our application is that it's responsive 📲, ensuring it looks great on various devices with a minimum resolution of 390px. This feature makes the shopping experience enjoyable, irrespective of the device users prefer.
 
+The application is a Single Page Application (SPA) i.e. dynamically rewrites a current web page with new data from the web server.
+
 Key pages in the application include:
 
 - Login and Registration pages 🖥️
@@ -29,12 +31,11 @@ The main idea of our application is to become a comprehensive online shopping po
 
 ## Technical Stack
 1. **TypeScript**: ensures type safety and improve the maintainability and scalability of the application.
-2. **Single Page Application (SPA)**: a website or web application that dynamically rewrites a current web page with new data from the web server.
+2. **React**: front-end JS library for building user interfaces based on components.
 3. **CommerceTools API**: provides business logic for commerce solutions as web services.
 4. **ESLint**: enforces consistent coding styles and identify potential issues in the codebase.
 5. **Prettier**: automatically formates code, ensuring a consistent and readable code style.
 6. **Husky**: manages Git hooks, automating tasks such as code formatting and linting checks during the commit process.
 7. **Jest**: the testing framework, enabling comprehensive testing of code functionality.
 8. **Webpack**: bundles JS files for usage in a browser.
-9. **React**: front-end JS library for building user interfaces based on components.
-10. **GitHub Project board**: represents work and its path towards completion.
+9. **GitHub Project board**: represents work and its path towards completion.
