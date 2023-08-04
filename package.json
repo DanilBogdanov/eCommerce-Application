@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\"",
     "check-format": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest"
   },
   "dependencies": {
     "eslint-config-airbnb-typescript": "^17.1.0",
