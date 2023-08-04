@@ -48,7 +48,8 @@
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,html}": [
       "npm run check-format",
-      "npm run lint"
+      "npm run lint",
+      "npm run test"
     ]
   }
 }
