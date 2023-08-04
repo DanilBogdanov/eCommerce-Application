@@ -5,6 +5,7 @@
 2. [Purpose](#purpose)
 3. [Technical Stack](#technical-stack)
 4. [Scripts List](#scripts-list)
+5. [Setup Instructions](#setup-instructions)
 
 ## Description
 Welcome to our eCommerce application! This platform replicates real-world shopping experiences in a digital environment 🏪. 
@@ -56,3 +57,13 @@ The main idea of our application is to become a comprehensive online shopping po
 - `npm run preview`: start a local web server that serves the built solution from ./dist for previewing.
 5. **Husky**: 
 - `npm run prepare`: install Git hooks.
+
+## Setup Instructions
+1. **Clone repository**:  
+- *https* : `git clone https://github.com/DanilBogdanov/eCommerce-Application.git`,
+- *SSH* : `git clone git@github.com:DanilBogdanov/eCommerce-Application.git`.
+2. **Install dependencies**: `npm install`.
+3. **Build the project**: `npm run build`.
+4. **Start a local web server for preview**: `npm run preview`.
+5. **Open this address in browser**: `http://localhost:4173/`.
+6. **You are awasome!**
