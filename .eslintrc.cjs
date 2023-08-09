@@ -23,6 +23,6 @@ module.exports = {
     ],
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'import/prefer-default-export': 'off',
-    'react-in-jsx-scope': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 };
