@@ -12,7 +12,8 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\"",
     "check-format": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\"",
     "prepare": "husky install",
-    "test": "jest"
+    "test": "jest",
+    "test-husky": "jest --passWithNoTests"
   },
   "dependencies": {
     "eslint-config-airbnb-typescript": "^17.1.0",
@@ -54,7 +55,7 @@
       "npm run format",
       "npm run lint:fix",
       "npm run lint",
-      "npm run test"
+      "npm run test-husky"
     ]
   }
 }
