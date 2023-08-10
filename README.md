@@ -40,7 +40,8 @@ The main idea of our application is to become a comprehensive online shopping po
 6. **Husky**: manages Git hooks, automating tasks such as code formatting and linting checks during the commit process.
 7. **Jest**: the testing framework, enabling comprehensive testing of code functionality.
 8. **Vite**: bundles JS files for usage in a browser.
-9. **GitHub Project board**: represents work and its path towards completion.
+9. **React Router**: Facilitates navigation and routing in a React application, enabling dynamic and multi-page experiences.
+10. **GitHub Project board**: represents work and its path towards completion.
 
 ## Scripts List
 1. **ESLint**: 
