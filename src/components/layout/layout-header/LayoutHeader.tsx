@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
-import Logo from '../../../assets/icons/Logo';
+import Logo from '../../logo/Logo';
 
 export default function LayoutHeader(): ReactElement {
   return (
