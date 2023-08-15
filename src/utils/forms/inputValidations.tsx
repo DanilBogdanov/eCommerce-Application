@@ -37,7 +37,7 @@ export const surnamValidation = {
 const dateMinimum = () => {
   const currentDate = new Date();
   const currentDateMS = currentDate.getTime();
-  const thirteenYearsMS = 31536000000;
+  const thirteenYearsMS = 410240038000;
   const dateMinMS = new Date(currentDateMS - thirteenYearsMS);
   const dateMin = dateMinMS.toISOString().slice(0, 10);
   return dateMin;
