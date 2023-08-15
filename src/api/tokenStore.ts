@@ -90,6 +90,7 @@ class TokenStore {
     this.exp = tokenResponse.exp;
     this.token = tokenResponse.accessToken;
     this.refreshToken = tokenResponse.refreshToken;
+    this.email = tokenResponse.email;
     this.save();
   }
 
