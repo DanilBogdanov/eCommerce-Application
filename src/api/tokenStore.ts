@@ -9,6 +9,7 @@ import {
   config,
 } from '../types/api';
 import handleError from '../utils/api/errorHandler';
+import { crypt, encrypt } from '../utils/api/crypt';
 
 class TokenStore {
   private readonly LS_KEY = 'd2v2:token_state';
@@ -26,7 +27,8 @@ class TokenStore {
   constructor() {
     const lsState = localStorage.getItem(this.LS_KEY);
     if (lsState) {
-      this.load(JSON.parse(lsState));
+      const encryptState = encrypt(lsState);
+      this.load(JSON.parse(encryptState));
     }
     this.save();
   }
@@ -156,7 +158,9 @@ class TokenStore {
       token: this.token,
       refreshToken: this.refreshToken,
     };
-    localStorage.setItem(this.LS_KEY, JSON.stringify(lsState));
+    const strState = JSON.stringify(lsState);
+    const cryptState = crypt(strState);
+    localStorage.setItem(this.LS_KEY, cryptState);
   }
 }
 
