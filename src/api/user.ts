@@ -10,6 +10,14 @@ class User {
     this.tokenStore = tokenStore;
   }
 
+  public isAnonymous(): boolean {
+    return this.tokenStore.isAnonym();
+  }
+
+  public getEmail(): string {
+    return this.tokenStore.getEmail();
+  }
+
   public async getProfile(): Promise<ApiResponse<Profile>> {
     if (this.tokenStore.isAnonym()) {
       return {
@@ -37,10 +45,6 @@ class User {
     } catch (e) {
       return handleError<Profile>(e);
     }
-  }
-
-  public isAnonymous(): boolean {
-    return this.tokenStore.isAnonym();
   }
 
   private static async me(token: string): Promise<Profile> {

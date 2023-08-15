@@ -112,6 +112,7 @@ class Auth {
       accessToken: data.access_token,
       refreshToken: data.refresh_token,
       exp: Date.now() + data.expires_in * MSEC_IN_SEC,
+      email,
     };
   }
 }

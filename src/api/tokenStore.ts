@@ -24,6 +24,8 @@ class TokenStore {
 
   private lock: Promise<void | TokenResponse> | null = null;
 
+  private email: string = '';
+
   constructor() {
     const lsState = localStorage.getItem(this.LS_KEY);
     if (lsState) {
@@ -35,6 +37,10 @@ class TokenStore {
 
   public isAnonym(): boolean {
     return this.isAnonymous;
+  }
+
+  public getEmail(): string {
+    return this.email;
   }
 
   public async getToken(): Promise<ApiResponse<string>> {
@@ -125,6 +131,7 @@ class TokenStore {
       accessToken: data.access_token,
       refreshToken: data.refresh_token,
       exp: Date.now() + data.expires_in * MSEC_IN_SEC,
+      email: '',
     };
   }
 
@@ -148,6 +155,9 @@ class TokenStore {
       if ('exp' in lsState && typeof lsState.exp === 'number') {
         this.exp = lsState.exp;
       }
+      if ('email' in lsState && typeof lsState.email === 'string') {
+        this.email = lsState.email;
+      }
     }
   }
 
@@ -157,6 +167,7 @@ class TokenStore {
       exp: this.exp,
       token: this.token,
       refreshToken: this.refreshToken,
+      email: this.email,
     };
     const strState = JSON.stringify(lsState);
     const cryptState = crypt(strState);

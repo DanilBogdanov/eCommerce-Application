@@ -18,6 +18,7 @@ export interface TokenResponse {
   exp: number;
   accessToken: string;
   refreshToken: string;
+  email: string;
 }
 
 export interface AuthResponse {
