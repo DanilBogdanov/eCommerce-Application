@@ -9,6 +9,7 @@ import {
   config,
 } from '../types/api';
 import handleError from '../utils/api/errorHandler';
+import { crypt, encrypt } from '../utils/api/crypt';
 
 class TokenStore {
   private readonly LS_KEY = 'd2v2:token_state';
@@ -23,16 +24,23 @@ class TokenStore {
 
   private lock: Promise<void | TokenResponse> | null = null;
 
+  private email: string = '';
+
   constructor() {
     const lsState = localStorage.getItem(this.LS_KEY);
     if (lsState) {
-      this.load(JSON.parse(lsState));
+      const encryptState = encrypt(lsState);
+      this.load(JSON.parse(encryptState));
     }
     this.save();
   }
 
   public isAnonym(): boolean {
     return this.isAnonymous;
+  }
+
+  public getEmail(): string {
+    return this.email;
   }
 
   public async getToken(): Promise<ApiResponse<string>> {
@@ -82,6 +90,7 @@ class TokenStore {
     this.exp = tokenResponse.exp;
     this.token = tokenResponse.accessToken;
     this.refreshToken = tokenResponse.refreshToken;
+    this.email = tokenResponse.email;
     this.save();
   }
 
@@ -123,6 +132,7 @@ class TokenStore {
       accessToken: data.access_token,
       refreshToken: data.refresh_token,
       exp: Date.now() + data.expires_in * MSEC_IN_SEC,
+      email: '',
     };
   }
 
@@ -146,6 +156,9 @@ class TokenStore {
       if ('exp' in lsState && typeof lsState.exp === 'number') {
         this.exp = lsState.exp;
       }
+      if ('email' in lsState && typeof lsState.email === 'string') {
+        this.email = lsState.email;
+      }
     }
   }
 
@@ -155,8 +168,11 @@ class TokenStore {
       exp: this.exp,
       token: this.token,
       refreshToken: this.refreshToken,
+      email: this.email,
     };
-    localStorage.setItem(this.LS_KEY, JSON.stringify(lsState));
+    const strState = JSON.stringify(lsState);
+    const cryptState = crypt(strState);
+    localStorage.setItem(this.LS_KEY, cryptState);
   }
 }
 

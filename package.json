@@ -16,10 +16,14 @@
     "test-husky": "jest --passWithNoTests"
   },
   "dependencies": {
+    "classnames": "^2.3.2",
     "axios": "^1.4.0",
     "eslint-config-airbnb-typescript": "^17.1.0",
+    "framer-motion": "^10.15.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.4",
+    "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.2"
   },
   "devDependencies": {
@@ -61,6 +65,6 @@
       "npm run lint",
       "npm run test-husky",
       "git add"
-    ]   
+    ]
   }
 }

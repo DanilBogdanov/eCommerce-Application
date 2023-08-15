@@ -1,9 +1,9 @@
 import { ReactElement } from 'react';
 
-export default function Main(): ReactElement {
+export default function Catalog(): ReactElement {
   return (
     <>
-      <h2>Main</h2>
+      <h2>Catalog</h2>
       <img src='/img/inProgress.png' alt='in building' />
     </>
   );
