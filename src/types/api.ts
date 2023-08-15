@@ -18,6 +18,7 @@ export interface TokenResponse {
   exp: number;
   accessToken: string;
   refreshToken: string;
+  email: string;
 }
 
 export interface AuthResponse {
@@ -50,3 +51,5 @@ export interface Profile {
   firstName: string;
   lastName: string;
 }
+
+export type AuthCallback = (isAnonym: boolean, email: string) => void;

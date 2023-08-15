@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
   ApiResponse,
+  AuthCallback,
   AuthResponse,
   MSEC_IN_SEC,
   RegisterForm,
@@ -13,6 +14,8 @@ import handleError from '../utils/api/errorHandler';
 class Auth {
   private tokenStore: TokenStore;
 
+  private callback?: AuthCallback;
+
   constructor(tokenStore: TokenStore) {
     this.tokenStore = tokenStore;
   }
@@ -24,6 +27,9 @@ class Auth {
     try {
       const tokenResponse = await Auth.loginUser(email, password);
       this.tokenStore.update(tokenResponse);
+      if (this.callback) {
+        this.callback(false, email);
+      }
       return {
         result: true,
         message: `User with email:${email} successfully logged in`,
@@ -38,6 +44,9 @@ class Auth {
     try {
       const tokenResponse = await TokenStore.loginAnonymous();
       this.tokenStore.update(tokenResponse);
+      if (this.callback) {
+        this.callback(true, '');
+      }
       return {
         result: true,
         message: 'User successfully logged out',
@@ -69,6 +78,10 @@ class Auth {
       result: true,
       message: `User with email:${registerForm.email} successfully registered and logged in`,
     };
+  }
+
+  public onChangeUser(callback: AuthCallback): void {
+    this.callback = callback;
   }
 
   private async registerUser(registerForm: RegisterForm): Promise<void> {
@@ -112,6 +125,7 @@ class Auth {
       accessToken: data.access_token,
       refreshToken: data.refresh_token,
       exp: Date.now() + data.expires_in * MSEC_IN_SEC,
+      email,
     };
   }
 }
