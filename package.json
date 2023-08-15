@@ -61,7 +61,6 @@
       "npm run lint",
       "npm run test-husky",
       "git add"
-    ]
-   
+    ]   
   }
 }

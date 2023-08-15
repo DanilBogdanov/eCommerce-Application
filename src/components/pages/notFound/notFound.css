@@ -1,0 +1,25 @@
+.not_found-container {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-block: 10% 20%;
+}
+
+.not_found-img {
+  width: 30%;
+}
+
+.not_found-nav_link {
+  border: 1px solid #1edaab;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 500ms ease-in-out;
+}
+
+.not_found-nav_link:hover {
+  background: #1edaab;
+  color: rgb(255, 255, 255);
+}

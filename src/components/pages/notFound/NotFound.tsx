@@ -1,5 +1,17 @@
 import { ReactElement } from 'react';
+import { NavLink } from 'react-router-dom';
+import './notFound.css';
+import pageError from '../../../assets/icons/404.png';
 
 export default function NotFound(): ReactElement {
-  return <div>404! Page not found</div>;
+  return (
+    <div className='not_found-container'>
+      <img className='not_found-img' src={pageError} alt='404' />
+      <h1>Error 404! Page not found!</h1>
+      <h2>Try another url</h2>
+      <NavLink className='not_found-nav_link' to='/'>
+        Go to Main
+      </NavLink>
+    </div>
+  );
 }
