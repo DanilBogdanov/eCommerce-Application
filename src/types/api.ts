@@ -37,6 +37,30 @@ export interface RegisterForm {
   password: string;
   firstName?: string;
   lastName?: string;
+  dateOfBirth?: Date;
+  addresses?: Address[];
+  defaultShippingAddress?: number;
+  shippingAddresses?: number[];
+  defaultBillingAddress?: number;
+  billingAddresses?: number[];
+}
+
+export enum Country {
+  RUSSIA = 'RU',
+  UKRAINE = 'UA',
+  BELARUS = 'BY',
+  USA = 'US',
+  AUSTRALIA = 'AU',
+}
+
+export interface Address {
+  country: Country;
+  streetName?: string;
+  postalCode?: string;
+  region?: string;
+  city?: string;
+  building?: string;
+  phone?: string;
 }
 
 export interface ApiResponse<T> {

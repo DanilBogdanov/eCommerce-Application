@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       { index: true, element: <Main /> },
       {
         path: '/registration',
-        element: <Registration />,
+        element: <Registration api={api} />,
         loader: redirectToMain,
       },
       {
