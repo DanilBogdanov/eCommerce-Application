@@ -12,13 +12,15 @@ type LayoutHeaderProps = {
 export default function LayoutHeader({ api }: LayoutHeaderProps): ReactElement {
   return (
     <header className='header'>
-      <NavLink to='/'>
-        <Logo color='#000000' />
-      </NavLink>
-      <NavLink to='/'>Main</NavLink>
-      <NavLink to='/catalog'>Catalog</NavLink>
-      <NavLink to='/about'>AboutUs</NavLink>
-      <UserBar api={api} />
+      <div className='header-container'>
+        <NavLink to='/'>
+          <Logo color='#1edaab' />
+        </NavLink>
+        <NavLink to='/'>Main</NavLink>
+        <NavLink to='/catalog'>Catalog</NavLink>
+        <NavLink to='/about'>AboutUs</NavLink>
+        <UserBar api={api} />
+      </div>
     </header>
   );
 }
