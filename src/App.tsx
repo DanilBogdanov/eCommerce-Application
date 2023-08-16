@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <Login />,
+        element: <Login api={api} />,
         loader: redirectToMain,
       },
       { path: '/catalog', element: <Catalog /> },
