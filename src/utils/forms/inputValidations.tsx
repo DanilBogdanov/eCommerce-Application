@@ -441,6 +441,24 @@ export const passwordValidation = {
   },
 };
 
+export const loginPasswordValidation = {
+  name: 'password',
+  label: 'password',
+  type: 'password',
+  id: 'password',
+  placeholder: 'type password ...',
+  validation: {
+    required: {
+      value: true,
+      message: 'required',
+    },
+    minLength: {
+      value: 1,
+      message: 'min 1 characters',
+    },
+  },
+};
+
 export const numValidation = {
   name: 'num',
   label: 'number',
