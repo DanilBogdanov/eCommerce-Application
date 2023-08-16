@@ -10,10 +10,10 @@ type LayoutProps = {
 
 export default function Layout({ api }: LayoutProps): ReactElement {
   return (
-    <>
+    <div className='layout_container'>
       <LayoutHeader api={api} />
       <Outlet />
       <LayoutFooter />
-    </>
+    </div>
   );
 }
