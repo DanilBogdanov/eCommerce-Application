@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     element: <Layout api={api} />,
     children: [
       { index: true, element: <Main /> },
-      { path: '/registration', element: <Registration /> },
+      { path: '/registration', element: <Registration api={api} /> },
       { path: '/login', element: <Login api={api} /> },
       { path: '/catalog', element: <Catalog /> },
       { path: '/about', element: <AboutUs /> },

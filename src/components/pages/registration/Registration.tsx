@@ -5,6 +5,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { GrMail } from 'react-icons/gr';
 import { BsFillCheckSquareFill } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 import {
   emailValidation,
   passwordValidation,
@@ -17,17 +18,40 @@ import {
   postcodeValidation,
 } from '../../../utils/forms/inputValidations';
 import { InputForm } from '../../../utils/forms/InputForm-component';
+import Api from '../../../api/api';
+import { RegisterForm } from '../../../types/api';
 
-function Registration(): ReactElement {
+type RegistrationProps = {
+  api: Api;
+};
+
+function Registration({ api }: RegistrationProps): ReactElement {
   const methods = useForm({
     shouldFocusError: false,
     criteriaMode: 'firstError',
     mode: 'onChange',
   });
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+
+  const logup = async (registerForm: RegisterForm) => {
+    const resp = await api.auth.registerAndLogin(registerForm);
+    if (resp.result) {
+      navigate('/');
+    } else {
+      // handle error
+    }
+  };
 
   const onSubmit = methods.handleSubmit(() => {
-    // data
+    const values = methods.getValues();
+    const { email, password } = values;
+    const registerForm: RegisterForm = {
+      email,
+      password,
+      // add rest fields
+    };
+    logup(registerForm);
     methods.reset();
     setSuccess(true);
   });
