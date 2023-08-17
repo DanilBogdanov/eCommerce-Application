@@ -24,6 +24,8 @@
 
 .nav-link {
   display: flex;
+  flex-direction: column;
+  gap: 5px;
   padding: 0 10px;
   width: 95px;
   height: 100%;
@@ -31,20 +33,25 @@
   justify-content: center;
   text-decoration: none;
   cursor: pointer;
-  color: black;
-  font-size: 1rem;
+  color: #209ed8;
+  font-size: 0.9rem;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   transition: 300ms ease-in-out;
 }
 
+.nav-link svg {
+  width: 40px;
+  height: 40px;
+}
+
 .nav-link:hover {
-  background-color: #94939380;
+  background-color: #d0eeff;
   transition: 300ms ease-in-out;
 }
 
 .nav-link.active {
-  background-color: #a7a7a7;
+  background-color: #54e2e7;
   color: #ffffff;
   transition: 300ms ease-in-out;
 }
@@ -58,5 +65,8 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     font-size: 0.9rem;
+  }
+  .nav-link svg {
+    display: none;
   }
 }

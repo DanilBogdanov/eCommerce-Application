@@ -2,11 +2,7 @@ import { ReactElement } from 'react';
 import './layoutFooter.css';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../logo/Logo';
-
-type NavLinkClassesProps = {
-  isActive: boolean;
-  isPending: boolean;
-};
+import { NavLinkClassesProps } from '../../../types/layout';
 
 const changeNavLinkClasses = ({
   isActive,

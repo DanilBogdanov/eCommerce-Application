@@ -1,10 +1,21 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { BiLogInCircle, BiLogOutCircle } from 'react-icons/bi';
+import { AiOutlineUserAdd } from 'react-icons/ai';
+import { NavLinkClassesProps } from '../../../../types/layout';
+
 import Api from '../../../../api/api';
 import './userBar.css';
 
 type UserBarProps = {
   api: Api;
+};
+
+const changeNavLinkClasses = ({
+  isActive,
+  isPending,
+}: NavLinkClassesProps): string => {
+  return `login-link ${isPending ? 'pending' : ''} ${isActive ? 'active' : ''}`;
 };
 
 export default function UserBar({ api }: UserBarProps): ReactElement {
@@ -32,23 +43,21 @@ export default function UserBar({ api }: UserBarProps): ReactElement {
   function getButtons() {
     if (isAnonymous) {
       return (
-        <>
-          <button
-            type='button'
-            onClick={() => {
-              navigate('/login');
-            }}
-          >
+        <div className='login-link_container'>
+          <NavLink to='/login' className={changeNavLinkClasses}>
+            <BiLogInCircle />
             LogIn
-          </button>
-          <button type='button' onClick={() => navigate('/registration')}>
+          </NavLink>
+          <NavLink to='/registration' className={changeNavLinkClasses}>
+            <AiOutlineUserAdd />
             LogUp
-          </button>
-        </>
+          </NavLink>
+        </div>
       );
     }
     return (
-      <button type='button' onClick={() => logout()}>
+      <button type='button' onClick={() => logout()} className='logut-btn'>
+        <BiLogOutCircle />
         LogOut
       </button>
     );
@@ -56,8 +65,10 @@ export default function UserBar({ api }: UserBarProps): ReactElement {
 
   return (
     <div className='user-bar'>
-      <img src='/img/user.svg' height={30} alt='user' />
-      <span>{email}</span>
+      <div className='user-container'>
+        <img src='/img/user.svg' height={30} alt='user' />
+        <span>{email}</span>
+      </div>
       <div>{getButtons()}</div>
     </div>
   );

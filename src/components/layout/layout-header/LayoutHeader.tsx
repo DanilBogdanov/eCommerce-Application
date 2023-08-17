@@ -1,17 +1,14 @@
 import { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
+import { BiHomeCircle, BiColumns, BiReceipt } from 'react-icons/bi';
 import Logo from '../../logo/Logo';
 import Api from '../../../api/api';
 import UserBar from './userBar/UserBar';
 import './layoutHeader.css';
+import { NavLinkClassesProps } from '../../../types/layout';
 
 type LayoutHeaderProps = {
   api: Api;
-};
-
-type NavLinkClassesProps = {
-  isActive: boolean;
-  isPending: boolean;
 };
 
 const changeNavLinkClasses = ({
@@ -30,12 +27,15 @@ export default function LayoutHeader({ api }: LayoutHeaderProps): ReactElement {
         </NavLink>
         <div className='header-nav'>
           <NavLink to='/' className={changeNavLinkClasses}>
+            <BiHomeCircle />
             Main
           </NavLink>
           <NavLink to='/catalog' className={changeNavLinkClasses}>
+            <BiColumns />
             Catalog
           </NavLink>
           <NavLink to='/about' className={changeNavLinkClasses}>
+            <BiReceipt />
             About Us
           </NavLink>
         </div>
