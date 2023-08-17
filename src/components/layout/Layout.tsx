@@ -13,7 +13,9 @@ export default function Layout({ api }: LayoutProps): ReactElement {
   return (
     <div className='layout_container'>
       <LayoutHeader api={api} />
-      <Outlet />
+      <div className='outlet-container'>
+        <Outlet />
+      </div>
       <LayoutFooter />
     </div>
   );

@@ -2,14 +2,15 @@ import './logo.css';
 
 interface ILogoProps {
   color: string;
+  width: string;
 }
 
-export default function Logo({ color }: ILogoProps) {
+export default function Logo({ color, width }: ILogoProps) {
   return (
     <svg
       version='1.0'
       xmlns='http://www.w3.org/2000/svg'
-      width='150'
+      width={width}
       viewBox='0 0 863 346'
       className='logo'
     >
