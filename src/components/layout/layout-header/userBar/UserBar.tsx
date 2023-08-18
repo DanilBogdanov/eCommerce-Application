@@ -33,6 +33,8 @@ export default function UserBar({ api }: UserBarProps): ReactElement {
         3000,
       );
       navigate('/login');
+    } else {
+      notifier.showMessage(MessageType.ERROR, 'Logout', resp.message, 6000);
     }
   };
 
