@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Api from '../../../../api/api';
 import './userBar.css';
+import { MessageType, notifier } from '../../../../utils/notifier';
 
 type UserBarProps = {
   api: Api;
@@ -25,6 +26,12 @@ export default function UserBar({ api }: UserBarProps): ReactElement {
   const logout = async () => {
     const resp = await api.auth.logout();
     if (resp.result) {
+      notifier.showMessage(
+        MessageType.INFO,
+        'Logout',
+        `User ${email} successfully logged out`,
+        3000,
+      );
       navigate('/login');
     }
   };
