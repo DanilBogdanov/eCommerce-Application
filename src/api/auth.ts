@@ -3,13 +3,13 @@ import {
   ApiResponse,
   AuthCallback,
   AuthResponse,
-  MSEC_IN_SEC,
   RegisterForm,
   TokenResponse,
   config,
 } from '../types/api';
 import TokenStore from './tokenStore';
 import handleError from '../utils/api/errorHandler';
+import { MSEC_IN_SEC } from '../types/constants';
 
 class Auth {
   private tokenStore: TokenStore;
