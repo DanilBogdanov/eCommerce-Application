@@ -12,6 +12,7 @@ import {
 } from '../../../utils/forms/inputValidations';
 import { InputForm } from '../../../utils/forms/InputForm-component';
 import Api from '../../../api/api';
+import { MessageType, notifier } from '../../../utils/notifier';
 
 type LoginProps = {
   api: Api;
@@ -32,7 +33,15 @@ function Login({ api }: LoginProps): ReactElement {
     const { email, password } = values;
     const resp = await api.auth.login(email, password);
     if (resp.result) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        'Login',
+        `User ${email} successfully logged in`,
+        3000,
+      );
       navigate('/');
+    } else {
+      notifier.showMessage(MessageType.ERROR, 'Login', resp.message, 6000);
     }
   };
 
