@@ -7,16 +7,26 @@ import { GrMail } from 'react-icons/gr';
 import { BsFillCheckSquareFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import {
-  emailValidation,
-  passwordValidation,
-  nameValidation,
-  surnamValidation,
-  birthdateValidation,
-  streetValidation,
-  cityValidation,
-  countryValidation,
-  postcodeValidation,
-} from '../../../utils/forms/inputValidations';
+  emailElementParams,
+  passwordElementParams,
+  nameElementParams,
+  surnameElementParams,
+  birthdateElementParams,
+  streetBillingElementParams,
+  cityBillingElementParams,
+  countryBillingElementParams,
+  postcodeBillingElementParams,
+  streetShippingElementParams,
+  cityShippingElementParams,
+  countryShippingElementParams,
+  postcodeShippingElementParams,
+  sameAddressCheckboxParams,
+  defaultBillingCheckboxParams,
+  defaultShippingCheckboxParams,
+  sameAddressLabelParams,
+  defaultBillingLabelParams,
+  defaultShippingLabelParams,
+} from '../../../utils/forms/inputElements';
 import { InputForm } from '../../../utils/forms/InputForm-component';
 import Api from '../../../api/api';
 import { RegisterForm } from '../../../types/api';
@@ -43,7 +53,9 @@ function Registration({ api }: RegistrationProps): ReactElement {
     }
   };
 
-  const onSubmit = methods.handleSubmit(() => {
+  const onSubmit = methods.handleSubmit((data) => {
+    // eslint-disable-next-line no-console
+    console.log(data);
     const values = methods.getValues();
     const { email, password } = values;
     const registerForm: RegisterForm = {
@@ -65,22 +77,34 @@ function Registration({ api }: RegistrationProps): ReactElement {
     <FormProvider {...methods}>
       <form autoComplete='off' onSubmit={(e) => e.preventDefault()} noValidate>
         <div>
-          <InputForm className='' {...emailValidation} />
+          <InputForm className='' {...emailElementParams} />
           <InputForm
             className=''
-            {...passwordValidation}
+            {...passwordElementParams}
             type={passwordShown ? 'text' : 'password'}
           />
           <button type='button' onClick={togglePassword}>
             Show Password
           </button>
-          <InputForm className='' {...nameValidation} />
-          <InputForm className='' {...surnamValidation} />
-          <InputForm className='' {...birthdateValidation} />
-          <InputForm className='' {...streetValidation} />
-          <InputForm className='' {...cityValidation} />
-          <InputForm select className='' {...countryValidation} />
-          <InputForm className='' {...postcodeValidation} />
+          <InputForm className='' {...nameElementParams} />
+          <InputForm className='' {...surnameElementParams} />
+          <InputForm className='' {...birthdateElementParams} />
+          <p>Billing Address</p>
+          <InputForm checkbox className='' {...defaultBillingCheckboxParams} />
+          <InputForm labelCheck className='' {...defaultBillingLabelParams} />
+          <InputForm address className='' {...streetBillingElementParams} />
+          <InputForm address className='' {...cityBillingElementParams} />
+          <InputForm select className='' {...countryBillingElementParams} />
+          <InputForm address className='' {...postcodeBillingElementParams} />
+          <p>Shipping Address</p>
+          <InputForm checkbox className='' {...sameAddressCheckboxParams} />
+          <InputForm labelCheck className='' {...sameAddressLabelParams} />
+          <InputForm checkbox className='' {...defaultShippingCheckboxParams} />
+          <InputForm labelCheck className='' {...defaultShippingLabelParams} />
+          <InputForm address className='' {...streetShippingElementParams} />
+          <InputForm address className='' {...cityShippingElementParams} />
+          <InputForm select className='' {...countryShippingElementParams} />
+          <InputForm address className='' {...postcodeShippingElementParams} />
         </div>
         <div>
           {success && (
