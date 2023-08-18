@@ -21,6 +21,10 @@ import { InputForm } from '../../../utils/forms/InputForm-component';
 import Api from '../../../api/api';
 import { RegisterForm } from '../../../types/api';
 import { MessageType, notifier } from '../../../utils/notifier';
+import {
+  MESSAGE_SHOW_TIME_ERROR,
+  MESSAGE_SHOW_TIME_SUCCESS,
+} from '../../../types/constants';
 
 type RegistrationProps = {
   api: Api;
@@ -42,7 +46,7 @@ function Registration({ api }: RegistrationProps): ReactElement {
         MessageType.SUCCESS,
         'Registration',
         `User ${registerForm.email} successfully logged up`,
-        3000,
+        MESSAGE_SHOW_TIME_SUCCESS,
       );
       navigate('/');
     } else {
@@ -50,7 +54,7 @@ function Registration({ api }: RegistrationProps): ReactElement {
         MessageType.ERROR,
         'Registration',
         resp.message,
-        3000,
+        MESSAGE_SHOW_TIME_ERROR,
       );
     }
   };

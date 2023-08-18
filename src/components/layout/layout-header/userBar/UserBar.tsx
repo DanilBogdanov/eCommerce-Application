@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Api from '../../../../api/api';
 import './userBar.css';
 import { MessageType, notifier } from '../../../../utils/notifier';
+import {
+  MESSAGE_SHOW_TIME_ERROR,
+  MESSAGE_SHOW_TIME_SUCCESS,
+} from '../../../../types/constants';
 
 type UserBarProps = {
   api: Api;
@@ -30,11 +34,16 @@ export default function UserBar({ api }: UserBarProps): ReactElement {
         MessageType.INFO,
         'Logout',
         `User ${email} successfully logged out`,
-        3000,
+        MESSAGE_SHOW_TIME_SUCCESS,
       );
       navigate('/login');
     } else {
-      notifier.showMessage(MessageType.ERROR, 'Logout', resp.message, 6000);
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Logout',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
     }
   };
 

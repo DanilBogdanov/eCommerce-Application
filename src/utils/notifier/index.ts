@@ -1,4 +1,4 @@
-import { MESSAGE_SHOW_TIME } from '../../types/constants';
+import { MESSAGE_SHOW_TIME_DEFAULT } from '../../types/constants';
 
 export enum MessageType {
   INFO,
@@ -23,7 +23,7 @@ class Notifier {
     type: MessageType,
     title: string,
     message: string,
-    showTime: number = MESSAGE_SHOW_TIME,
+    showTime: number = MESSAGE_SHOW_TIME_DEFAULT,
   ) {
     if (this.callback) {
       this.callback({
