@@ -191,17 +191,17 @@ export const postcodeShippingElementParams = {
 };
 
 export const sameAddressCheckboxParams = {
-  name: 'SameAddress',
+  name: 'sameAddress',
   type: 'checkbox',
   id: 'checkboxSameAddress',
 };
 export const defaultBillingCheckboxParams = {
-  name: 'DefaultBilling',
+  name: 'defaultBilling',
   type: 'checkbox',
   id: 'checkboxBillingDefault',
 };
 export const defaultShippingCheckboxParams = {
-  name: 'DefaultShipping',
+  name: 'defaultShipping',
   type: 'checkbox',
   id: 'checkboxShipingDefault',
 };

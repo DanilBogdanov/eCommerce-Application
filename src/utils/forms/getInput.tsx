@@ -88,7 +88,7 @@ export default function GetInput(
     setIsDefaultShipping((current) => !current);
   };
 
-  if (name === 'SameAddress') {
+  if (name === 'sameAddress') {
     output = (
       <input
         name={name}
@@ -97,7 +97,7 @@ export default function GetInput(
         onChange={handleChangeSameAddress}
       />
     );
-  } else if (name === 'DefaultBilling') {
+  } else if (name === 'defaultBilling') {
     output = (
       <input
         id={id}
@@ -106,7 +106,7 @@ export default function GetInput(
         onChange={handleChangeDefaultBilling}
       />
     );
-  } else if (name === 'DefaultShipping') {
+  } else if (name === 'defaultShipping') {
     output = (
       <input
         id={id}
