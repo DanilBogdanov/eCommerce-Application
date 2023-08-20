@@ -53,9 +53,7 @@ function Registration({ api }: RegistrationProps): ReactElement {
     }
   };
 
-  const onSubmit = methods.handleSubmit((data) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+  const onSubmit = methods.handleSubmit(() => {
     const values = methods.getValues();
     const { email, password } = values;
 
@@ -135,8 +133,6 @@ function Registration({ api }: RegistrationProps): ReactElement {
       }
       delete element.key;
     }
-    // eslint-disable-next-line no-console
-    console.log(registerForm);
 
     logup(registerForm);
     methods.reset();
