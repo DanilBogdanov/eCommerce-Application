@@ -20,6 +20,11 @@ import {
 import { InputForm } from '../../../utils/forms/InputForm-component';
 import Api from '../../../api/api';
 import { RegisterForm } from '../../../types/api';
+import { MessageType, notifier } from '../../../utils/notifier';
+import {
+  MESSAGE_SHOW_TIME_ERROR,
+  MESSAGE_SHOW_TIME_SUCCESS,
+} from '../../../types/constants';
 
 type RegistrationProps = {
   api: Api;
@@ -37,9 +42,20 @@ function Registration({ api }: RegistrationProps): ReactElement {
   const logup = async (registerForm: RegisterForm) => {
     const resp = await api.auth.registerAndLogin(registerForm);
     if (resp.result) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        'Registration',
+        `User ${registerForm.email} successfully logged up`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
       navigate('/');
     } else {
-      // handle error
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Registration',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
     }
   };
 

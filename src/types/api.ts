@@ -8,11 +8,6 @@ export const config = {
     'manage_my_quotes:ecommerce_application manage_my_payments:ecommerce_application manage_my_quote_requests:ecommerce_application manage_customers:ecommerce_application create_anonymous_token:ecommerce_application view_published_products:ecommerce_application manage_my_profile:ecommerce_application manage_my_shopping_lists:ecommerce_application view_categories:ecommerce_application manage_my_orders:ecommerce_application manage_my_business_units:ecommerce_application',
 };
 
-export const MSEC_IN_SEC = 1000;
-
-// Valid 10 minutes
-export const VALID_TIME_INTERVAL = MSEC_IN_SEC * 600;
-
 export interface TokenResponse {
   isAnonymous: boolean;
   exp: number;

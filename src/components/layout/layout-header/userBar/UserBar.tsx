@@ -6,6 +6,11 @@ import { NavLinkClassesProps } from '../../../../types/layout';
 
 import Api from '../../../../api/api';
 import './userBar.css';
+import { MessageType, notifier } from '../../../../utils/notifier';
+import {
+  MESSAGE_SHOW_TIME_ERROR,
+  MESSAGE_SHOW_TIME_SUCCESS,
+} from '../../../../types/constants';
 
 type UserBarProps = {
   api: Api;
@@ -36,7 +41,20 @@ export default function UserBar({ api }: UserBarProps): ReactElement {
   const logout = async () => {
     const resp = await api.auth.logout();
     if (resp.result) {
+      notifier.showMessage(
+        MessageType.INFO,
+        'Logout',
+        `User ${email} successfully logged out`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
       navigate('/login');
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Logout',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
     }
   };
 

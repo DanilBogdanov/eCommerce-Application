@@ -12,6 +12,11 @@ import {
 } from '../../../utils/forms/inputValidations';
 import { InputForm } from '../../../utils/forms/InputForm-component';
 import Api from '../../../api/api';
+import { MessageType, notifier } from '../../../utils/notifier';
+import {
+  MESSAGE_SHOW_TIME_ERROR,
+  MESSAGE_SHOW_TIME_SUCCESS,
+} from '../../../types/constants';
 
 type LoginProps = {
   api: Api;
@@ -32,7 +37,20 @@ function Login({ api }: LoginProps): ReactElement {
     const { email, password } = values;
     const resp = await api.auth.login(email, password);
     if (resp.result) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        'Login',
+        `User ${email} successfully logged in`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
       navigate('/');
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Login',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
     }
   };
 

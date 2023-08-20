@@ -2,14 +2,13 @@ import axios from 'axios';
 import {
   ApiResponse,
   AuthResponse,
-  MSEC_IN_SEC,
   RefreshResponse,
   TokenResponse,
-  VALID_TIME_INTERVAL,
   config,
 } from '../types/api';
 import handleError from '../utils/api/errorHandler';
 import { crypt, encrypt } from '../utils/api/crypt';
+import { MSEC_IN_SEC, VALID_TIME_INTERVAL } from '../types/constants';
 
 class TokenStore {
   private readonly LS_KEY = 'd2v2:token_state';
@@ -29,8 +28,12 @@ class TokenStore {
   constructor() {
     const lsState = localStorage.getItem(this.LS_KEY);
     if (lsState) {
-      const encryptState = encrypt(lsState);
-      this.load(JSON.parse(encryptState));
+      try {
+        const encryptState = encrypt(lsState);
+        this.load(JSON.parse(encryptState));
+      } catch {
+        // empty
+      }
     }
     this.save();
   }
