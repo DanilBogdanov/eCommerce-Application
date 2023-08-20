@@ -13,7 +13,7 @@ export default function Layout({ api }: LayoutProps): ReactElement {
   return (
     <div className='layout_container'>
       <LayoutHeader api={api} />
-      <div className='outlet-container'>
+      <div className='outlet-container' data-testid='outlet'>
         <Outlet />
       </div>
       <LayoutFooter />
