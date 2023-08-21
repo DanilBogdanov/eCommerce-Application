@@ -82,7 +82,7 @@ export default function UserBar({ api }: UserBarProps): ReactElement {
   }
 
   return (
-    <div className='user-bar'>
+    <div className='user-bar' data-testid='user-bar'>
       <div className='user-container'>
         <img src='/img/user.svg' height={30} alt='user' />
         <span>{email}</span>

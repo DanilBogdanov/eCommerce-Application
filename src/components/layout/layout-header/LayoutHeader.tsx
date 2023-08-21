@@ -20,7 +20,7 @@ const changeNavLinkClasses = ({
 
 export default function LayoutHeader({ api }: LayoutHeaderProps): ReactElement {
   return (
-    <header className='header'>
+    <header className='header' data-testid='layout-header'>
       <div className='header-container'>
         <NavLink to='/'>
           <Logo color='#10116d' width='150' />

@@ -15,7 +15,7 @@ const changeNavLinkClasses = ({
 
 export default function LayoutFooter(): ReactElement {
   return (
-    <footer className='footer'>
+    <footer className='footer' data-testid='layout-footer'>
       <div className='footer-container'>
         <NavLink to='/'>
           <Logo color='#ffffff' width='100' />
