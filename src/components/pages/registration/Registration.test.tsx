@@ -27,10 +27,10 @@ describe('Registration', () => {
     const nameInput = screen.getByPlaceholderText(/\bname\b/i);
     const surnameInput = screen.getByPlaceholderText(/surname/i);
     const birthdateInput = screen.getByPlaceholderText(/birth/i);
-    const streetInput = screen.getByPlaceholderText(/street/i);
-    const cityInput = screen.getByPlaceholderText(/city/i);
-    const countrySelect = screen.getByPlaceholderText(/country/i);
-    const postcodeInput = screen.getByPlaceholderText(/postcode/i);
+    const streetInput = screen.getAllByPlaceholderText(/street/i);
+    const cityInput = screen.getAllByPlaceholderText(/city/i);
+    const countrySelect = screen.getAllByPlaceholderText(/country/i);
+    const postcodeInput = screen.getAllByPlaceholderText(/postcode/i);
     const signUpButton = screen.getByText('Sign Up');
 
     expect(emailInput).toBeInTheDocument();
@@ -38,10 +38,18 @@ describe('Registration', () => {
     expect(nameInput).toBeInTheDocument();
     expect(surnameInput).toBeInTheDocument();
     expect(birthdateInput).toBeInTheDocument();
-    expect(streetInput).toBeInTheDocument();
-    expect(cityInput).toBeInTheDocument();
-    expect(countrySelect).toBeInTheDocument();
-    expect(postcodeInput).toBeInTheDocument();
+    streetInput.forEach((item) => {
+      expect(item).toBeInTheDocument();
+    });
+    cityInput.forEach((item) => {
+      expect(item).toBeInTheDocument();
+    });
+    countrySelect.forEach((item) => {
+      expect(item).toBeInTheDocument();
+    });
+    postcodeInput.forEach((item) => {
+      expect(item).toBeInTheDocument();
+    });
     expect(signUpButton).toBeInTheDocument();
   });
 });
