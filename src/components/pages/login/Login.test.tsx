@@ -84,8 +84,8 @@ describe('Login', () => {
     const passwordInput = screen.getByPlaceholderText(/password/i);
     const signInButton = screen.getByText('Sign In');
 
-    fireEvent.input(emailInput, { target: { value: 'test@example.com' } });
-    fireEvent.input(passwordInput, { target: { value: 'password123' } });
+    fireEvent.input(emailInput, { target: { value: '11123user@example.com' } });
+    fireEvent.input(passwordInput, { target: { value: '123qwe!@#QWE' } });
     await act(async () => {
       fireEvent.click(signInButton);
       await Promise.resolve();

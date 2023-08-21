@@ -19,11 +19,8 @@ const framerError = {
 };
 function InputError({ message }: InputErrorsTypes) {
   return (
-    <motion.p
-      className='flex items-center gap-1 px-2 font-semibold text-red-500 bg-red-100 rounded-md'
-      {...framerError}
-    >
-      <MdError />
+    <motion.p className='ValidationMessage' {...framerError}>
+      <MdError className='ValidationIcon' />
       {message}
     </motion.p>
   );
@@ -38,6 +35,7 @@ export function InputForm({
   select,
   checkbox,
   labelCheck,
+  className,
   htmlFor,
   address,
 }: FormValues) {
@@ -63,6 +61,7 @@ export function InputForm({
     element = (
       <select
         {...register(name, validation)}
+        className={className}
         value={selected}
         onChange={handleChangeCountry}
         id={id}
@@ -77,12 +76,12 @@ export function InputForm({
       </select>
     );
   } else if (checkbox && name) {
-    element = GetInput({ name, type, id } as FormValues, register);
+    element = GetInput({ name, type, id, className } as FormValues, register);
   } else if (labelCheck) {
     element = <label htmlFor={htmlFor}>{name}</label>;
   } else if (address) {
     element = GetInput(
-      { name, type, id, placeholder, validation } as FormValues,
+      { name, type, id, placeholder, validation, className } as FormValues,
       register,
     );
   } else {
@@ -92,12 +91,13 @@ export function InputForm({
         {...register(name, validation)}
         id={id}
         type={type}
+        className={className}
       />
     );
   }
 
   return (
-    <div>
+    <div className={id}>
       <div>
         <label htmlFor={id}>{label}</label>
         <AnimatePresence mode='wait' initial={false}>

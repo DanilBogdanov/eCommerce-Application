@@ -23,9 +23,6 @@ import {
   sameAddressCheckboxParams,
   defaultBillingCheckboxParams,
   defaultShippingCheckboxParams,
-  sameAddressLabelParams,
-  defaultBillingLabelParams,
-  defaultShippingLabelParams,
 } from '../../../utils/forms/inputElements';
 import { InputForm } from '../../../utils/forms/InputForm-component';
 import Api from '../../../api/api';
@@ -35,6 +32,8 @@ import {
   MESSAGE_SHOW_TIME_ERROR,
   MESSAGE_SHOW_TIME_SUCCESS,
 } from '../../../types/constants';
+
+import '../../../utils/forms/FormsStyle.css';
 
 type RegistrationProps = {
   api: Api;
@@ -149,7 +148,6 @@ function Registration({ api }: RegistrationProps): ReactElement {
       }
       delete element.key;
     }
-
     logup(registerForm);
     methods.reset();
     setSuccess(true);
@@ -162,48 +160,63 @@ function Registration({ api }: RegistrationProps): ReactElement {
 
   return (
     <FormProvider {...methods}>
-      <form autoComplete='off' onSubmit={(e) => e.preventDefault()} noValidate>
-        <div>
-          <InputForm className='' {...emailElementParams} />
+      <form
+        autoComplete='off'
+        onSubmit={(e) => e.preventDefault()}
+        noValidate
+        className='FormWrapper'
+      >
+        <div className='BioSection FormSection'>
+          <h1 className='FormHeader'>Registrartion</h1>
+          <h2 className='BioHeader SectionHeader'>Bio</h2>
+          <InputForm {...emailElementParams} />
           <InputForm
-            className=''
             {...passwordElementParams}
             type={passwordShown ? 'text' : 'password'}
           />
-          <button type='button' onClick={togglePassword}>
+          <button type='button' onClick={togglePassword} className='FormButton'>
             Show Password
           </button>
-          <InputForm className='' {...nameElementParams} />
-          <InputForm className='' {...surnameElementParams} />
-          <InputForm className='' {...birthdateElementParams} />
-          <p>Billing Address</p>
-          <InputForm checkbox className='' {...defaultBillingCheckboxParams} />
-          <InputForm labelCheck className='' {...defaultBillingLabelParams} />
-          <InputForm address className='' {...streetBillingElementParams} />
-          <InputForm address className='' {...cityBillingElementParams} />
-          <InputForm select className='' {...countryBillingElementParams} />
-          <InputForm address className='' {...postcodeBillingElementParams} />
-          <p>Shipping Address</p>
-          <InputForm checkbox className='' {...sameAddressCheckboxParams} />
-          <InputForm labelCheck className='' {...sameAddressLabelParams} />
-          <InputForm checkbox className='' {...defaultShippingCheckboxParams} />
-          <InputForm labelCheck className='' {...defaultShippingLabelParams} />
-          <InputForm address className='' {...streetShippingElementParams} />
-          <InputForm address className='' {...cityShippingElementParams} />
-          <InputForm select className='' {...countryShippingElementParams} />
-          <InputForm address className='' {...postcodeShippingElementParams} />
+          <InputForm {...nameElementParams} />
+          <InputForm {...surnameElementParams} />
+          <InputForm {...birthdateElementParams} />
         </div>
         <div>
-          {success && (
-            <p>
-              <BsFillCheckSquareFill />
-              Form has been submitted successfully
-            </p>
-          )}
-          <button type='button' onClick={onSubmit}>
-            <GrMail />
-            Sign Up
-          </button>
+          <div className='AddressSectionWrapper'>
+            <div className='AddressSection FormSection'>
+              <h2 className='AddressHeader SectionHeader'>Billing Address</h2>
+              <InputForm checkbox {...defaultBillingCheckboxParams} />
+              <InputForm address {...streetBillingElementParams} />
+              <InputForm address {...cityBillingElementParams} />
+              <InputForm select {...countryBillingElementParams} />
+              <InputForm address {...postcodeBillingElementParams} />
+            </div>
+            <div className='AddressSection FormSection'>
+              <h2 className='AddressHeader SectionHeader'>Shipping Address</h2>
+              <InputForm checkbox {...sameAddressCheckboxParams} />
+              <InputForm checkbox {...defaultShippingCheckboxParams} />
+              <InputForm address {...streetShippingElementParams} />
+              <InputForm address {...cityShippingElementParams} />
+              <InputForm select {...countryShippingElementParams} />
+              <InputForm address {...postcodeShippingElementParams} />
+              <div>
+                {success && (
+                  <p>
+                    <BsFillCheckSquareFill />
+                    Form has been submitted successfully
+                  </p>
+                )}
+                <button
+                  type='button'
+                  onClick={onSubmit}
+                  className='FormButton SubmitButton'
+                >
+                  <GrMail className='LogInUpIcon' />
+                  Sign Up
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </FormProvider>
