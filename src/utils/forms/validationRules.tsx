@@ -125,15 +125,3 @@ export const emailValidationRules: ValidationParams = {
     message: 'your email should be like "user@example.com"',
   },
 };
-
-// change to default loginValidationRules on release
-export const loginPasswordValidationRules: ValidationParams = {
-  required: {
-    value: true,
-    message: 'required',
-  },
-  minLength: {
-    value: 1,
-    message: 'min 1 characters',
-  },
-};

@@ -15,7 +15,7 @@ export interface FormValues {
   labelCheck?: boolean;
   select?: boolean;
   checkbox?: boolean;
-  className: string;
+  className?: string;
   children?: ReactNode;
   value?: string;
   address?: boolean;
@@ -23,7 +23,7 @@ export interface FormValues {
 }
 
 export default function GetInput(
-  { name, type, id, placeholder, validation }: FormValues,
+  { name, type, id, placeholder, validation, className }: FormValues,
   register: UseFormRegister<FieldValues>,
 ): JSX.Element | undefined {
   let output;
@@ -115,54 +115,10 @@ export default function GetInput(
         onChange={handleChangeDefaultShipping}
       />
     );
-  } else if (name === 'streetBilling') {
+  } else {
     output = (
       <input
-        placeholder={placeholder}
-        id={id}
-        type={type}
-        {...register(name, validation)}
-      />
-    );
-  } else if (name === 'cityBilling') {
-    output = (
-      <input
-        placeholder={placeholder}
-        id={id}
-        type={type}
-        {...register(name, validation)}
-      />
-    );
-  } else if (name === 'postcodeBilling') {
-    output = (
-      <input
-        placeholder={placeholder}
-        id={id}
-        type={type}
-        {...register(name, validation)}
-      />
-    );
-  } else if (name === 'streetShipping') {
-    output = (
-      <input
-        placeholder={placeholder}
-        id={id}
-        type={type}
-        {...register(name, validation)}
-      />
-    );
-  } else if (name === 'cityShipping') {
-    output = (
-      <input
-        placeholder={placeholder}
-        id={id}
-        type={type}
-        {...register(name, validation)}
-      />
-    );
-  } else if (name === 'postcodeShipping') {
-    output = (
-      <input
+        className={className}
         placeholder={placeholder}
         id={id}
         type={type}

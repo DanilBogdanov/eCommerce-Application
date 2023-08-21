@@ -1,0 +1,123 @@
+.InputForm {
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: #028dce;
+  padding: 3%;
+  outline: none;
+  border-style: solid;
+  transition: 0.1s;
+  margin: 5px 0 10px 0;
+}
+
+.InputForm:hover {
+  background-color: #11a5e91e;
+}
+
+.InputForm:focus {
+  background-color: #11a5e91e;
+}
+
+.FormSection {
+  width: 240px;
+  max-height: 450px;
+}
+
+.FormWrapper {
+  padding: 50px 50px 0 50px;
+  border: 2px solid #028dce;
+  border-radius: 10px;
+  margin: 50px 0;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 50px;
+  column-gap: 100px;
+  justify-content: center;
+}
+
+.LoginFormWrapper {
+  padding: 0 50px 0 50px;
+  flex-direction: column;
+}
+
+.SectionHeader,
+.FormHeader {
+  margin: 0 0 15px 0;
+}
+
+.FormHeader {
+  color: #028dce;
+}
+
+.AddressSectionWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 100px;
+  row-gap: 45px;
+  justify-content: center;
+}
+
+.checkboxShipingDefault,
+.checkboxSameAddress,
+.checkboxBillingDefault {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+#checkboxShipingDefault,
+#checkboxSameAddress,
+#checkboxBillingDefault {
+  margin: 0 5px 15px 0;
+}
+
+.FormButton {
+  border-radius: 15px;
+  border-width: 0;
+  background-color: #028dce;
+  color: #fff;
+  padding: 4% 7%;
+  outline: none;
+  transition: 0.1s;
+  cursor: pointer;
+  margin: 0 0 10px 0;
+
+  display: flex;
+  gap: 5px;
+}
+
+.FormButton:hover {
+  background-color: #028dced7;
+}
+
+.FormButton:active {
+  background-color: #028dce;
+}
+
+.SubmitButton {
+  margin-top: 42px;
+  background-color: #00b300;
+}
+
+.SubmitButton:hover {
+  background-color: #00b300c7;
+}
+
+.SubmitButton:active {
+  background-color: #00b300;
+}
+
+.ValidationMessage {
+  max-width: 220px;
+  display: flex;
+  gap: 5px;
+  margin: 5px 0 0 0;
+  color: #ff203e;
+}
+
+.ValidationIcon {
+  min-width: 16px;
+}
+
+.SubmitLoginButton {
+  margin-top: 0;
+}

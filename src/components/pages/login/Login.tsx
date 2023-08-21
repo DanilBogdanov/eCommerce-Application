@@ -8,7 +8,7 @@ import { BsFillCheckSquareFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import {
   emailElementParams,
-  loginPasswordElementParams,
+  passwordElementParams,
 } from '../../../utils/forms/inputElements';
 import { InputForm } from '../../../utils/forms/InputForm-component';
 import Api from '../../../api/api';
@@ -68,16 +68,21 @@ function Login({ api }: LoginProps): ReactElement {
 
   return (
     <FormProvider {...methods}>
-      <form autoComplete='off' onSubmit={(e) => e.preventDefault()} noValidate>
-        <div>
-          <InputForm multiline={false} className='' {...emailElementParams} />
+      <form
+        autoComplete='off'
+        onSubmit={(e) => e.preventDefault()}
+        noValidate
+        className='FormWrapper LoginFormWrapper'
+      >
+        <div className='FormSection'>
+          <h1 className='FormHeader'>Welcome!</h1>
+          <InputForm multiline={false} {...emailElementParams} />
           <InputForm
             multiline={false}
-            className=''
-            {...loginPasswordElementParams}
+            {...passwordElementParams}
             type={passwordShown ? 'text' : 'password'}
           />
-          <button type='button' onClick={togglePassword}>
+          <button type='button' onClick={togglePassword} className='FormButton'>
             Show Password
           </button>
         </div>
@@ -88,7 +93,11 @@ function Login({ api }: LoginProps): ReactElement {
               Form has been submitted successfully
             </p>
           )}
-          <button type='button' onClick={onSubmit}>
+          <button
+            type='button'
+            onClick={onSubmit}
+            className='FormButton SubmitButton SubmitLoginButton'
+          >
             <GrMail />
             Sign In
           </button>
