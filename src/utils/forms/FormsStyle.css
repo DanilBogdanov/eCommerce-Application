@@ -7,6 +7,8 @@
   border-style: solid;
   transition: 0.1s;
   margin: 5px 0 10px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .InputForm:hover {
@@ -23,7 +25,7 @@
 }
 
 .FormWrapper {
-  padding: 50px 50px 0 50px;
+  padding: 50px;
   border: 2px solid #028dce;
   border-radius: 10px;
   margin: 50px 0;
@@ -32,6 +34,8 @@
   row-gap: 50px;
   column-gap: 100px;
   justify-content: center;
+  max-width: 1000px;
+  max-height: 100%;
 }
 
 .LoginFormWrapper {
@@ -52,7 +56,7 @@
   display: flex;
   flex-wrap: wrap;
   column-gap: 100px;
-  row-gap: 45px;
+  row-gap: 25px;
   justify-content: center;
 }
 
@@ -71,18 +75,18 @@
 }
 
 .FormButton {
-  border-radius: 15px;
+  border-radius: 20px;
   border-width: 0;
   background-color: #028dce;
   color: #fff;
-  padding: 4% 7%;
+  padding: 10px 15px;
   outline: none;
   transition: 0.1s;
   cursor: pointer;
   margin: 0 0 10px 0;
-
   display: flex;
   gap: 5px;
+  box-sizing: border-box;
 }
 
 .FormButton:hover {
@@ -94,8 +98,11 @@
 }
 
 .SubmitButton {
-  margin-top: 42px;
+  /* margin-top: 42px; */
+  justify-content: center;
   background-color: #00b300;
+  width: 200px;
+  margin: 0;
 }
 
 .SubmitButton:hover {
@@ -104,6 +111,10 @@
 
 .SubmitButton:active {
   background-color: #00b300;
+}
+
+.ButtonWrapper {
+  height: 35px;
 }
 
 .ValidationMessage {
@@ -120,4 +131,10 @@
 
 .SubmitLoginButton {
   margin-top: 0;
+}
+
+@media (max-width: 1050px) {
+  .FormWrapper {
+    max-width: 700px;
+  }
 }

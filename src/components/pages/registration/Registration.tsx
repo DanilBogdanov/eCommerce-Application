@@ -199,24 +199,24 @@ function Registration({ api }: RegistrationProps): ReactElement {
               <InputForm address {...cityShippingElementParams} />
               <InputForm select {...countryShippingElementParams} />
               <InputForm address {...postcodeShippingElementParams} />
-              <div>
-                {success && (
-                  <p>
-                    <BsFillCheckSquareFill />
-                    Form has been submitted successfully
-                  </p>
-                )}
-                <button
-                  type='button'
-                  onClick={onSubmit}
-                  className='FormButton SubmitButton'
-                >
-                  <GrMail className='LogInUpIcon' />
-                  Sign Up
-                </button>
-              </div>
             </div>
           </div>
+        </div>
+        <div className='ButtonWrapper'>
+          {success && (
+            <p>
+              <BsFillCheckSquareFill />
+              Form has been submitted successfully
+            </p>
+          )}
+          <button
+            type='button'
+            onClick={onSubmit}
+            className='FormButton SubmitButton'
+          >
+            <GrMail className='LogInUpIcon' />
+            Sign Up
+          </button>
         </div>
       </form>
     </FormProvider>
