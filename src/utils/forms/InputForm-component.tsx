@@ -1,24 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import cn from 'classnames';
 import { useFormContext } from 'react-hook-form';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MdError } from 'react-icons/md';
-import { ReactNode } from 'react';
+import { useState } from 'react';
 import { findInputError, isFormInvalid } from '.';
+import countryOptions from './countryOptions';
+import GetInput, { FormValues } from './getInput';
 
-export interface FormValues {
-  name: string;
-  label: string;
-  type: string;
-  id: string;
-  placeholder: string;
-  validation: object;
-  multiline?: boolean;
-  select?: boolean;
-  className: string;
-  children?: ReactNode;
-}
 export type InputErrorsTypes = {
   message?: string;
 };
@@ -47,8 +36,10 @@ export function InputForm({
   placeholder,
   validation,
   select,
-  className,
-  children,
+  checkbox,
+  labelCheck,
+  htmlFor,
+  address,
 }: FormValues) {
   const {
     register,
@@ -63,12 +54,52 @@ export function InputForm({
   const inputErrors: InputErrorsTypesAll = findInputError(errors, name);
   const isInvalid = isFormInvalid(inputErrors);
 
+  const [selected, setSelected] = useState(countryOptions[0].value);
+  const handleChangeCountry = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelected(event.target.value);
+  };
+  let element;
+  if (select) {
+    element = (
+      <select
+        {...register(name, validation)}
+        value={selected}
+        onChange={handleChangeCountry}
+        id={id}
+        data-type={type}
+        placeholder={placeholder}
+      >
+        {countryOptions.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.text}
+          </option>
+        ))}
+      </select>
+    );
+  } else if (checkbox && name) {
+    element = GetInput({ name, type, id } as FormValues, register);
+  } else if (labelCheck) {
+    element = <label htmlFor={htmlFor}>{name}</label>;
+  } else if (address) {
+    element = GetInput(
+      { name, type, id, placeholder, validation } as FormValues,
+      register,
+    );
+  } else {
+    element = (
+      <input
+        placeholder={placeholder}
+        {...register(name, validation)}
+        id={id}
+        type={type}
+      />
+    );
+  }
+
   return (
-    <div className={cn('flex flex-col w-full gap-2', className)}>
-      <div className='flex justify-between'>
-        <label htmlFor={id} className='font-semibold capitalize'>
-          {label}
-        </label>
+    <div>
+      <div>
+        <label htmlFor={id}>{label}</label>
         <AnimatePresence mode='wait' initial={false}>
           {isInvalid && (
             <InputError
@@ -78,23 +109,7 @@ export function InputForm({
           )}
         </AnimatePresence>
       </div>
-      {select ? (
-        <select
-          id={id}
-          data-type={type}
-          placeholder={placeholder}
-          {...register(name, validation)}
-        >
-          {children}
-        </select>
-      ) : (
-        <input
-          id={id}
-          type={type}
-          placeholder={placeholder}
-          {...register(name, validation)}
-        />
-      )}
+      {element}
     </div>
   );
 }

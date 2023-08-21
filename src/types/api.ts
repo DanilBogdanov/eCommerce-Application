@@ -33,7 +33,7 @@ export interface RegisterForm {
   firstName?: string;
   lastName?: string;
   dateOfBirth?: Date;
-  addresses?: Address[];
+  addresses: Address[];
   defaultShippingAddress?: number;
   shippingAddresses?: number[];
   defaultBillingAddress?: number;
@@ -49,6 +49,7 @@ export enum Country {
 }
 
 export interface Address {
+  key?: string;
   country: Country;
   streetName?: string;
   postalCode?: string;

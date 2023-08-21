@@ -7,9 +7,9 @@ import { GrMail } from 'react-icons/gr';
 import { BsFillCheckSquareFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import {
-  emailValidation,
-  loginPasswordValidation,
-} from '../../../utils/forms/inputValidations';
+  emailElementParams,
+  loginPasswordElementParams,
+} from '../../../utils/forms/inputElements';
 import { InputForm } from '../../../utils/forms/InputForm-component';
 import Api from '../../../api/api';
 import { MessageType, notifier } from '../../../utils/notifier';
@@ -70,11 +70,11 @@ function Login({ api }: LoginProps): ReactElement {
     <FormProvider {...methods}>
       <form autoComplete='off' onSubmit={(e) => e.preventDefault()} noValidate>
         <div>
-          <InputForm multiline={false} className='' {...emailValidation} />
+          <InputForm multiline={false} className='' {...emailElementParams} />
           <InputForm
             multiline={false}
             className=''
-            {...loginPasswordValidation}
+            {...loginPasswordElementParams}
             type={passwordShown ? 'text' : 'password'}
           />
           <button type='button' onClick={togglePassword}>
