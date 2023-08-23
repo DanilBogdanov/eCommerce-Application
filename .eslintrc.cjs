@@ -10,7 +10,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'prettier',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'jest.config.ts'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'jest.config.ts', 'setupTests.ts'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
@@ -23,6 +23,6 @@ module.exports = {
     ],
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'import/prefer-default-export': 'off',
-    'react-in-jsx-scope': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 };

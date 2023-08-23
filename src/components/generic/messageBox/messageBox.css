@@ -1,0 +1,88 @@
+.message-box {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  column-gap: 10px;
+  min-width: 200px;
+  max-width: 400px;
+  margin: 10px;
+  padding: 0 30px 0 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(43, 43, 43);
+  border: 1px solid;
+  border-bottom-width: 4px;
+  border-radius: 8px 8px 4px 4px;
+  box-shadow: -1px 4px 10px 3px rgba(34, 60, 80, 0.5);
+}
+
+.message-box_default {
+  border-color: gray;
+  background-color: rgb(240, 240, 240);
+}
+
+.message-box_error {
+  border-color: rgb(246, 56, 32);
+  background-color: rgb(254, 227, 225);
+}
+
+.message-box_success {
+  border-color: rgb(2, 148, 62);
+  background-color: rgb(179, 236, 203);
+}
+
+.message-box_info {
+  border-color: rgb(3, 103, 223);
+  background-color: rgb(194, 237, 254);
+}
+
+.message-box_warning {
+  border-color: rgb(250, 165, 21);
+  background-color: rgb(255, 227, 199);
+}
+
+.message-box__icon {
+  width: 40px;
+  flex-shrink: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.message-box_error .message-box__icon {
+  background-image: url('/icons/messageBox/error.svg');
+}
+
+.message-box_warning .message-box__icon {
+  background-image: url('/icons/messageBox/warning.svg');
+}
+
+.message-box_success .message-box__icon {
+  background-image: url('/icons/messageBox/success.svg');
+}
+
+.message-box_info .message-box__icon {
+  background-image: url('/icons/messageBox/info.svg');
+}
+
+.message-box__close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 100%;
+  color: rgb(77, 75, 75);
+  font-size: 1.7rem;
+  text-align: center;
+  vertical-align: center;
+  background: none;
+  transition-duration: 0.2s;
+}
+
+.message-box__close-btn:hover {
+  color: rgb(255, 1, 1);
+}
