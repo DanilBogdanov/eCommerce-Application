@@ -25,21 +25,17 @@ import {
   defaultShippingCheckboxParams,
 } from '../../../utils/forms/inputElements';
 import { InputForm } from '../../../utils/forms/InputForm-component';
-import Api from '../../../api/api';
 import { RegisterForm } from '../../../types/api';
 import { MessageType, notifier } from '../../../utils/notifier';
 import {
   MESSAGE_SHOW_TIME_ERROR,
   MESSAGE_SHOW_TIME_SUCCESS,
 } from '../../../types/constants';
+import { api } from '../../../api/api';
 
 import '../../../utils/forms/FormsStyle.css';
 
-type RegistrationProps = {
-  api: Api;
-};
-
-function Registration({ api }: RegistrationProps): ReactElement {
+function Registration(): ReactElement {
   const methods = useForm({
     shouldFocusError: false,
     criteriaMode: 'firstError',

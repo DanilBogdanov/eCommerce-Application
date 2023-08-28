@@ -6,16 +6,11 @@ import NavBar from './navBar/NavBar';
 import BurgerBtn from './burgerBtn/BurgerBtn';
 import Burger from './burger/Burger';
 
-import Api from '../../../api/api';
 import { BURGER_BREAKPOINT } from '../../../types/constants';
 
 import './layoutHeader.css';
 
-type LayoutHeaderProps = {
-  api: Api;
-};
-
-export default function LayoutHeader({ api }: LayoutHeaderProps): ReactElement {
+export default function LayoutHeader(): ReactElement {
   const [hasBurger, setHasBurger] = useState(false);
   const [isBurgerActive, setIsBurgerActive] = useState(false);
 
@@ -53,7 +48,7 @@ export default function LayoutHeader({ api }: LayoutHeaderProps): ReactElement {
         {!hasBurger && (
           <>
             <NavBar />
-            <UserBar api={api} />
+            <UserBar />
           </>
         )}
         {hasBurger && (
@@ -65,7 +60,6 @@ export default function LayoutHeader({ api }: LayoutHeaderProps): ReactElement {
       </div>
       {hasBurger && (
         <Burger
-          api={api}
           isActive={isBurgerActive}
           onClick={() => setIsBurgerActive((prev) => !prev)}
         />
