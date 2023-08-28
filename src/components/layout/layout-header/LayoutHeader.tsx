@@ -1,46 +1,75 @@
-import { ReactElement } from 'react';
-import { NavLink } from 'react-router-dom';
-import { BiHomeCircle, BiColumns, BiReceipt } from 'react-icons/bi';
-import Logo from '../../logo/Logo';
-import Api from '../../../api/api';
+import { ReactElement, useEffect, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import Logo from './logo/Logo';
 import UserBar from './userBar/UserBar';
+import NavBar from './navBar/NavBar';
+import BurgerBtn from './burgerBtn/BurgerBtn';
+import Burger from './burger/Burger';
+
+import Api from '../../../api/api';
+import { BURGER_BREAKPOINT } from '../../../types/constants';
+
 import './layoutHeader.css';
-import { NavLinkClassesProps } from '../../../types/layout';
 
 type LayoutHeaderProps = {
   api: Api;
 };
 
-const changeNavLinkClasses = ({
-  isActive,
-  isPending,
-}: NavLinkClassesProps): string => {
-  return `nav-link ${isPending ? 'pending' : ''} ${isActive ? 'active' : ''}`;
-};
-
 export default function LayoutHeader({ api }: LayoutHeaderProps): ReactElement {
+  const [hasBurger, setHasBurger] = useState(false);
+  const [isBurgerActive, setIsBurgerActive] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsBurgerActive(false);
+  }, [location]);
+
+  function resizeHandler() {
+    setHasBurger(window.innerWidth <= BURGER_BREAKPOINT);
+  }
+
+  useEffect(() => {
+    resizeHandler();
+    globalThis.addEventListener('resize', resizeHandler);
+
+    return () => {
+      globalThis.removeEventListener('resize', resizeHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!hasBurger) {
+      setIsBurgerActive(false);
+    }
+  }, [hasBurger, isBurgerActive]);
+
   return (
     <header className='header' data-testid='layout-header'>
-      <div className='header-container'>
+      <div className='header__container'>
         <NavLink to='/'>
-          <Logo color='#10116d' width='150' />
+          <Logo color='#638C47' width='100' />
         </NavLink>
-        <div className='header-nav'>
-          <NavLink to='/' className={changeNavLinkClasses}>
-            <BiHomeCircle />
-            Main
-          </NavLink>
-          <NavLink to='/catalog' className={changeNavLinkClasses}>
-            <BiColumns />
-            Catalog
-          </NavLink>
-          <NavLink to='/about' className={changeNavLinkClasses}>
-            <BiReceipt />
-            About Us
-          </NavLink>
-        </div>
-        <UserBar api={api} />
+        {!hasBurger && (
+          <>
+            <NavBar />
+            <UserBar api={api} />
+          </>
+        )}
+        {hasBurger && (
+          <BurgerBtn
+            isActive={isBurgerActive}
+            onClick={() => setIsBurgerActive((prev) => !prev)}
+          />
+        )}
       </div>
+      {hasBurger && (
+        <Burger
+          api={api}
+          isActive={isBurgerActive}
+          onClick={() => setIsBurgerActive((prev) => !prev)}
+        />
+      )}
     </header>
   );
 }
