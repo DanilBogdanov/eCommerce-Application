@@ -60,7 +60,7 @@ export interface Address {
 }
 
 export interface ApiResponse<T> {
-  result: boolean;
+  isSuccessful: boolean;
   message: string;
   data?: T;
 }
@@ -73,3 +73,23 @@ export interface Profile {
 }
 
 export type AuthCallback = (isAnonym: boolean, email: string) => void;
+
+export type CategoriesResponse = {
+  results: {
+    id: string;
+    key: string;
+    name: {
+      'en-US': string;
+    };
+    description: {
+      'en-US': string;
+    };
+  }[];
+};
+
+export interface Category {
+  id: string;
+  key: string;
+  name: string;
+  description: string;
+}
