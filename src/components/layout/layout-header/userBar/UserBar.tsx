@@ -1,26 +1,22 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { BiLogInCircle, BiLogOutCircle } from 'react-icons/bi';
-import { AiOutlineUserAdd } from 'react-icons/ai';
 import { NavLinkClassesProps } from '../../../../types/layout';
 
 import Api from '../../../../api/api';
-import './userBar.css';
 import { MessageType, notifier } from '../../../../utils/notifier';
 import {
   MESSAGE_SHOW_TIME_ERROR,
   MESSAGE_SHOW_TIME_SUCCESS,
 } from '../../../../types/constants';
 
+import './userBar.css';
+
 type UserBarProps = {
   api: Api;
 };
 
-const changeNavLinkClasses = ({
-  isActive,
-  isPending,
-}: NavLinkClassesProps): string => {
-  return `login-link ${isPending ? 'pending' : ''} ${isActive ? 'active' : ''}`;
+const changeNavLinkClasses = ({ isActive }: NavLinkClassesProps): string => {
+  return `user-bar__link  ${isActive ? 'user-bar__link_active' : ''}`;
 };
 
 export default function UserBar({ api }: UserBarProps): ReactElement {
@@ -61,21 +57,19 @@ export default function UserBar({ api }: UserBarProps): ReactElement {
   function getButtons() {
     if (isAnonymous) {
       return (
-        <div className='login-link_container'>
+        <>
           <NavLink to='/login' className={changeNavLinkClasses}>
-            <BiLogInCircle />
             LogIn
           </NavLink>
+          <span className='user-bar__separator'>/</span>
           <NavLink to='/registration' className={changeNavLinkClasses}>
-            <AiOutlineUserAdd />
             LogUp
           </NavLink>
-        </div>
+        </>
       );
     }
     return (
-      <button type='button' onClick={() => logout()} className='logut-btn'>
-        <BiLogOutCircle />
+      <button type='button' onClick={() => logout()} className='user-bar__btn'>
         LogOut
       </button>
     );
@@ -83,11 +77,14 @@ export default function UserBar({ api }: UserBarProps): ReactElement {
 
   return (
     <div className='user-bar' data-testid='user-bar'>
-      <div className='user-container'>
-        <img src='/img/user.svg' height={30} alt='user' />
-        <span>{email}</span>
-      </div>
-      <div>{getButtons()}</div>
+      <NavLink
+        className='user-bar__img'
+        to={isAnonymous ? '/login' : '/profile'}
+      >
+        <img src='/icons/header/user.svg' height={25} alt='user' />
+      </NavLink>
+      <div className='user-bar__links'>{getButtons()}</div>
+      <div className='user-bar__info'>{isAnonymous ? 'Anonymous' : email}</div>
     </div>
   );
 }
