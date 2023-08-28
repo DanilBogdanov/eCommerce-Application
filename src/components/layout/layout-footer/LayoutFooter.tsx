@@ -1,35 +1,27 @@
 import { ReactElement } from 'react';
-import './layoutFooter.css';
 import { NavLink } from 'react-router-dom';
-import Logo from '../../logo/Logo';
-import { NavLinkClassesProps } from '../../../types/layout';
 
-const changeNavLinkClasses = ({
-  isActive,
-  isPending,
-}: NavLinkClassesProps): string => {
-  return `footer-link ${isPending ? 'pending' : ''} ${
-    isActive ? 'active' : ''
-  }`;
-};
+import './layoutFooter.css';
 
 export default function LayoutFooter(): ReactElement {
   return (
     <footer className='footer' data-testid='layout-footer'>
-      <div className='footer-container'>
-        <NavLink to='/'>
-          <Logo color='#ffffff' width='100' />
+      <div className='footer__container'>
+        <div className='footer__authors'>
+          <NavLink to='https://github.com/danilbogdanov'>
+            <img src='/icons/footer/github.svg' height={25} alt='user' />
+          </NavLink>
+          <NavLink to='https://github.com/dartster'>
+            <img src='/icons/footer/github.svg' height={25} alt='user' />
+          </NavLink>
+          <NavLink to='https://github.com/natteskrekkk'>
+            <img src='/icons/footer/github.svg' height={25} alt='user' />
+          </NavLink>
+        </div>
+        <p className='footer__info'>Created by Winners Team 2023</p>
+        <NavLink to='https://rs.school/'>
+          <img src='/icons/footer/rss.svg' height={35} alt='rss' />
         </NavLink>
-        <NavLink to='/' className={changeNavLinkClasses}>
-          Main
-        </NavLink>
-        <NavLink to='/catalog' className={changeNavLinkClasses}>
-          Catalog
-        </NavLink>
-        <NavLink to='/about' className={changeNavLinkClasses}>
-          AboutUs
-        </NavLink>
-        <div>Create by Winners Team</div>
       </div>
     </footer>
   );
