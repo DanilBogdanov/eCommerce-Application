@@ -32,7 +32,7 @@ export default function UserBar(): ReactElement {
 
   const logout = async () => {
     const resp = await api.auth.logout();
-    if (resp.result) {
+    if (resp.isSuccessful) {
       notifier.showMessage(
         MessageType.INFO,
         'Logout',

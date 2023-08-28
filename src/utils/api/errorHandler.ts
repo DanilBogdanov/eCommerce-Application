@@ -37,7 +37,7 @@ export default function handleError<T>(e: unknown): ApiResponse<T> {
   }
 
   return {
-    result: false,
+    isSuccessful: false,
     message,
   };
 }
