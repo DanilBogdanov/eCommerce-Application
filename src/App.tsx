@@ -1,4 +1,3 @@
-import './App.css';
 import { ReactElement } from 'react';
 import {
   createBrowserRouter,
@@ -10,9 +9,10 @@ import Main from './components/pages/main/Main';
 import Registration from './components/pages/registration/Registration';
 import Login from './components/pages/login/Login';
 import NotFound from './components/pages/notFound/NotFound';
-import Api from './api/api';
 import AboutUs from './components/pages/about/About';
 import Catalog from './components/pages/catalog/Catalog';
+import Api from './api/api';
+import './App.css';
 
 const api = new Api();
 

@@ -2,10 +2,12 @@ import { ReactElement, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import LayoutHeader from './layout-header/LayoutHeader';
 import LayoutFooter from './layout-footer/LayoutFooter';
-import Api from '../../api/api';
-import './layout.css';
-import { Message, MessageType, notifier } from '../../utils/notifier';
 import MessageBox from '../generic/messageBox/MessageBox';
+
+import Api from '../../api/api';
+import { Message, MessageType, notifier } from '../../utils/notifier';
+
+import './layout.css';
 
 type LayoutProps = {
   api: Api;
@@ -31,13 +33,17 @@ export default function Layout({ api }: LayoutProps): ReactElement {
       }, mess.showTime);
       setTimeoutId(+id);
     });
-  }, [timeoutId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className='layout_container'>
+    <>
       <LayoutHeader api={api} />
-      <div className='outlet-container' data-testid='outlet'>
-        <Outlet />
-      </div>
+      <main className='main'>
+        <div className='main__container'>
+          <Outlet />
+        </div>
+      </main>
       <LayoutFooter />
       {messageVisibility && (
         <MessageBox
@@ -45,6 +51,6 @@ export default function Layout({ api }: LayoutProps): ReactElement {
           onClose={() => setMessageVisibility(false)}
         />
       )}
-    </div>
+    </>
   );
 }
