@@ -2,24 +2,20 @@ import { ReactElement, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { NavLinkClassesProps } from '../../../../types/layout';
 
-import Api from '../../../../api/api';
 import { MessageType, notifier } from '../../../../utils/notifier';
 import {
   MESSAGE_SHOW_TIME_ERROR,
   MESSAGE_SHOW_TIME_SUCCESS,
 } from '../../../../types/constants';
+import { api } from '../../../../api/api';
 
 import './userBar.css';
-
-type UserBarProps = {
-  api: Api;
-};
 
 const changeNavLinkClasses = ({ isActive }: NavLinkClassesProps): string => {
   return `user-bar__link  ${isActive ? 'user-bar__link_active' : ''}`;
 };
 
-export default function UserBar({ api }: UserBarProps): ReactElement {
+export default function UserBar(): ReactElement {
   const [isAnonymous, setAnonymous] = useState(false);
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
@@ -32,7 +28,7 @@ export default function UserBar({ api }: UserBarProps): ReactElement {
       setAnonymous(isAnonym);
       setEmail(userEmail);
     });
-  }, [api.user, api.auth]);
+  }, []);
 
   const logout = async () => {
     const resp = await api.auth.logout();

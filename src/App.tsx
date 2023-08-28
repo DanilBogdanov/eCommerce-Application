@@ -11,10 +11,8 @@ import Login from './components/pages/login/Login';
 import NotFound from './components/pages/notFound/NotFound';
 import AboutUs from './components/pages/about/About';
 import Catalog from './components/pages/catalog/Catalog';
-import Api from './api/api';
+import { api } from './api/api';
 import './App.css';
-
-const api = new Api();
 
 const redirectToMain = () => {
   if (!api.user.isAnonymous()) {
@@ -26,17 +24,17 @@ const redirectToMain = () => {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout api={api} />,
+    element: <Layout />,
     children: [
       { index: true, element: <Main /> },
       {
         path: '/registration',
-        element: <Registration api={api} />,
+        element: <Registration />,
         loader: redirectToMain,
       },
       {
         path: '/login',
-        element: <Login api={api} />,
+        element: <Login />,
         loader: redirectToMain,
       },
       { path: '/catalog', element: <Catalog /> },

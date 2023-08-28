@@ -4,16 +4,11 @@ import LayoutHeader from './layout-header/LayoutHeader';
 import LayoutFooter from './layout-footer/LayoutFooter';
 import MessageBox from '../generic/messageBox/MessageBox';
 
-import Api from '../../api/api';
 import { Message, MessageType, notifier } from '../../utils/notifier';
 
 import './layout.css';
 
-type LayoutProps = {
-  api: Api;
-};
-
-export default function Layout({ api }: LayoutProps): ReactElement {
+export default function Layout(): ReactElement {
   const [message, setMessage] = useState<Message>({
     type: MessageType.ERROR,
     title: '',
@@ -38,7 +33,7 @@ export default function Layout({ api }: LayoutProps): ReactElement {
 
   return (
     <>
-      <LayoutHeader api={api} />
+      <LayoutHeader />
       <main className='main'>
         <div className='main__container'>
           <Outlet />
