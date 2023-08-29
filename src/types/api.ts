@@ -141,6 +141,11 @@ export interface ProductFetchResponse {
       value: {
         centAmount: number;
       };
+      discounted?: {
+        value: {
+          centAmount: number;
+        };
+      };
     }[];
   };
 }
@@ -156,4 +161,5 @@ export interface Product {
   }[];
   imagesUrl: string[];
   price: number;
+  salePrice: number | null;
 }

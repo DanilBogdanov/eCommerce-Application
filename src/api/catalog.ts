@@ -136,7 +136,12 @@ class Catalog {
         categoryId: product.categories[0].id,
         attributes: product.masterVariant.attributes,
         imagesUrl: product.masterVariant.images.map<string>((img) => img.url),
-        price: product.masterVariant.prices[0].value.centAmount / 100,
+        price: product.masterVariant.prices[0].value.centAmount
+          ? product.masterVariant.prices[0].value.centAmount / 100
+          : 0,
+        salePrice: product.masterVariant.prices[0].discounted?.value.centAmount
+          ? product.masterVariant.prices[0].discounted.value.centAmount / 100
+          : null,
       };
     });
 
@@ -168,7 +173,12 @@ class Catalog {
       categoryId: data.categories[0].id,
       attributes: data.masterVariant.attributes,
       imagesUrl: data.masterVariant.images.map<string>((img) => img.url),
-      price: data.masterVariant.prices[0].value.centAmount / 100,
+      price: data.masterVariant.prices[0].value.centAmount
+        ? data.masterVariant.prices[0].value.centAmount / 100
+        : 0,
+      salePrice: data.masterVariant.prices[0].discounted?.value.centAmount
+        ? data.masterVariant.prices[0].discounted.value.centAmount / 100
+        : null,
     };
 
     return product;
