@@ -26,8 +26,6 @@ export default function GetInput(
   { name, type, id, placeholder, validation, className }: FormValues,
   register: UseFormRegister<FieldValues>,
 ): JSX.Element | undefined {
-  let output;
-
   const setIsSameAddress = useState(false)[1];
   const handleChangeSameAddress = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -88,12 +86,14 @@ export default function GetInput(
     setIsDefaultShipping((current) => !current);
   };
 
+  let output;
+
   if (name === 'sameAddress') {
     output = (
       <input
-        name={name}
         id={id}
         type={type}
+        {...register(name)}
         onChange={handleChangeSameAddress}
       />
     );
