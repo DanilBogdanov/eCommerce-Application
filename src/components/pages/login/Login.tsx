@@ -32,7 +32,7 @@ function Login(): ReactElement {
     const values = methods.getValues();
     const { email, password } = values;
     const resp = await api.auth.login(email, password);
-    if (resp.result) {
+    if (resp.isSuccessful) {
       notifier.showMessage(
         MessageType.SUCCESS,
         'Login',

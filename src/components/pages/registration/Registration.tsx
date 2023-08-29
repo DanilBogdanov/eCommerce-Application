@@ -46,7 +46,7 @@ function Registration(): ReactElement {
 
   const logup = async (registerForm: RegisterForm) => {
     const resp = await api.auth.registerAndLogin(registerForm);
-    if (resp.result) {
+    if (resp.isSuccessful) {
       notifier.showMessage(
         MessageType.SUCCESS,
         'Registration',

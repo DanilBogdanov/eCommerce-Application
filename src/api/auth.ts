@@ -31,7 +31,7 @@ class Auth {
         this.callback(false, email);
       }
       return {
-        result: true,
+        isSuccessful: true,
         message: `User with email:${email} successfully logged in`,
       };
     } catch (e: unknown) {
@@ -48,7 +48,7 @@ class Auth {
         this.callback(true, '');
       }
       return {
-        result: true,
+        isSuccessful: true,
         message: 'User successfully logged out',
       };
     } catch (e: unknown) {
@@ -70,12 +70,12 @@ class Auth {
       registerForm.email,
       registerForm.password,
     );
-    if (!loginResp.result) {
+    if (!loginResp.isSuccessful) {
       return loginResp;
     }
 
     return {
-      result: true,
+      isSuccessful: true,
       message: `User with email:${registerForm.email} successfully registered and logged in`,
     };
   }
@@ -87,7 +87,7 @@ class Auth {
   private async registerUser(registerForm: RegisterForm): Promise<void> {
     const tokenResp = await this.tokenStore.getToken();
 
-    if (tokenResp.result && tokenResp.data) {
+    if (tokenResp.isSuccessful && tokenResp.data) {
       const token = tokenResp.data;
       await axios.post(
         `${config.apiUrl}/${config.projectKey}/customers`,

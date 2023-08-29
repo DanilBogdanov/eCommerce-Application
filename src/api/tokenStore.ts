@@ -62,7 +62,7 @@ class TokenStore {
         const resp = await prom;
         this.update(resp);
         return {
-          result: true,
+          isSuccessful: true,
           message: 'Success',
           data: resp.accessToken,
         };
@@ -82,7 +82,7 @@ class TokenStore {
       }
     }
     return {
-      result: true,
+      isSuccessful: true,
       message: 'Success',
       data: this.token,
     };

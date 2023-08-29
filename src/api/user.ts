@@ -21,16 +21,16 @@ class User {
   public async getProfile(): Promise<ApiResponse<Profile>> {
     if (this.tokenStore.isAnonym()) {
       return {
-        result: false,
+        isSuccessful: false,
         message: 'Anonymous user has no profile',
       };
     }
 
     const tokenResp = await this.tokenStore.getToken();
 
-    if (!tokenResp.result || !tokenResp.data) {
+    if (!tokenResp.isSuccessful || !tokenResp.data) {
       return {
-        result: false,
+        isSuccessful: false,
         message: `Can't get token: ${tokenResp.message}`,
       };
     }
@@ -38,7 +38,7 @@ class User {
     try {
       const profile = await User.me(tokenResp.data);
       return {
-        result: true,
+        isSuccessful: true,
         message: 'Success',
         data: profile,
       };
