@@ -10,3 +10,5 @@ export const MESSAGE_SHOW_TIME_ERROR = 6000;
 export const MESSAGE_SHOW_TIME_SUCCESS = 3000;
 
 export const BURGER_BREAKPOINT = 768;
+
+export const DEFAULT_LIMIT_PER_PAGE = 10;
