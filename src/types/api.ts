@@ -119,6 +119,7 @@ export interface ProductsResponse {
 
 export interface ProductFetchResponse {
   id: string;
+  key: string;
   name: {
     'en-US': string;
   };
@@ -152,6 +153,7 @@ export interface ProductFetchResponse {
 
 export interface Product {
   id: string;
+  key: string;
   name: string;
   description: string;
   categoryId: string;
