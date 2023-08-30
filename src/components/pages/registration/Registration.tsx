@@ -66,10 +66,16 @@ function Registration(): ReactElement {
 
   const onSubmit = methods.handleSubmit(() => {
     const values = methods.getValues();
-    const { email, password } = values;
+    // const { email, password, surnam, name, dateOfBirth } = values;
 
     //
     const {
+      email,
+      password,
+      surnam,
+      name,
+      dateOfBirth,
+      sameAddress,
       defaultBilling,
       streetBilling,
       cityBilling,
@@ -98,52 +104,46 @@ function Registration(): ReactElement {
       country: countryShipping,
     };
 
-    const defaultBillingObj = {
-      key: 'defaultBilling',
-      streetName: streetBilling,
-      postalCode: postcodeBilling,
-      city: cityBilling,
-      country: countryBilling,
-    };
-
-    const defaultShippingObj = {
-      key: 'defaultShipping',
-      streetName: streetShipping,
-      postalCode: postcodeShipping,
-      city: cityShipping,
-      country: countryShipping,
-    };
-
     const addressArr = [];
-    addressArr.push(BillingObj, ShippingObj);
-    if (defaultBilling) {
-      addressArr.push(defaultBillingObj);
-    }
-    if (defaultShipping) {
-      addressArr.push(defaultShippingObj);
-    }
+    addressArr.push(BillingObj);
+
+    const firstName = name;
+    const lastName = surnam;
 
     const registerForm: RegisterForm = {
       email,
       password,
       addresses: addressArr,
+      firstName,
+      lastName,
+      dateOfBirth,
+
       // add rest fields
       // address ID fields add in loop lower
     };
 
-    for (let i = 0; i < registerForm.addresses!.length; i += 1) {
-      const element = registerForm?.addresses[i];
-      if (element.key === 'defaultBilling') {
-        registerForm.defaultBillingAddress = i;
-      } else if (element.key === 'defaultShipping') {
-        registerForm.defaultShippingAddress = i;
-      } else if (element.key === 'billing') {
-        registerForm.billingAddresses = [i];
-      } else if (element.key === 'shipping') {
-        registerForm.shippingAddresses = [i];
-      }
-      delete element.key;
+    const billingIndex = 0;
+    const shippingIndex = 1;
+
+    if (sameAddress) {
+      registerForm.billingAddresses = [billingIndex];
+      registerForm.shippingAddresses = [billingIndex];
+    } else {
+      addressArr.push(ShippingObj);
+      registerForm.billingAddresses = [billingIndex];
+      registerForm.shippingAddresses = [shippingIndex];
     }
+
+    if (defaultBilling) {
+      registerForm.defaultBillingAddress = billingIndex;
+    }
+    if (defaultShipping && sameAddress) {
+      registerForm.defaultShippingAddress = billingIndex;
+    }
+    if (defaultShipping && !sameAddress) {
+      registerForm.defaultShippingAddress = shippingIndex;
+    }
+
     logup(registerForm);
     methods.reset();
     setSuccess(true);
