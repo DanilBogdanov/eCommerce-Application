@@ -97,7 +97,10 @@ export interface Category {
 export interface ProductRequestOptions {
   limit?: number;
   categoryId?: string;
+  categoryKey?: string;
   page?: number;
+  sortField?: 'name' | 'price';
+  sortOrder?: 'asc' | 'desc';
 }
 
 export interface ProductsFetchResponse {

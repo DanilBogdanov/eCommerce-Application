@@ -17,17 +17,22 @@ import { DEFAULT_LIMIT_PER_PAGE } from '../types/constants';
 class Catalog {
   private tokenStore: TokenStore;
 
+  private categories?: Category[];
+
   constructor(tokenStore: TokenStore) {
     this.tokenStore = tokenStore;
   }
 
   public async getCategories(): Promise<ApiResponse<Category[]>> {
     try {
-      const categories = await this.fetchCategories();
+      if (!this.categories) {
+        const categories = await this.fetchCategories();
+        this.categories = categories;
+      }
       return {
         isSuccessful: true,
         message: 'Success',
-        data: categories,
+        data: this.categories,
       };
     } catch (e) {
       return handleError<Category[]>(e);
@@ -37,14 +42,24 @@ class Catalog {
   public async getProducts({
     limit = DEFAULT_LIMIT_PER_PAGE,
     categoryId,
+    categoryKey,
     page,
+    sortField,
+    sortOrder = 'asc',
   }: ProductRequestOptions): Promise<ApiResponse<ProductsResponse>> {
-    const checkedLimit = limit <= 0 ? DEFAULT_LIMIT_PER_PAGE : limit;
-    const queryString = `limit=${checkedLimit}${
-      categoryId ? `&filter=categories.id:"${categoryId}"` : ''
-    }${page ? `&offset=${page * checkedLimit}` : ''}`;
-
     try {
+      const checkedLimit = limit <= 0 ? DEFAULT_LIMIT_PER_PAGE : limit;
+      const checkedCategoryId =
+        categoryId ||
+        (categoryKey ? await this.getCategoryIdByKey(categoryKey) : null);
+      const checkedSortField = sortField === 'name' ? 'name.en-US' : sortField;
+
+      const queryString = `limit=${checkedLimit}${
+        checkedCategoryId ? `&filter=categories.id:"${checkedCategoryId}"` : ''
+      }${page ? `&offset=${page * checkedLimit}` : ''}${
+        checkedSortField ? `&sort=${checkedSortField} ${sortOrder}` : ''
+      }`;
+
       const products = await this.fetchProducts(queryString);
       return {
         isSuccessful: true,
@@ -160,6 +175,11 @@ class Catalog {
     }
 
     return tokenResp.data;
+  }
+
+  private async getCategoryIdByKey(key: string): Promise<string | null> {
+    const categories = await this.getCategories();
+    return categories.data?.find((cat) => cat.key === key)?.id || null;
   }
 }
 
