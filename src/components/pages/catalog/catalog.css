@@ -27,6 +27,18 @@
   justify-content: space-between;
 }
 
+@media (max-width: 1000px) {
+  .products-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .products-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 .prodoct-card {
   display: flex;
   flex-direction: column;
