@@ -15,4 +15,6 @@
   --main-color-013: rgba(99, 140, 71, 0.13);
   --secondary-color-light: rgba(255, 255, 255, 0.7);
   --secondary-color-light-active: rgb(255, 255, 255);
+  --danger-color: rgb(246, 56, 32);
+  --danger-color-light: rgb(254, 227, 225);
 }
