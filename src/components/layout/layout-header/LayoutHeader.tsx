@@ -5,6 +5,7 @@ import UserBar from './userBar/UserBar';
 import NavBar from './navBar/NavBar';
 import BurgerBtn from './burgerBtn/BurgerBtn';
 import Burger from './burger/Burger';
+import SearchBar from './searchBar/SearchBar';
 
 import { BURGER_BREAKPOINT } from '../../../types/constants';
 
@@ -48,7 +49,10 @@ export default function LayoutHeader(): ReactElement {
         {!hasBurger && (
           <>
             <NavBar />
-            <UserBar />
+            <div className='header__control'>
+              <SearchBar />
+              <UserBar />
+            </div>
           </>
         )}
         {hasBurger && (
