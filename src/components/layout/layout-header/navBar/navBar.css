@@ -9,8 +9,6 @@
 .burger .nav-bar {
   flex-direction: column;
   height: 12rem;
-  padding-top: 1rem;
-  border-top: 0.1rem solid var(--main-color);
 }
 
 .nav-bar__link {

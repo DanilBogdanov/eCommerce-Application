@@ -101,6 +101,7 @@ export interface ProductRequestOptions {
   page?: number;
   sortField?: 'name' | 'price';
   sortOrder?: 'asc' | 'desc';
+  search?: string;
 }
 
 export interface ProductsFetchResponse {

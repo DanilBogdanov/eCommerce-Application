@@ -46,6 +46,7 @@ class Catalog {
     page,
     sortField,
     sortOrder = 'asc',
+    search,
   }: ProductRequestOptions): Promise<ApiResponse<ProductsResponse>> {
     try {
       const checkedLimit = limit <= 0 ? DEFAULT_LIMIT_PER_PAGE : limit;
@@ -53,11 +54,16 @@ class Catalog {
         categoryId ||
         (categoryKey ? await this.getCategoryIdByKey(categoryKey) : null);
       const checkedSortField = sortField === 'name' ? 'name.en-US' : sortField;
+      const checkedSearch = search && search.length >= 5 ? search : null;
 
       const queryString = `limit=${checkedLimit}${
         checkedCategoryId ? `&filter=categories.id:"${checkedCategoryId}"` : ''
       }${page ? `&offset=${page * checkedLimit}` : ''}${
         checkedSortField ? `&sort=${checkedSortField} ${sortOrder}` : ''
+      }${
+        checkedSearch
+          ? `&text.en-US=${checkedSearch}&fuzzy=true&fuzzyLevel=2`
+          : ''
       }`;
 
       const products = await this.fetchProducts(queryString);
