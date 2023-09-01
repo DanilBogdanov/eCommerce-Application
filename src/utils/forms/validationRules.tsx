@@ -11,6 +11,14 @@ export const postcodeValidationRules: ValidationParams = {
     value: false,
     message: 'required',
   },
+  pattern: {
+    value: /^[A-Za-z0-9]+$/,
+    message: 'Use only letters (A-Z, a- z) and numbers (0-9)',
+  },
+  maxLength: {
+    value: 8,
+    message: 'max 8 characters',
+  },
 };
 
 export const passwordValidationRules: ValidationParams = {
@@ -121,7 +129,7 @@ export const emailValidationRules: ValidationParams = {
   },
   pattern: {
     value:
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,4}))$/,
     message: 'your email should be like "user@example.com"',
   },
 };

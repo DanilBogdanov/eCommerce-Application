@@ -17,4 +17,8 @@
   --secondary-color-light-active: rgb(255, 255, 255);
 
   --font-color: rgba(0, 0, 0, 0.35);
+  
+  --danger-color: rgb(246, 56, 32);
+  --danger-color-light: rgb(254, 227, 225);
+
 }

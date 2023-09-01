@@ -5,6 +5,7 @@ import NavBar from '../navBar/NavBar';
 import UserBar from '../userBar/UserBar';
 
 import './burger.css';
+import SearchBar from '../searchBar/SearchBar';
 
 type BurgerProps = {
   isActive: boolean;
@@ -20,6 +21,7 @@ export default function Burger({
       <div className='burger__background' onClick={() => onClick()} />
       <div className='burger__container'>
         <UserBar />
+        <SearchBar />
         <NavBar />
       </div>
     </div>

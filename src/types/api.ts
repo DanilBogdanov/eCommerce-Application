@@ -97,7 +97,11 @@ export interface Category {
 export interface ProductRequestOptions {
   limit?: number;
   categoryId?: string;
+  categoryKey?: string;
   page?: number;
+  sortField?: 'name' | 'price';
+  sortOrder?: 'asc' | 'desc';
+  search?: string;
 }
 
 export interface ProductsFetchResponse {
@@ -119,6 +123,7 @@ export interface ProductsResponse {
 
 export interface ProductFetchResponse {
   id: string;
+  key: string;
   name: {
     'en-US': string;
   };
@@ -152,6 +157,7 @@ export interface ProductFetchResponse {
 
 export interface Product {
   id: string;
+  key: string;
   name: string;
   description: string;
   categoryId: string;
