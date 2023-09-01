@@ -37,7 +37,16 @@ const router = createBrowserRouter([
         element: <Login />,
         loader: redirectToMain,
       },
-      { path: '/catalog', element: <Catalog /> },
+      {
+        path: '/catalog',
+        element: <Catalog />,
+        children: [
+          {
+            path: '/catalog/:category',
+            element: <Catalog />,
+          },
+        ],
+      },
       { path: '/about', element: <AboutUs /> },
       { path: '/*', element: <NotFound /> },
     ],
