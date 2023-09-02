@@ -51,9 +51,6 @@
 }
 
 @media (max-width: 1000px) {
-  .products-header__breadcrumbs {
-    justify-content: flex-end;
-  }
   .products-header__second-line {
     flex-direction: column;
     margin-bottom: 0.5rem;

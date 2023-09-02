@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { Card } from './card/Card';
 import { CatalogHeader } from './catalogHeader/CatalogHeader';
 import { Pagination } from './pagination/Pagination';
@@ -8,6 +8,7 @@ import { api } from '../../../api/api';
 import { ApiResponse, Category, ProductsResponse } from '../../../types/api';
 import { DEFAULT_LIMIT_PER_PAGE } from '../../../types/constants';
 import './catalog.css';
+import { Sidebar } from '../../sidebar/Sidebar';
 
 const CATALOG_TITLE = 'all stuff';
 
@@ -64,22 +65,7 @@ export default function Catalog(): ReactElement {
 
   return (
     <main className='catalog'>
-      <div className='sidebar'>
-        {categories &&
-          categories.data &&
-          categories?.data?.map((item) => {
-            const categoryName = item.name.toLowerCase();
-            return (
-              <NavLink
-                to={`/catalog/${categoryName}`}
-                key={item.key}
-                id={item.id}
-              >
-                {item.name}
-              </NavLink>
-            );
-          })}
-      </div>
+      <Sidebar categories={categories} />
       <div className='products-main'>
         <CatalogHeader
           search={search}

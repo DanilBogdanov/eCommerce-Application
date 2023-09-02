@@ -8,7 +8,7 @@
 
 .burger .nav-bar {
   flex-direction: column;
-  height: 12rem;
+  height: 23rem;
 }
 
 .nav-bar__link {
@@ -36,4 +36,40 @@
 .burger .nav-bar__link {
   max-width: 4rem;
   margin: 0 auto;
+}
+
+.nav-bar__separator {
+  width: 65%;
+  height: 0.2rem;
+  border: none;
+  background-color: var(--main-color-light);
+}
+
+.nav-bar__categories {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-bar__categories {
+    display: flex;
+    flex-direction: column;
+    color: var(--secondary-color-light);
+    font-size: 1.8rem;
+    cursor: default;
+  }
+}
+
+.nav-bar__categories-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-bar__categories .nav-bar__link {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.nav-bar__categories .nav-bar__link_active {
+  border-bottom: 0.2rem solid var(--main-color);
 }
