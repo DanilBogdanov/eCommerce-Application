@@ -8,7 +8,7 @@
 
 .burger .nav-bar {
   flex-direction: column;
-  height: 23rem;
+  height: 22rem;
 }
 
 .nav-bar__link {
@@ -38,13 +38,6 @@
   margin: 0 auto;
 }
 
-.nav-bar__separator {
-  width: 65%;
-  height: 0.2rem;
-  border: none;
-  background-color: var(--main-color-light);
-}
-
 .nav-bar__categories {
   display: none;
 }
@@ -57,12 +50,6 @@
     font-size: 1.8rem;
     cursor: default;
   }
-}
-
-.nav-bar__categories-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .nav-bar__categories .nav-bar__link {
