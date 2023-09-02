@@ -42,8 +42,8 @@
 }
 
 .sidebar__underline {
-  width: 200px;
-  height: 2px;
+  width: 20rem;
+  height: 0.2rem;
   background: var(--main-color);
   margin: 0 auto;
   margin-top: 2.7rem;
