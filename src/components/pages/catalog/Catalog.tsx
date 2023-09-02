@@ -1,10 +1,15 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
+import { Card } from './card/Card';
+import { CatalogHeader } from './catalogHeader/CatalogHeader';
+import { Pagination } from './pagination/Pagination';
+import { PageLimit } from './pageLimit/PageLimit';
 import { api } from '../../../api/api';
 import { ApiResponse, Category, ProductsResponse } from '../../../types/api';
-import './catalog.css';
 import { DEFAULT_LIMIT_PER_PAGE } from '../../../types/constants';
-import { Card } from './card/Card';
+import './catalog.css';
+
+const CATALOG_TITLE = 'all stuff';
 
 export default function Catalog(): ReactElement {
   const [categories, setCategories] = useState<ApiResponse<Category[]> | null>(
@@ -14,31 +19,21 @@ export default function Catalog(): ReactElement {
     useState<ApiResponse<ProductsResponse> | null>(null);
   const [search, setSearch] = useState<string | null>(null);
   const [pageLimit, setPageLimit] = useState(DEFAULT_LIMIT_PER_PAGE);
-  const [currentPage] = useState(0);
-  const [currentCategory, setCurrentCategory] = useState('All stuff');
+  const [currentPage, setCurrentPage] = useState(0);
+  const [currentCategory, setCurrentCategory] = useState(CATALOG_TITLE);
   const [searchParams] = useSearchParams();
 
   const location = useLocation();
-
-  useEffect(() => {
-    const callData = async () => {
-      const categoriesResponse = await api.catalog.getCategories();
-      const productsResponse = await api.catalog.getProducts({
-        limit: pageLimit,
-        page: currentPage,
-      });
-      setCategories(categoriesResponse);
-      setProducts(productsResponse);
-    };
-    callData();
-  }, [pageLimit, currentPage]);
-
   useEffect(() => {
     setSearch(searchParams.get('search'));
   }, [searchParams]);
 
   useEffect(() => {
     const updateProducts = async () => {
+      if (!categories) {
+        const categoriesResponse = await api.catalog.getCategories();
+        setCategories(categoriesResponse);
+      }
       const pathArray = location.pathname.split('/');
       const lastNest = pathArray[pathArray.length - 1];
       if (lastNest !== 'catalog' && categories && categories.data) {
@@ -47,6 +42,7 @@ export default function Catalog(): ReactElement {
         );
         setCurrentCategory(lastNest);
         const categoryId = filteredCategoryByUrl[0].id;
+        if (currentCategory !== lastNest) setCurrentPage(0);
         const newProducts = await api.catalog.getProducts({
           limit: pageLimit,
           categoryId,
@@ -54,16 +50,17 @@ export default function Catalog(): ReactElement {
         });
         setProducts(newProducts);
       } else {
+        if (currentCategory !== CATALOG_TITLE) setCurrentPage(0);
         const newProducts = await api.catalog.getProducts({
           limit: pageLimit,
           page: currentPage,
         });
         setProducts(newProducts);
-        setCurrentCategory('All Staff');
+        setCurrentCategory(CATALOG_TITLE);
       }
     };
     updateProducts();
-  }, [location, pageLimit, currentPage, categories]);
+  }, [location, pageLimit, currentPage, categories, currentCategory]);
 
   return (
     <main className='catalog'>
@@ -84,42 +81,30 @@ export default function Catalog(): ReactElement {
           })}
       </div>
       <div className='products-main'>
-        <div className='products-main__header'>
-          <div className='products-main__breadcrumbs'>{location.pathname}</div>
-          <div className='products-main__category-name'>
-            {search
-              ? `Result of search: ${search}`
-              : currentCategory.toUpperCase()}
-          </div>
-          <div className='products-main__pagination'>
-            {products?.data?.currentPage}
-            {products?.data?.totalPage}
-          </div>
-          <div className='products-main__page-limit-settings'>
-            <button
-              type='button'
-              onClick={() => setPageLimit(DEFAULT_LIMIT_PER_PAGE)}
-            >
-              {DEFAULT_LIMIT_PER_PAGE}
-            </button>
-            <button
-              type='button'
-              onClick={() => setPageLimit(DEFAULT_LIMIT_PER_PAGE * 2)}
-            >
-              {DEFAULT_LIMIT_PER_PAGE * 2}
-            </button>
-            <button
-              type='button'
-              onClick={() => setPageLimit(DEFAULT_LIMIT_PER_PAGE * 5)}
-            >
-              {DEFAULT_LIMIT_PER_PAGE * 5}
-            </button>
-          </div>
-        </div>
+        <CatalogHeader
+          search={search}
+          currentCategory={currentCategory}
+          location={location}
+          products={products}
+          pageLimit={pageLimit}
+          setPageLimit={setPageLimit}
+          setCurrentPage={setCurrentPage}
+        />
         <div className='products-list'>
           {products?.data?.results.map((item) => (
             <Card item={item} key={item.id} />
           ))}
+        </div>
+        <div className='products-footer__page-settings'>
+          <div className='products-footer__pagination'>
+            <Pagination
+              currentPage={currentPage || 0}
+              totalPages={products?.data?.totalPage || 1}
+              onPageChange={setCurrentPage}
+            />
+          </div>
+          <div className='products-footer__separator'>|</div>
+          <PageLimit pageLimit={pageLimit} setPageLimit={setPageLimit} />
         </div>
       </div>
     </main>

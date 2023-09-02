@@ -9,6 +9,7 @@
   --content-padding-small: 1rem;
 
   --main-background-color: rgb(59, 72, 84);
+  --main-background-color-light: rgb(59, 72, 84, 0.17);
   --secondary-background-color: rgb(38, 43, 48);
 
   --main-color: rgb(99, 140, 71);
@@ -18,7 +19,9 @@
   --secondary-color-light-active: rgb(255, 255, 255);
 
   --font-author-color: rgba(0, 0, 0, 0.35);
-  --card-shadow-color: rgba(185, 212, 238, 0.92);
+  --shadow-color: rgba(185, 212, 238, 0.92);
+  --font-header-color: rgb(128, 178, 94);
+  --btns-bg-color: rgba(128, 178, 94, 0.13);
 
   --danger-color: rgb(246, 56, 32);
   --danger-color-light: rgb(254, 227, 225);

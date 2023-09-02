@@ -7,7 +7,7 @@
   background-color: var(--secondary-color-light-active);
   border-radius: 1.5rem;
   border-bottom: 0.5rem solid var(--main-color);
-  box-shadow: 0 0 0.8rem 0 var(--card-shadow-color);
+  box-shadow: 0 0 0.8rem 0 var(--shadow-color);
 }
 
 .product-card__header {
