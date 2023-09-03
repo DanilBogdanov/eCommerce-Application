@@ -92,6 +92,7 @@ export interface ProfileAction {
 }
 
 export enum Action {
+  ChangeEmail = 'changeEmail',
   SetFirstName = 'setFirstName',
   SetLastName = 'setLastName',
   AddAddress = 'addAddress',
