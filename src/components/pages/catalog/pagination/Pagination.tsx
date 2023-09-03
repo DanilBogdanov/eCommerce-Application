@@ -1,74 +1,102 @@
+import { ReactElement, useState, useEffect } from 'react';
+import './pagination.css';
+
 type PaginationProps = {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
 };
 
+type PaginationButtonContent = string | number;
+
 export function Pagination({
   currentPage,
   totalPages,
   onPageChange,
-}: PaginationProps) {
-  function getPageNumbers() {
-    const pageNumbers = [];
-    const maxVisiblePages = 5;
+}: PaginationProps): ReactElement {
+  const [butnsNumbers, setButnsNumbers] = useState<
+    PaginationButtonContent[] | null
+  >(null);
 
-    if (totalPages <= maxVisiblePages) {
-      for (let i = 1; i <= totalPages; i + 1) {
-        pageNumbers.push(i);
-      }
-    } else {
-      const leftOffset = Math.floor(maxVisiblePages / 2);
-      const rightOffset = totalPages - leftOffset;
-
-      if (currentPage <= leftOffset) {
-        for (let i = 1; i <= maxVisiblePages; i + 1) {
-          pageNumbers.push(i);
-        }
-        pageNumbers.push('...', totalPages);
-      } else if (currentPage >= rightOffset) {
-        pageNumbers.push(1, '...');
-        for (
-          let i = rightOffset - (maxVisiblePages - 1);
-          i <= totalPages;
-          i + 1
+  useEffect(() => {
+    const arrayOfAllPagesNumbers = Array(totalPages).fill(null);
+    const filledArrayOfPageNumbers = arrayOfAllPagesNumbers
+      .map((item, index, array) => {
+        if (
+          index === 0 ||
+          index === array.length - 1 ||
+          index === currentPage - 1 ||
+          index === currentPage ||
+          index === currentPage + 1
         ) {
-          pageNumbers.push(i);
+          return index;
         }
-      } else {
-        pageNumbers.push(
-          1,
-          '...',
-          currentPage - 1,
-          currentPage,
-          currentPage + 1,
-          '...',
-          totalPages,
-        );
-      }
-    }
+        if (
+          (index !== 0 && index === currentPage - 2) ||
+          (index !== currentPage + 1 && index === array.length - 2)
+        )
+          return '...';
 
-    return pageNumbers;
-  }
-
-  function handlePageClick(page: number | string) {
-    if (page !== '...') {
-      onPageChange(Number(page));
-    }
-  }
+        return item;
+      })
+      .filter((item) => item === 0 || item);
+    setButnsNumbers(filledArrayOfPageNumbers);
+  }, [currentPage, totalPages]);
 
   return (
-    <div className='pagination'>
-      {getPageNumbers().map((page, index) => (
-        <button
-          type='button'
-          key={String(index) + page}
-          className={page === currentPage ? 'active' : ''}
-          onClick={() => handlePageClick(page)}
-        >
-          {page}
-        </button>
-      ))}
+    <div className='catalog-pagination'>
+      <button
+        className='catalog-pagination__prev-page'
+        type='button'
+        onClick={() => {
+          if (currentPage === 0) return;
+          onPageChange(currentPage - 1);
+        }}
+        disabled={currentPage <= 0}
+      >
+        {`<`}
+      </button>
+      <div className='catalog-pagination__btns-container'>
+        {butnsNumbers &&
+          butnsNumbers.map((item, index) => {
+            if (item === '...')
+              return (
+                <button
+                  type='button'
+                  key={String(index) + String(item)}
+                  className='catalog-pagination__button'
+                  disabled
+                >
+                  {item}
+                </button>
+              );
+            return (
+              <button
+                type='button'
+                key={String(index) + String(item)}
+                onClick={() => {
+                  onPageChange(Number(item));
+                }}
+                className={`catalog-pagination__button ${
+                  item === currentPage ? 'active' : null
+                }`}
+              >
+                {Number(item) + 1}
+              </button>
+            );
+          })}
+      </div>
+      <button
+        className='catalog-pagination__next-page'
+        type='button'
+        onClick={() => {
+          if (currentPage >= totalPages - 1) return;
+          onPageChange(currentPage + 1);
+        }}
+        disabled={currentPage >= totalPages - 1}
+      >
+        {`>`}
+      </button>
     </div>
   );
 }

@@ -1,0 +1,71 @@
+.catalog-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.catalog-pagination__prev-page,
+.catalog-pagination__next-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  padding-bottom: 0.1rem;
+
+  border: 0.1rem solid var(--main-background-color-light);
+  border-radius: 50%;
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--font-author-color);
+  background-color: var(--secondary-color-light);
+  cursor: pointer;
+  transition: 0.5s ease-in;
+}
+
+.catalog-pagination__btns-container {
+  display: flex;
+  border: 0.1rem solid var(--main-background-color-light);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.catalog-pagination__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: 0.1rem solid var(--main-background-color-light);
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--font-author-color);
+  background-color: var(--secondary-color-light);
+  cursor: pointer;
+  transition: 0.5s ease-in;
+}
+
+.catalog-pagination__button.active {
+  background-color: var(--main-color);
+  color: var(--secondary-color-light-active);
+}
+
+.catalog-pagination__prev-page:hover,
+.catalog-pagination__next-page:hover,
+.catalog-pagination__button:hover {
+  background-color: var(--main-color-light);
+  color: var(--secondary-color-light);
+}
+
+.catalog-pagination__prev-page:disabled,
+.catalog-pagination__next-page:disabled,
+.catalog-pagination__button:disabled {
+  color: var(--shadow-color);
+  background-color: var(--secondary-color-light);
+  cursor: default;
+}
