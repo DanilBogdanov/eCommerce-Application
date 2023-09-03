@@ -12,11 +12,11 @@ import {
   nameElementParams,
   surnameElementParams,
   birthdateElementParams,
-  streetBillingElementParams,
+  addressBillingElementParams,
   cityBillingElementParams,
   countryBillingElementParams,
   postcodeBillingElementParams,
-  streetShippingElementParams,
+  addressShippingElementParams,
   cityShippingElementParams,
   countryShippingElementParams,
   postcodeShippingElementParams,
@@ -182,7 +182,7 @@ function Registration(): ReactElement {
             <div className='AddressSection FormSection'>
               <h2 className='AddressHeader SectionHeader'>Billing Address</h2>
               <InputForm checkbox {...defaultBillingCheckboxParams} />
-              <InputForm address {...streetBillingElementParams} />
+              <InputForm address {...addressBillingElementParams} />
               <InputForm address {...cityBillingElementParams} />
               <InputForm select {...countryBillingElementParams} />
               <InputForm address {...postcodeBillingElementParams} />
@@ -191,7 +191,7 @@ function Registration(): ReactElement {
               <h2 className='AddressHeader SectionHeader'>Shipping Address</h2>
               <InputForm checkbox {...sameAddressCheckboxParams} />
               <InputForm checkbox {...defaultShippingCheckboxParams} />
-              <InputForm address {...streetShippingElementParams} />
+              <InputForm address {...addressShippingElementParams} />
               <InputForm address {...cityShippingElementParams} />
               <InputForm select {...countryShippingElementParams} />
               <InputForm address {...postcodeShippingElementParams} />

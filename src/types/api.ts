@@ -70,6 +70,25 @@ export interface Profile {
   email: string;
   firstName: string;
   lastName: string;
+  addresses: Array<UserAddress>;
+  dateOfBirth: string;
+  shippingAddressIds: string[];
+  billingAddressIds: string[];
+  defaultShippingAddressId: DefaultAddress;
+  defaultBillingAddressId: DefaultAddress;
+}
+
+export interface UserAddress {
+  city: string;
+  country: string;
+  id: string;
+  postalCode: string;
+  streetName: string;
+}
+
+export interface DefaultAddress {
+  shippingAddressIds?: string;
+  billingAddressIds?: string;
 }
 
 export type AuthCallback = (isAnonym: boolean, email: string) => void;

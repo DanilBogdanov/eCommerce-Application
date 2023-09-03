@@ -3,7 +3,7 @@ import {
   nameValidationRules,
   surnameValidationRules,
   birthdateValidationRules,
-  streetValidationRules,
+  addressValidationRules,
   cityValidationRules,
   countryValidationRules,
   postcodeValidationRules,
@@ -38,7 +38,7 @@ export const surnameElementParams = {
 
 export const birthdateElementParams = {
   className: 'InputForm',
-  name: 'birthdate',
+  name: 'dateOfBirth',
   label: 'Birthdate:',
   type: 'date',
   id: 'birthdate',
@@ -48,15 +48,15 @@ export const birthdateElementParams = {
   },
 };
 
-export const streetBillingElementParams = {
+export const addressBillingElementParams = {
   className: 'InputForm',
   name: 'streetBilling',
-  label: 'Street:',
+  label: 'Address:',
   type: 'text',
   id: 'streetBilling',
   placeholder: 'write your street ...',
   validation: {
-    ...streetValidationRules,
+    ...addressValidationRules,
   },
 };
 
@@ -145,7 +145,7 @@ export const emailElementParams = {
   },
 };
 
-export const streetShippingElementParams = {
+export const addressShippingElementParams = {
   className: 'InputForm',
   name: 'streetShipping',
   label: 'Street:',
@@ -153,7 +153,7 @@ export const streetShippingElementParams = {
   id: 'streetShipping',
   placeholder: 'write your street ...',
   validation: {
-    ...streetValidationRules,
+    ...addressValidationRules,
   },
 };
 
@@ -225,4 +225,27 @@ export const defaultBillingLabelParams = {
 export const defaultShippingLabelParams = {
   name: 'Make address default for shipping',
   htmlFor: 'checkboxShipingDefault',
+};
+
+export const billingCheckboxParams = {
+  label: 'Use for billing',
+  className: 'checkboxForm',
+  name: 'billingOnly',
+  type: 'checkbox',
+  id: 'checkboxBilling',
+};
+export const shippingCheckboxParams = {
+  label: 'Use for billing',
+  className: 'checkboxForm',
+  name: 'shippingOnly',
+  type: 'checkbox',
+  id: 'checkboxShiping',
+};
+export const billingLabelParams = {
+  name: 'Use for billing',
+  htmlFor: 'checkboxBilling',
+};
+export const shippingLabelParams = {
+  name: 'Use for shipping',
+  htmlFor: 'checkboxShiping',
 };
