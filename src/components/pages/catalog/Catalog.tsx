@@ -23,6 +23,9 @@ export default function Catalog(): ReactElement {
   const [currentPage, setCurrentPage] = useState(0);
   const [currentCategory, setCurrentCategory] = useState(CATALOG_TITLE);
   const [searchParams] = useSearchParams();
+  const [cateoguriesNames, setCateoguriesNames] = useState<string[][] | null>(
+    null,
+  );
 
   const location = useLocation();
   useEffect(() => {
@@ -34,6 +37,13 @@ export default function Catalog(): ReactElement {
       if (!categories) {
         const categoriesResponse = await api.catalog.getCategories();
         setCategories(categoriesResponse);
+      }
+      if (categories && categories.data) {
+        const findedCategoriesNames = categories.data.map((item) => [
+          item.id,
+          item.name,
+        ]);
+        setCateoguriesNames(findedCategoriesNames);
       }
       const pathArray = location.pathname.split('/');
       const lastNest = pathArray[pathArray.length - 1];
@@ -78,7 +88,11 @@ export default function Catalog(): ReactElement {
         />
         <div className='products-list'>
           {products?.data?.results.map((item) => (
-            <Card item={item} key={item.id} />
+            <Card
+              item={item}
+              key={item.id}
+              cateoguriesNames={cateoguriesNames}
+            />
           ))}
         </div>
         <div className='products-footer__page-settings'>

@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
 import { Pagination } from '../pagination/Pagination';
 import { PageLimit } from '../pageLimit/PageLimit';
 import { ApiResponse, ProductsResponse } from '../../../../types/api';
 import './catalogHeader.css';
+import Breadcrumbs from '../../../breadcrumbs/Breadcrumbs';
 
 interface Location {
   pathname: string;
@@ -37,35 +37,7 @@ export function CatalogHeader({
 
   return (
     <div className='products-header'>
-      <div className='products-header__breadcrumbs'>
-        {locationArray.map((item, index, array) => {
-          if (array.length - 1 > index) {
-            if (!item)
-              return (
-                <div key='main' className='products-header__breadcrumbs-link'>
-                  <Link to={`/${item}`}>main</Link>
-                  {` / `}
-                </div>
-              );
-            return (
-              <div key={item} className='products-header__breadcrumbs-link'>
-                <Link to={`${array.slice(0, index).join(`/`)}/${item}`}>
-                  {item}
-                </Link>
-                {` / `}
-              </div>
-            );
-          }
-          return (
-            <div
-              key={item}
-              className='products-header__breadcrumbs-current-position'
-            >
-              {item}
-            </div>
-          );
-        })}
-      </div>
+      <Breadcrumbs locationArray={locationArray} />
       <div className='products-header__second-line'>
         <div className='products-header__category-name'>
           {search
