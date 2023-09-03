@@ -49,6 +49,7 @@ export enum Country {
 }
 
 export interface Address {
+  id?: string;
   key?: string;
   country: Country;
   streetName?: string;
@@ -66,10 +67,17 @@ export interface ApiResponse<T> {
 }
 
 export interface Profile {
+  id: string;
   version: number;
   email: string;
   firstName: string;
   lastName: string;
+  dateOfBirth: Date;
+  addresses: Address[];
+  shippingAddressIds: string[];
+  billingAddressIds: string[];
+  defaultBillingAddressId?: string;
+  defaultShippingAddressId?: string;
 }
 
 export type AuthCallback = (isAnonym: boolean, email: string) => void;

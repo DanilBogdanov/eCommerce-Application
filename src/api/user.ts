@@ -47,6 +47,60 @@ class User {
     }
   }
 
+  public async changePassword(
+    currentPassword: string,
+    newPassword: string,
+  ): Promise<ApiResponse<Profile>> {
+    const tokenResp = await this.tokenStore.getToken();
+    if (!tokenResp.isSuccessful || !tokenResp.data) {
+      return {
+        isSuccessful: false,
+        message: `Can't get token: ${tokenResp.message}`,
+      };
+    }
+
+    const profileResp = await this.getProfile();
+    if (!profileResp.isSuccessful || !profileResp.data?.version) {
+      return profileResp;
+    }
+
+    try {
+      const profile = await User.fetchChangePassword(
+        tokenResp.data,
+        currentPassword,
+        newPassword,
+        profileResp.data.version,
+      );
+      return {
+        isSuccessful: true,
+        message: 'Success',
+        data: profile,
+      };
+    } catch (e) {
+      return handleError<Profile>(e);
+    }
+  }
+
+  private static async fetchChangePassword(
+    token: string,
+    currentPassword: string,
+    newPassword: string,
+    version: number,
+  ): Promise<Profile> {
+    const { data } = await axios.post<Profile>(
+      `${config.apiUrl}/${config.projectKey}/me/password`,
+      {
+        version,
+        currentPassword,
+        newPassword,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+    return data;
+  }
+
   private static async me(token: string): Promise<Profile> {
     const { data } = await axios.get<Profile>(
       `${config.apiUrl}/${config.projectKey}/me`,
