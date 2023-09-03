@@ -80,6 +80,32 @@ export interface Profile {
   defaultShippingAddressId?: string;
 }
 
+export interface ProfileAction {
+  action: Action;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  address?: Address;
+  addressId?: string;
+  addressKey?: string;
+  dateOfBirth?: Date;
+}
+
+export enum Action {
+  SetFirstName = 'setFirstName',
+  SetLastName = 'setLastName',
+  AddAddress = 'addAddress',
+  ChangeAddress = 'changeAddress',
+  RemoveAddress = 'removeAddress',
+  SetDefaultShippingAddress = 'setDefaultShippingAddress',
+  AddShippingAddressId = 'addShippingAddressId',
+  RemoveShippingAddressId = 'removeShippingAddressId',
+  SetDefaultBillingAddress = 'setDefaultBillingAddress',
+  AddBillingAddressId = 'addBillingAddressId',
+  RemoveBillingAddressId = 'removeBillingAddressId',
+  SetDateOfBirth = 'setDateOfBirth',
+}
+
 export type AuthCallback = (isAnonym: boolean, email: string) => void;
 
 export type CategoriesResponse = {
