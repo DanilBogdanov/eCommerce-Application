@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { api } from '../../../api/api';
 import { ApiResponse, Category, Product } from '../../../types/api';
 import { Sidebar } from '../../sidebar/Sidebar';
@@ -21,8 +21,24 @@ export function ProductPage() {
     null,
   );
   const [currentImage, setCurrentImage] = useState<string | null>(null);
+  const [modalActive, setModalActive] = useState(false);
   const location = useLocation();
   const locationArray = location.pathname.split('/');
+
+  function handleKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      setModalActive(false);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
   useEffect(() => {
     const getProduct = async () => {
       if (!categories) {
@@ -51,7 +67,11 @@ export function ProductPage() {
         <div className='product-page__data'>
           <div className='product-page__images_wrapper'>
             <div className='product-page__images-container'>
-              <div className='product-page__current-image-container'>
+              <button
+                type='button'
+                className='product-page__current-image-container'
+                onClick={() => setModalActive(true)}
+              >
                 {currentImage && (
                   <img
                     src={currentImage}
@@ -59,7 +79,7 @@ export function ProductPage() {
                     className='product-page__current-image'
                   />
                 )}
-              </div>
+              </button>
               <div className='product-page__images-navigation'>
                 {productData &&
                   productData.data &&
@@ -70,7 +90,11 @@ export function ProductPage() {
                         setCurrentImage(imageUrl);
                       }}
                       key={imageUrl}
-                      className='product-page__image-container'
+                      className={`product-page__image-container ${
+                        imageUrl === currentImage
+                          ? 'product-page__image-container_active'
+                          : null
+                      }`}
                     >
                       <img
                         className='product-page__image'
@@ -86,6 +110,43 @@ export function ProductPage() {
               </div>
             </div>
           </div>
+          {modalActive && (
+            <div className='modal-wrapper'>
+              <div className='modal-wrapper__container'>
+                <button
+                  type='button'
+                  className='modal-wrapper__close'
+                  onClick={() => setModalActive(false)}
+                >
+                  X
+                </button>
+                <Swiper
+                  modules={[Navigation, Pagination, Scrollbar, A11y]}
+                  spaceBetween={50}
+                  navigation
+                  pagination={{ clickable: true }}
+                  scrollbar={{ draggable: true }}
+                  initialSlide={
+                    productData && productData.data && currentImage
+                      ? productData.data.imagesUrl.indexOf(currentImage)
+                      : 0
+                  }
+                >
+                  {productData &&
+                    productData.data &&
+                    productData.data.imagesUrl.map((imageUrl, index) => (
+                      <SwiperSlide key={imageUrl}>
+                        <img
+                          src={imageUrl}
+                          alt={`slide ${index}`}
+                          className='slider-image'
+                        />
+                      </SwiperSlide>
+                    ))}
+                </Swiper>
+              </div>
+            </div>
+          )}
           <div className='product-page__product-detailes'>
             <div className='product-page__title-container'>
               <h1 className='product-page__title'>{productData?.data?.name}</h1>
