@@ -1,8 +1,10 @@
 import { Pagination } from '../pagination/Pagination';
 import { PageLimit } from '../pageLimit/PageLimit';
+import { SortedBy, SortOrder } from './CatalogHeaderTypes';
 import { ApiResponse, ProductsResponse } from '../../../../types/api';
-import './catalogHeader.css';
 import Breadcrumbs from '../../../breadcrumbs/Breadcrumbs';
+import './catalogHeader.css';
+import { SortingButtns } from './SortingButtns/SortingButtns';
 
 interface Location {
   pathname: string;
@@ -13,13 +15,17 @@ interface Location {
 }
 
 type CatalogHeaderProps = {
-  search: string | null;
+  search: string | undefined;
   currentCategory: string;
   location: Location;
   products: ApiResponse<ProductsResponse> | null;
   pageLimit: number | null;
+  sortedBy: string;
+  sortOrder: string;
   setPageLimit: (limit: number) => void;
   setCurrentPage: (currentPage: number) => void;
+  setSortedBy: (sortedBy: SortedBy) => void;
+  setSortOrder: (order: SortOrder) => void;
 };
 
 export function CatalogHeader({
@@ -28,10 +34,16 @@ export function CatalogHeader({
   location,
   products,
   pageLimit,
+  sortedBy,
+  sortOrder,
   setPageLimit,
   setCurrentPage,
+  setSortedBy,
+  setSortOrder,
 }: CatalogHeaderProps) {
-  const locationArray = location.pathname.split('/');
+  const locationArray = search
+    ? [...location.pathname.split('/'), search]
+    : location.pathname.split('/');
   const currentPage = products?.data?.currentPage;
   const totalPages = products?.data?.totalPage;
 
@@ -45,6 +57,12 @@ export function CatalogHeader({
             : currentCategory.toUpperCase()}
         </div>
         <div className='products-header__page-settings'>
+          <SortingButtns
+            sortedBy={sortedBy}
+            sortOrder={sortOrder}
+            setSortedBy={setSortedBy}
+            setSortOrder={setSortOrder}
+          />
           <div className='products-header__pagination'>
             <Pagination
               currentPage={currentPage || 0}

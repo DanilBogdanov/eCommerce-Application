@@ -36,6 +36,8 @@
 .product-page__current-image-container {
   width: 100%;
   max-width: 100%;
+  position: relative;
+  z-index: 100;
   height: 50rem;
   text-align: center;
   background-color: transparent;
@@ -46,7 +48,7 @@
 }
 
 .product-page__current-image-container:hover {
-  scale: 1.1;
+  scale: 1.05;
 }
 
 .product-page__current-image-container:focus {
@@ -89,13 +91,13 @@
 }
 
 .product-page__image-container:hover {
-  scale: 1.2;
+  scale: 1.1;
   box-shadow: 0 0 0.8rem 0 var(--shadow-color);
   z-index: 2;
 }
 
 .product-page__image-container_active {
-  scale: 1.2;
+  scale: 1.1;
 }
 
 .product-page__image {
@@ -155,6 +157,7 @@
 
 .modal-wrapper {
   position: absolute;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,12 +195,12 @@
 
 .modal-wrapper__close:hover {
   font-size: 3.5rem;
-  box-shadow: 2px 2px 4px var(--main-color);
+  box-shadow: 0.2rem 0.2rem 0.4rem var(--main-color);
 }
 
 .modal-wrapper__close:active {
   font-size: 2.5rem;
-  box-shadow: inset 2px 2px 4px var(--main-color);
+  box-shadow: inset 0.2rem 0.2rem 0.4rem var(--main-color);
 }
 
 .swiper {
@@ -230,6 +233,18 @@
   .product-page__images-container {
     flex: 1;
     max-width: 40rem;
+  }
+
+  .product-page__image-container:hover {
+    z-index: 11;
+  }
+
+  .product-page__image-container_active {
+    z-index: 6;
+  }
+
+  .product-page__images-navigation {
+    margin-block: 2rem;
   }
 
   .product-page__product-detailes {
