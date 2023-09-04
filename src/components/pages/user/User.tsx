@@ -40,8 +40,7 @@ function User(): ReactElement {
     useState<DefaultAddress>();
   const [dataDefaultBillingAddress, setDataDefaultBillingAddress] =
     useState<DefaultAddress>();
-  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-  const [dataLabels, setDataLabels] = useState<Array<string[]>>([]);
+  const [dataLabels] = useState<Array<string[]>>([]);
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
