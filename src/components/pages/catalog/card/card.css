@@ -92,65 +92,7 @@
   line-height: normal;
 }
 
-.product-card__shoping-attributs {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.product-card__current-price {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.product-card__current-price {
-  color: var(--main-color);
-  font-size: 2.4rem;
-  white-space: nowrap;
-  text-align: center;
-}
-
-.product-card__full-price {
-  color: var(--secondary-color-light);
-  text-decoration: line-through;
-  white-space: nowrap;
-  text-align: center;
-  font-size: 1.4rem;
-}
-
-.product-card__counter {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  color: var(--secondary-color-light);
-  font-family: Inter;
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  width: 5.8rem;
-  height: 2.2rem;
-  flex-shrink: 0;
-  border-radius: 0.5rem;
-  border: 0.1rem solid var(--main-color);
-}
-
-.product-card__counter-data {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.3rem;
-  height: 2.2rem;
-  flex-shrink: 0;
-  border: 1px solid var(--main-color);
-}
-
-.product-card__basket,
-.product-card__bookmark,
-.product-card__decrise-counter,
-.product-card__incrise-counter {
+.product-card__bookmark {
   padding: 0;
   border: none;
   font: inherit;
@@ -158,42 +100,4 @@
   background-color: transparent;
   cursor: pointer;
   transition: 0.5s ease-in;
-}
-
-.product-card__decrise-counter,
-.product-card__incrise-counter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--main-color);
-  text-align: center;
-}
-.product-card__decrise-counter {
-  padding-left: 0.1rem;
-  padding-bottom: 0.2rem;
-}
-
-.product-card__incrise-counter {
-  padding-right: 0.2rem;
-  padding-top: 0.1rem;
-}
-
-.product-card__basket:hover {
-  scale: 1.1;
-}
-
-.product-card__basket_svg path {
-  fill: var(--secondary-color-light);
-  transition: 0.5s ease-in;
-}
-.product-card__basket.active .product-card__basket_svg path {
-  fill: var(--main-color);
-}
-
-.product-card__basket:hover .product-card__basket_svg path {
-  fill: var(--secondary-color-light-active);
-}
-
-.product-card__basket.active:hover .product-card__basket_svg path {
-  fill: var(--main-color-light);
 }
