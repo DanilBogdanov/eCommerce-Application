@@ -1,0 +1,199 @@
+.prodoct-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 23.5rem;
+  height: 32rem;
+  background-color: var(--secondary-color-light-active);
+  border-radius: 1.5rem;
+  border-bottom: 0.5rem solid var(--main-color);
+  box-shadow: 0 0 0.8rem 0 var(--shadow-color);
+}
+
+.product-card__header {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.1rem;
+  font-style: italic;
+  overflow: hidden;
+  color: var(--font-author-color);
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  padding-inline: 1.3rem;
+}
+
+.product-card__author-name {
+  font-family: Inter;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.product-card__bookmark {
+  position: absolute;
+  right: 1rem;
+  transition: 1s ease-in;
+}
+
+.product-card__bookmark__svg path {
+  fill-opacity: 0.15;
+  transition: 0.5s ease-in;
+}
+
+.product-card__bookmark.active .product-card__bookmark__svg path {
+  fill-opacity: 1;
+  transition: 0.5s ease-in;
+}
+
+.product-card_img-container {
+  position: relative;
+  height: 20.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prodoct-card__img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  transition: 1s ease-in-out;
+}
+
+.prodoct-card__img:hover {
+  position: absolute;
+  scale: 2;
+  z-index: 2;
+}
+
+.product-card__attributs {
+  height: 8rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--secondary-background-color);
+  gap: 0.5rem;
+  border-top: 0.2rem solid var(--main-color);
+  padding: 0.5rem 0.7rem 1.3rem 1.7rem;
+  border-bottom-left-radius: 1.2rem;
+  border-bottom-right-radius: 1.2rem;
+}
+
+.product-card__item-name {
+  color: var(--secondary-color-light-active);
+  font-family: Inder;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.product-card__shoping-attributs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-card__current-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-card__current-price {
+  color: var(--main-color);
+  font-size: 2.4rem;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.product-card__full-price {
+  color: var(--secondary-color-light);
+  text-decoration: line-through;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.product-card__counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: var(--secondary-color-light);
+  font-family: Inter;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  width: 5.8rem;
+  height: 2.2rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  border: 0.1rem solid var(--main-color);
+}
+
+.product-card__counter-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.3rem;
+  height: 2.2rem;
+  flex-shrink: 0;
+  border: 1px solid var(--main-color);
+}
+
+.product-card__basket,
+.product-card__bookmark,
+.product-card__decrise-counter,
+.product-card__incrise-counter {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.5s ease-in;
+}
+
+.product-card__decrise-counter,
+.product-card__incrise-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-color);
+  text-align: center;
+}
+.product-card__decrise-counter {
+  padding-left: 0.1rem;
+  padding-bottom: 0.2rem;
+}
+
+.product-card__incrise-counter {
+  padding-right: 0.2rem;
+  padding-top: 0.1rem;
+}
+
+.product-card__basket:hover {
+  scale: 1.1;
+}
+
+.product-card__basket_svg path {
+  fill: var(--secondary-color-light);
+  transition: 0.5s ease-in;
+}
+.product-card__basket.active .product-card__basket_svg path {
+  fill: var(--main-color);
+}
+
+.product-card__basket:hover .product-card__basket_svg path {
+  fill: var(--secondary-color-light-active);
+}
+
+.product-card__basket.active:hover .product-card__basket_svg path {
+  fill: var(--main-color-light);
+}

@@ -49,6 +49,7 @@ export enum Country {
 }
 
 export interface Address {
+  id?: string;
   key?: string;
   country: Country;
   streetName?: string;
@@ -66,16 +67,17 @@ export interface ApiResponse<T> {
 }
 
 export interface Profile {
+  id: string;
   version: number;
   email: string;
   firstName: string;
   lastName: string;
-  addresses: Array<UserAddress>;
-  dateOfBirth: string;
+  addresses: Array<UserAddress>; // Address[]
+  dateOfBirth: string; //Date
   shippingAddressIds: string[];
   billingAddressIds: string[];
-  defaultShippingAddressId: DefaultAddress;
-  defaultBillingAddressId: DefaultAddress;
+  defaultShippingAddressId: DefaultAddress; //string
+  defaultBillingAddressId: DefaultAddress; //string
 }
 
 export interface UserAddress {
@@ -89,6 +91,33 @@ export interface UserAddress {
 export interface DefaultAddress {
   shippingAddressIds?: string;
   billingAddressIds?: string;
+}
+
+export interface ProfileAction {
+  action: Action;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  address?: Address;
+  addressId?: string;
+  addressKey?: string;
+  dateOfBirth?: Date;
+}
+
+export enum Action {
+  ChangeEmail = 'changeEmail',
+  SetFirstName = 'setFirstName',
+  SetLastName = 'setLastName',
+  AddAddress = 'addAddress',
+  ChangeAddress = 'changeAddress',
+  RemoveAddress = 'removeAddress',
+  SetDefaultShippingAddress = 'setDefaultShippingAddress',
+  AddShippingAddressId = 'addShippingAddressId',
+  RemoveShippingAddressId = 'removeShippingAddressId',
+  SetDefaultBillingAddress = 'setDefaultBillingAddress',
+  AddBillingAddressId = 'addBillingAddressId',
+  RemoveBillingAddressId = 'removeBillingAddressId',
+  SetDateOfBirth = 'setDateOfBirth',
 }
 
 export type AuthCallback = (isAnonym: boolean, email: string) => void;

@@ -1,0 +1,38 @@
+.page-limit-settings {
+  display: flex;
+  border-radius: 0.9rem;
+  border: 0.1rem solid var(--main-background-color-light);
+  background: var(--catalog-header-btns-bg-color);
+  color: var(--font-author-color);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  overflow: hidden;
+}
+
+.page-limit-button {
+  padding: 0.2rem 0.5rem 0.3rem 0.6rem;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.7s ease-in;
+}
+
+.page-limit-settings .page-limit-button:nth-child(2) {
+  border-left: 0.1rem solid var(--main-background-color-light);
+  border-right: 0.1rem solid var(--main-background-color-light);
+}
+
+.page-limit-button:hover {
+  background-color: var(--main-color-light);
+  color: var(--secondary-color-light-active);
+}
+
+.page-limit-button.active {
+  background: var(--main-color);
+  color: var(--secondary-color-light-active);
+}
