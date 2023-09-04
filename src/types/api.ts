@@ -72,12 +72,25 @@ export interface Profile {
   email: string;
   firstName: string;
   lastName: string;
-  dateOfBirth: Date;
-  addresses: Address[];
+  addresses: Array<UserAddress>; // Address[]
+  dateOfBirth: string; //Date
   shippingAddressIds: string[];
   billingAddressIds: string[];
-  defaultBillingAddressId?: string;
-  defaultShippingAddressId?: string;
+  defaultShippingAddressId: DefaultAddress; //string
+  defaultBillingAddressId: DefaultAddress; //string
+}
+
+export interface UserAddress {
+  city: string;
+  country: string;
+  id: string;
+  postalCode: string;
+  streetName: string;
+}
+
+export interface DefaultAddress {
+  shippingAddressIds?: string;
+  billingAddressIds?: string;
 }
 
 export interface ProfileAction {

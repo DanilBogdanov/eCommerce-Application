@@ -1,0 +1,106 @@
+.UserFormHeader {
+  margin: 0;
+}
+
+.UserProfileWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.SectionHeader {
+  color: var(--main-color);
+}
+
+.UserSectionTitle {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.UserSectionValue {
+  font-size: 2rem;
+  color: var(--main-color);
+}
+
+hr {
+  width: 100%;
+  background-color: var(--main-color);
+  margin: 2rem 0 2rem 0;
+}
+
+.TitleSection {
+  display: flex;
+  align-items: center;
+  column-gap: 0.7rem;
+}
+
+.UserSectionElement {
+  margin-bottom: 1rem;
+}
+
+.ChangeWrapper {
+  display: flex;
+  align-items: center;
+  column-gap: 0.7rem;
+}
+
+.UserInputForm {
+  margin: 0;
+}
+
+.UserFormButton {
+  margin: 0;
+}
+
+.PasswordInputForm {
+  margin: 0.3rem 0 1rem 0;
+}
+
+.AddressTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.AddressTableData,
+.AddressTableHeader {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.AddressTableRow:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.AddressTableRow:hover {
+  background-color: #ddd;
+  transition: 0.15s;
+}
+
+.AddressTableHeader {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--main-color);
+  color: white;
+}
+
+.checkboxShiping,
+.checkboxBilling {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+#checkboxShiping,
+#checkboxBilling {
+  margin: 0 0.5rem 1.5rem 0;
+}
+
+.UserSectionAddress {
+  margin-bottom: 10rem;
+}
+
+.SubmitButtonAddress {
+  margin-bottom: 2rem;
+}

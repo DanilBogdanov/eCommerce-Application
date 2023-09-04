@@ -8,7 +8,7 @@ type ValidationParams = {
 
 export const postcodeValidationRules: ValidationParams = {
   required: {
-    value: false,
+    value: true,
     message: 'required',
   },
   pattern: {
@@ -79,7 +79,7 @@ export const birthdateValidationRules: ValidationParams = {
   },
 };
 
-export const streetValidationRules: ValidationParams = {
+export const addressValidationRules: ValidationParams = {
   required: {
     value: true,
     message: 'required',

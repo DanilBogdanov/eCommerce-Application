@@ -11,6 +11,7 @@ import Login from './components/pages/login/Login';
 import NotFound from './components/pages/notFound/NotFound';
 import AboutUs from './components/pages/about/About';
 import Catalog from './components/pages/catalog/Catalog';
+import User from './components/pages/user/User';
 import { api } from './api/api';
 import './App.css';
 
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Main /> },
+      { path: '/profile', element: <User /> },
       {
         path: '/registration',
         element: <Registration />,

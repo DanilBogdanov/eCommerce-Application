@@ -18,10 +18,14 @@
   --secondary-color-light: rgba(255, 255, 255, 0.7);
   --secondary-color-light-active: rgb(255, 255, 255);
 
+  --font-color: rgba(0, 0, 0, 0.35);
   --font-author-color: rgba(0, 0, 0, 0.35);
   --shadow-color: rgba(185, 212, 238, 0.92);
   --font-header-color: rgb(128, 178, 94);
   --btns-bg-color: rgba(128, 178, 94, 0.13);
+  --button-background-color: rgb(142, 142, 142);
+  --button-background-color-active: rgba(142, 142, 142, 0.856);
+  --submit-button-background-color: rgb(128, 178, 94);
 
   --danger-color: rgb(246, 56, 32);
   --danger-color-light: rgb(254, 227, 225);

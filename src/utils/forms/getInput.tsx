@@ -86,6 +86,15 @@ export default function GetInput(
     setIsDefaultShipping((current) => !current);
   };
 
+  const setIsShipping = useState(false)[1];
+  const handleChangeShipping = () => {
+    setIsShipping((current) => !current);
+  };
+  const setIsBilling = useState(false)[1];
+  const handleChangeBilling = () => {
+    setIsBilling((current) => !current);
+  };
+
   let output;
 
   if (name === 'sameAddress') {
@@ -113,6 +122,24 @@ export default function GetInput(
         type={type}
         {...register(name)}
         onChange={handleChangeDefaultShipping}
+      />
+    );
+  } else if (name === 'shippingOnly') {
+    output = (
+      <input
+        id={id}
+        type={type}
+        {...register(name)}
+        onChange={handleChangeShipping}
+      />
+    );
+  } else if (name === 'billingOnly') {
+    output = (
+      <input
+        id={id}
+        type={type}
+        {...register(name)}
+        onChange={handleChangeBilling}
       />
     );
   } else {
