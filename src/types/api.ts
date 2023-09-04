@@ -73,11 +73,11 @@ export interface Profile {
   firstName: string;
   lastName: string;
   addresses: Array<UserAddress>; // Address[]
-  dateOfBirth: string; // Date
+  dateOfBirth: string; //Date
   shippingAddressIds: string[];
   billingAddressIds: string[];
-  defaultShippingAddressId: DefaultAddress; // string
-  defaultBillingAddressId: DefaultAddress; // string
+  defaultShippingAddressId: DefaultAddress; //string
+  defaultBillingAddressId: DefaultAddress; //string
 }
 
 export interface UserAddress {
@@ -150,8 +150,6 @@ export interface ProductRequestOptions {
   sortField?: 'name' | 'price';
   sortOrder?: 'asc' | 'desc';
   search?: string;
-  priceFrom?: number;
-  priceTo?: number;
 }
 
 export interface ProductsFetchResponse {

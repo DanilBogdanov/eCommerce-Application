@@ -39,9 +39,7 @@ export function ShopingAttributs({ item }: ShopinAttributsProps): ReactElement {
         >
           –
         </button>
-        <div className='counter-data' data-testid='counter-data'>
-          {itemCounter}
-        </div>
+        <div className='counter-data'>{itemCounter}</div>
         <button
           type='button'
           className='incrise-counter'
@@ -55,7 +53,6 @@ export function ShopingAttributs({ item }: ShopinAttributsProps): ReactElement {
         className='basket'
         onClick={addToBusket}
         ref={buttonBasketRef}
-        data-testid='basket'
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'

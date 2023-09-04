@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ApiResponse, Category } from '../../types/api';
-import { NavLinkClassesProps } from '../../types/layout';
 import './sidebar.css';
+import { NavLinkClassesProps } from '../../types/layout';
 
 type SidebarProps = {
   categories: ApiResponse<Category[]> | null;

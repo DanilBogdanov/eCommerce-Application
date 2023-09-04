@@ -1,12 +1,15 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Layout from './Layout';
+import Api from '../../api/api';
 
 describe('Layout component', () => {
+  const mockApi = new Api();
+
   it('renders without crashing', () => {
     render(
       <MemoryRouter>
-        <Layout />
+        <Layout api={mockApi} />
       </MemoryRouter>,
     );
   });
@@ -14,7 +17,7 @@ describe('Layout component', () => {
   it('renders LayoutHeader component', () => {
     const { getByTestId } = render(
       <MemoryRouter>
-        <Layout />
+        <Layout api={mockApi} />
       </MemoryRouter>,
     );
     const headerComponent = getByTestId('layout-header');
@@ -24,7 +27,7 @@ describe('Layout component', () => {
   it('renders Outlet component', () => {
     const { getByTestId } = render(
       <MemoryRouter>
-        <Layout />
+        <Layout api={mockApi} />
       </MemoryRouter>,
     );
     const outletComponent = getByTestId('outlet');
@@ -34,7 +37,7 @@ describe('Layout component', () => {
   it('renders LayoutFooter component', () => {
     const { getByTestId } = render(
       <MemoryRouter>
-        <Layout />
+        <Layout api={mockApi} />
       </MemoryRouter>,
     );
     const footerComponent = getByTestId('layout-footer');
