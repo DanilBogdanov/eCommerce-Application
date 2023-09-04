@@ -66,9 +66,7 @@ function Registration(): ReactElement {
 
   const onSubmit = methods.handleSubmit(() => {
     const values = methods.getValues();
-    // const { email, password, surnam, name, dateOfBirth } = values;
 
-    //
     const {
       email,
       password,

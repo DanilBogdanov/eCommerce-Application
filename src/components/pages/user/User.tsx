@@ -3,13 +3,37 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Profile, UserAddress, DefaultAddress } from '../../../types/api';
-import { api } from '../../../api/api';
+
+import { MessageType, notifier } from '../../../utils/notifier';
 import {
+  MESSAGE_SHOW_TIME_ERROR,
+  MESSAGE_SHOW_TIME_SUCCESS,
+} from '../../../types/constants';
+import { api } from '../../../api/api';
+
+import {
+  getChangeEmailRequestLine,
+  getSetFirstNameRequestLine,
+  getSetLastNameRequestLine,
+  // getAddAddressRequestLine,
+  // getChangeAddressLine,
+  // getRemoveAddressRequestLine,
+  // getSetDefaultShippingAddressRequestLine,
+  // getAddShippingAddressIdRequestLine,
+  // getRemoveShippingAddressIdRequestLine,
+  // getSetDefaultBillingAddressRequestLine,
+  // getAddBillingAddressIdRequestLine,
+  // getRemoveBillingAddressIdRequestLine,
+  getSetDateOfBirthRequestLine,
+} from './getRequestLine';
+
+import {
+  currentPasswordElementParams,
+  newPasswordElementParams,
   emailElementParams,
-  passwordElementParams,
   nameElementParams,
   surnameElementParams,
   birthdateElementParams,
@@ -27,11 +51,37 @@ import '../../../utils/forms/FormsStyle.css';
 import './User.css';
 
 function User(): ReactElement {
-  const methods = useForm({
+  const methodsName = useForm({
     shouldFocusError: false,
     criteriaMode: 'firstError',
     mode: 'onChange',
   });
+  const methodsPassword = useForm({
+    shouldFocusError: false,
+    criteriaMode: 'firstError',
+    mode: 'onChange',
+  });
+  const methodsSurname = useForm({
+    shouldFocusError: false,
+    criteriaMode: 'firstError',
+    mode: 'onChange',
+  });
+  const methodsBirthdate = useForm({
+    shouldFocusError: false,
+    criteriaMode: 'firstError',
+    mode: 'onChange',
+  });
+  const methodsEmail = useForm({
+    shouldFocusError: false,
+    criteriaMode: 'firstError',
+    mode: 'onChange',
+  });
+  const methodsAddress = useForm({
+    shouldFocusError: false,
+    criteriaMode: 'firstError',
+    mode: 'onChange',
+  });
+
   const [dataProfile, setDataProfile] = useState<Profile>();
   const [dataAddresses, setDataAddresses] = useState<Array<UserAddress>>();
   const [dataShippingAddress, setDataShippingAddresses] = useState<string[]>();
@@ -43,6 +93,12 @@ function User(): ReactElement {
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   const [dataLabels, setDataLabels] = useState<Array<string[]>>([]);
   const [passwordShown, setPasswordShown] = useState(false);
+
+  const [visibleUserData, setVisibleUserData] = useState(false);
+  const onClickEditUserData = () => {
+    setVisibleUserData(!visibleUserData);
+  };
+
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
@@ -87,13 +143,170 @@ function User(): ReactElement {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const updatePassword = async (
+    currentPassword: string,
+    newPassword: string,
+  ) => {
+    const resp = await api.user.changePassword(currentPassword, newPassword);
+    if (resp.isSuccessful) {
+      api.auth.login(dataProfile?.email, newPassword);
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        'Changing password',
+        `Password successfully changed`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Changing password',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const onSubmitChangePassword = methodsPassword.handleSubmit(() => {
+    const values = methodsPassword.getValues();
+    const { currentPassword, newPassword } = values;
+
+    updatePassword(currentPassword, newPassword);
+    methodsPassword.reset();
+  });
+
+  const updateName = async (name: string) => {
+    const resp = await api.user.updateProfile([
+      getSetFirstNameRequestLine(name),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Hello, ${resp.data?.firstName}`,
+        `Name successfully changed`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Changing Name',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const onSubmitChangeName = methodsName.handleSubmit(() => {
+    const values = methodsName.getValues();
+    const { name } = values;
+    updateName(name);
+    methodsName.reset();
+  });
+
+  const updateSurname = async (surnam: string) => {
+    const resp = await api.user.updateProfile([
+      getSetLastNameRequestLine(surnam),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Changing Surname`,
+        `Name successfully changed`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Changing Name',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const onSubmitChangeSurname = methodsSurname.handleSubmit(() => {
+    const values = methodsSurname.getValues();
+    const { surnam } = values;
+    updateSurname(surnam);
+    methodsSurname.reset();
+  });
+
+  const updateBirthdate = async (dateOfBirth: Date) => {
+    const resp = await api.user.updateProfile([
+      getSetDateOfBirthRequestLine(dateOfBirth),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Everyday ia a Birthday`,
+        `Bithdate successfully changed`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Changing Name',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const onSubmitChangeBirthdate = methodsBirthdate.handleSubmit(() => {
+    const values = methodsBirthdate.getValues();
+    const { dateOfBirth } = values;
+    updateBirthdate(dateOfBirth);
+    methodsBirthdate.reset();
+  });
+
+  const updateEmail = async (email: string) => {
+    const resp = await api.user.updateProfile([
+      getChangeEmailRequestLine(email),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Everyday ia a Birthday`,
+        `Bithdate successfully changed`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Changing Name',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const onSubmitChangeEmail = methodsEmail.handleSubmit(() => {
+    const values = methodsEmail.getValues();
+    const { email } = values;
+    updateEmail(email);
+    methodsEmail.reset();
+  });
+
   return (
     <div className='UserProfileWrapper'>
       <h1 className='FormHeader UserFormHeader'>Profile Settings</h1>
       <div className=' UserSection'>
         <hr />
-        <h2 className='SectionHeader'>User info</h2>
-        <FormProvider {...methods}>
+        <div className='SectionHeaderWrapper'>
+          <h2 className='SectionHeader UserDataHeader'>User info</h2>
+          <button
+            type='button'
+            onClick={onClickEditUserData}
+            className='FormButton SubmitButton'
+          >
+            {visibleUserData ? 'Exit edit mode' : 'Edit'}
+          </button>
+        </div>
+        <FormProvider {...methodsName}>
           <form className='UserSectionElement'>
             <div className='TitleSection'>
               <p className='UserSectionTitle'>Name:</p>
@@ -101,25 +314,28 @@ function User(): ReactElement {
                 <b>{dataProfile?.firstName}</b>
               </p>
             </div>
-            <div className='ChangeWrapper'>
-              <InputForm
-                {...nameElementParams}
-                placeholder={dataProfile?.firstName}
-                label=''
-                className='InputForm UserInputForm'
-              />
-              <button
-                type='button'
-                // onClick={onSubmitChangeName}
-                className='FormButton SubmitButton'
-              >
-                Update Name
-              </button>
-            </div>
+            {visibleUserData && (
+              <div className='ChangeWrapper'>
+                <InputForm
+                  {...nameElementParams}
+                  placeholder='type new name'
+                  id='userName'
+                  label=''
+                  className='InputForm UserInputForm'
+                />
+                <button
+                  type='button'
+                  onClick={onSubmitChangeName}
+                  className='FormButton SubmitButton'
+                >
+                  Update Name
+                </button>
+              </div>
+            )}
           </form>
         </FormProvider>
 
-        <FormProvider {...methods}>
+        <FormProvider {...methodsSurname}>
           <form className='UserSectionElement'>
             <div className='TitleSection'>
               <p className='UserSectionTitle'>Surname:</p>
@@ -127,25 +343,28 @@ function User(): ReactElement {
                 <b>{dataProfile?.lastName}</b>
               </p>
             </div>
-            <div className='ChangeWrapper'>
-              <InputForm
-                {...surnameElementParams}
-                placeholder={dataProfile?.lastName}
-                label=''
-                className='InputForm UserInputForm'
-              />
-              <button
-                type='button'
-                // onClick={onSubmitChangeSurname}
-                className='FormButton SubmitButton'
-              >
-                Update Surname
-              </button>
-            </div>
+            {visibleUserData && (
+              <div className='ChangeWrapper'>
+                <InputForm
+                  {...surnameElementParams}
+                  placeholder='type new surname'
+                  id='userSurname'
+                  label=''
+                  className='InputForm UserInputForm'
+                />
+                <button
+                  type='button'
+                  onClick={onSubmitChangeSurname}
+                  className='FormButton SubmitButton'
+                >
+                  Update Surname
+                </button>
+              </div>
+            )}
           </form>
         </FormProvider>
 
-        <FormProvider {...methods}>
+        <FormProvider {...methodsBirthdate}>
           <form className='UserSectionElement'>
             <div className='TitleSection'>
               <p className='UserSectionTitle'>Date of birth:</p>
@@ -153,67 +372,68 @@ function User(): ReactElement {
                 <b>{dataProfile?.dateOfBirth}</b>
               </p>
             </div>
-            <div className='ChangeWrapper'>
-              <InputForm
-                {...birthdateElementParams}
-                placeholder={dataProfile?.dateOfBirth}
-                label=''
-                className='InputForm UserInputForm'
-              />
-              <button
-                type='button'
-                // onClick={onSubmitChangeBirthdate}
-                className='FormButton SubmitButton'
-              >
-                Update Date of birth
-              </button>
-            </div>
+            {visibleUserData && (
+              <div className='ChangeWrapper'>
+                <InputForm
+                  {...birthdateElementParams}
+                  id='userBirth'
+                  label=''
+                  className='InputForm UserInputForm'
+                />
+                <button
+                  type='button'
+                  onClick={onSubmitChangeBirthdate}
+                  className='FormButton SubmitButton'
+                >
+                  Update Date of birth
+                </button>
+              </div>
+            )}
           </form>
         </FormProvider>
 
-        <FormProvider {...methods}>
+        <FormProvider {...methodsEmail}>
           <form className='UserSectionElement'>
             <div className='TitleSection'>
               <p className='UserSectionTitle'>Email:</p>
               <p className='UserSectionTitle UserSectionValue'>
-                <b>{dataProfile?.email}</b>
+                <b>{dataProfile?.email as ReactNode}</b>
               </p>
             </div>
-            <div className='ChangeWrapper'>
-              <InputForm
-                {...emailElementParams}
-                placeholder={dataProfile?.email}
-                label=''
-                className='InputForm UserInputForm'
-              />
-              <button
-                type='button'
-                // onClick={onSubmitChangeEmail}
-                className='FormButton SubmitButton'
-              >
-                Update Email
-              </button>
-            </div>
+            {visibleUserData && (
+              <div className='ChangeWrapper'>
+                <InputForm
+                  {...emailElementParams}
+                  placeholder='type new email'
+                  id='userEmail'
+                  label=''
+                  className='InputForm UserInputForm'
+                />
+                <button
+                  type='button'
+                  onClick={onSubmitChangeEmail}
+                  className='FormButton SubmitButton'
+                >
+                  Update Email
+                </button>
+              </div>
+            )}
           </form>
         </FormProvider>
       </div>
       <div className=' UserSection'>
         <hr />
         <h2 className='SectionHeader'>Update password</h2>
-        <FormProvider {...methods}>
+        <FormProvider {...methodsPassword}>
           <form>
             <InputForm
-              {...passwordElementParams}
+              {...currentPasswordElementParams}
               type={passwordShown ? 'text' : 'password'}
-              id='oldPassword'
-              label='Current Password'
               className='InputForm PasswordInputForm'
             />
             <InputForm
-              {...passwordElementParams}
+              {...newPasswordElementParams}
               type={passwordShown ? 'text' : 'password'}
-              id='newPassword'
-              label='New Password'
               className='InputForm PasswordInputForm'
             />
             <button
@@ -225,7 +445,7 @@ function User(): ReactElement {
             </button>
             <button
               type='button'
-              // onClick={onSubmitChangePassword}
+              onClick={onSubmitChangePassword}
               className='FormButton SubmitButton'
             >
               Update Password
@@ -271,7 +491,7 @@ function User(): ReactElement {
           </tbody>
         </table>
         <hr />
-        <FormProvider {...methods}>
+        <FormProvider {...methodsAddress}>
           <form>
             <div className='FormSection UserSectionAddress'>
               <h2 className='AddressHeader SectionHeader'>Add new address</h2>

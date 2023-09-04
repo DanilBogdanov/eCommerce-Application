@@ -19,6 +19,7 @@ export const nameElementParams = {
   type: 'text',
   id: 'name',
   placeholder: 'write your name ...',
+  // value: '',
   validation: {
     ...nameValidationRules,
   },
@@ -29,6 +30,7 @@ export const surnameElementParams = {
   name: 'surnam',
   label: 'Surname:',
   type: 'text',
+  // value: '',
   id: 'surnam',
   placeholder: 'write your surname ...',
   validation: {
@@ -41,6 +43,7 @@ export const birthdateElementParams = {
   name: 'dateOfBirth',
   label: 'Birthdate:',
   type: 'date',
+  // value: '',
   id: 'birthdate',
   placeholder: 'write your date of birth ...',
   validation: {
@@ -53,6 +56,7 @@ export const addressBillingElementParams = {
   name: 'streetBilling',
   label: 'Address:',
   type: 'text',
+  // value: '',
   id: 'streetBilling',
   placeholder: 'write your street ...',
   validation: {
@@ -65,6 +69,7 @@ export const cityBillingElementParams = {
   name: 'cityBilling',
   label: 'City:',
   type: 'text',
+  // value: '',
   id: 'cityBilling',
   placeholder: 'write your city ...',
   validation: {
@@ -77,6 +82,7 @@ export const countryBillingElementParams = {
   name: 'countryBilling',
   label: 'Country:',
   type: 'select',
+  // value: '',
   id: 'countryBilling',
   placeholder: 'write your country ...',
   validation: {
@@ -89,6 +95,7 @@ export const postcodeBillingElementParams = {
   name: 'postcodeBilling',
   label: 'Postcode:',
   type: 'text',
+  // value: '',
   id: 'postcodeBilling',
   placeholder: 'write your postcode ...',
   validation: {
@@ -101,6 +108,7 @@ export const descElementParams = {
   name: 'description',
   label: 'Description:',
   type: 'text',
+  // value: '',
   multiline: true,
   id: 'description',
   placeholder: 'write description ...',
@@ -114,8 +122,35 @@ export const passwordElementParams = {
   name: 'password',
   label: 'Password:',
   type: 'password',
+  // value: '',
   id: 'password',
   placeholder: 'type password ...',
+  validation: {
+    ...passwordValidationRules,
+  },
+};
+
+export const currentPasswordElementParams = {
+  className: 'InputForm',
+  name: 'currentPassword',
+  label: 'Current password:',
+  type: 'password',
+  // value: '',
+  id: 'currentPassword',
+  placeholder: 'type current password ...',
+  validation: {
+    ...passwordValidationRules,
+  },
+};
+
+export const newPasswordElementParams = {
+  className: 'InputForm',
+  name: 'newPassword',
+  label: 'New password:',
+  type: 'password',
+  // value: '',
+  id: 'newPassword',
+  placeholder: 'type new password ...',
   validation: {
     ...passwordValidationRules,
   },
@@ -126,6 +161,7 @@ export const numElementParams = {
   name: 'num',
   label: 'Number:',
   type: 'number',
+  // value: '',
   id: 'num',
   placeholder: 'write a number ...',
   validation: {
@@ -138,6 +174,7 @@ export const emailElementParams = {
   name: 'email',
   label: 'Email:',
   type: 'email',
+  // value: '',
   id: 'email',
   placeholder: 'write an email address ...',
   validation: {
@@ -150,6 +187,7 @@ export const addressShippingElementParams = {
   name: 'streetShipping',
   label: 'Street:',
   type: 'text',
+  // value: '',
   id: 'streetShipping',
   placeholder: 'write your street ...',
   validation: {
@@ -162,6 +200,7 @@ export const cityShippingElementParams = {
   name: 'cityShipping',
   label: 'City:',
   type: 'text',
+  // value: '',
   id: 'cityShipping',
   placeholder: 'write your city ...',
   validation: {
@@ -174,6 +213,7 @@ export const countryShippingElementParams = {
   name: 'countryShipping',
   label: 'Country:',
   type: 'select',
+  // value: '',
   id: 'countryShipping',
   placeholder: 'write your country ...',
   validation: {
@@ -186,6 +226,7 @@ export const postcodeShippingElementParams = {
   name: 'postcodeShipping',
   label: 'Postcode:',
   type: 'text',
+  // value: '',
   id: 'postcodeShipping',
   placeholder: 'write your postcode ...',
   validation: {
@@ -198,6 +239,7 @@ export const sameAddressCheckboxParams = {
   className: 'checkboxForm',
   name: 'sameAddress',
   type: 'checkbox',
+  // value: '',
   id: 'checkboxSameAddress',
 };
 export const defaultBillingCheckboxParams = {
@@ -205,6 +247,7 @@ export const defaultBillingCheckboxParams = {
   className: 'checkboxForm',
   name: 'defaultBilling',
   type: 'checkbox',
+  // value: '',
   id: 'checkboxBillingDefault',
 };
 export const defaultShippingCheckboxParams = {
@@ -212,6 +255,7 @@ export const defaultShippingCheckboxParams = {
   className: 'checkboxForm',
   name: 'defaultShipping',
   type: 'checkbox',
+  // value: '',
   id: 'checkboxShipingDefault',
 };
 export const sameAddressLabelParams = {
@@ -232,6 +276,7 @@ export const billingCheckboxParams = {
   className: 'checkboxForm',
   name: 'billingOnly',
   type: 'checkbox',
+  // value: '',
   id: 'checkboxBilling',
 };
 export const shippingCheckboxParams = {
@@ -239,6 +284,7 @@ export const shippingCheckboxParams = {
   className: 'checkboxForm',
   name: 'shippingOnly',
   type: 'checkbox',
+  // value: '',
   id: 'checkboxShiping',
 };
 export const billingLabelParams = {

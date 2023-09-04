@@ -2,6 +2,7 @@
 
 import { useState, ReactNode } from 'react';
 import { UseFormRegister, FieldValues } from 'react-hook-form';
+import { Profile } from '../../types/api';
 
 export interface FormValues {
   name: string;
@@ -9,7 +10,7 @@ export interface FormValues {
   type?: string;
   id?: string;
   htmlFor?: string;
-  placeholder?: string;
+  placeholder?: string | Profile | undefined;
   validation?: object;
   multiline?: boolean;
   labelCheck?: boolean;
@@ -17,13 +18,13 @@ export interface FormValues {
   checkbox?: boolean;
   className?: string;
   children?: ReactNode;
-  value?: string;
+  value?: string | Profile | undefined;
   address?: boolean;
   ref?: React.RefObject<HTMLInputElement>;
 }
 
 export default function GetInput(
-  { name, type, id, placeholder, validation, className }: FormValues,
+  { name, type, id, placeholder, validation, className, value }: FormValues,
   register: UseFormRegister<FieldValues>,
 ): JSX.Element | undefined {
   const setIsSameAddress = useState(false)[1];
@@ -145,6 +146,7 @@ export default function GetInput(
   } else {
     output = (
       <input
+        value={value}
         className={className}
         placeholder={placeholder}
         id={id}
