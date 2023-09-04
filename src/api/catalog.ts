@@ -47,6 +47,8 @@ class Catalog {
     sortField,
     sortOrder = 'asc',
     search,
+    priceFrom,
+    priceTo,
   }: ProductRequestOptions): Promise<ApiResponse<ProductsResponse>> {
     try {
       const checkedLimit = limit <= 0 ? DEFAULT_LIMIT_PER_PAGE : limit;
@@ -63,6 +65,12 @@ class Catalog {
       }${
         checkedSearch
           ? `&text.en-US=${checkedSearch}&fuzzy=true&fuzzyLevel=2`
+          : ''
+      }${
+        priceFrom || priceTo
+          ? `&filter=variants.price.centAmount:range (${
+              priceFrom ? priceFrom * 100 : '*'
+            } to ${priceTo ? priceTo * 100 : '*'})`
           : ''
       }`;
 
