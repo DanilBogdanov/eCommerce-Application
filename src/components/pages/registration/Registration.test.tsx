@@ -1,25 +1,19 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Registration from './Registration';
-import Api from '../../../api/api';
-
-const mockApi = new Api();
-mockApi.auth.login = jest.fn(async () => {
-  return { result: true, message: `logged in` };
-});
 
 describe('Registration', () => {
   it('renders without errors', () => {
     render(
       <MemoryRouter>
-        <Registration api={mockApi} />
+        <Registration />
       </MemoryRouter>,
     );
   });
   it('submits the form successfully', () => {
     render(
       <MemoryRouter>
-        <Registration api={mockApi} />
+        <Registration />
       </MemoryRouter>,
     );
     const emailInput = screen.getByPlaceholderText(/email/i);

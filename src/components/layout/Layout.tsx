@@ -35,7 +35,7 @@ export default function Layout(): ReactElement {
     <>
       <LayoutHeader />
       <main className='main'>
-        <div className='main__container'>
+        <div className='main__container' data-testid='outlet'>
           <Outlet />
         </div>
       </main>

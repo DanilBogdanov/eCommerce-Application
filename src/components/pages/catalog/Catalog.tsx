@@ -29,6 +29,8 @@ export default function Catalog(): ReactElement {
   const [currentCategory, setCurrentCategory] = useState(CATALOG_TITLE);
   const [sortedBy, setSortedBy] = useState<SortedBy>(SortedBy.NAME);
   const [sortOrder, setSortOrder] = useState(SortOrder.ASC);
+  const [priceFrom, setPriceFrom] = useState<number | undefined>(undefined);
+  const [priceTo, setPriceTo] = useState<number | undefined>(undefined);
   const [searchParams] = useSearchParams();
   const [cateoguriesNames, setCateoguriesNames] = useState<string[][] | null>(
     null,
@@ -70,6 +72,8 @@ export default function Catalog(): ReactElement {
           page: currentPage,
           sortField: sortedBy,
           sortOrder,
+          priceTo,
+          priceFrom,
         });
         setProducts(newProducts);
       } else {
@@ -80,15 +84,19 @@ export default function Catalog(): ReactElement {
           search,
           sortField: sortedBy,
           sortOrder,
+          priceTo,
+          priceFrom,
         });
         if (newProducts.data && newProducts.data.count === 0) {
           notifier.showMessage(
             MessageType.ERROR,
             'Search',
-            `We don't have ${search}`,
+            `We don't have ${search || 'such expensive goods'}`,
             MESSAGE_SHOW_TIME_ERROR,
           );
           navigate('/catalog');
+          setPriceFrom(undefined);
+          setPriceTo(undefined);
         }
         setProducts(newProducts);
         setCurrentCategory(CATALOG_TITLE);
@@ -105,6 +113,8 @@ export default function Catalog(): ReactElement {
     navigate,
     sortedBy,
     sortOrder,
+    priceTo,
+    priceFrom,
   ]);
 
   return (
@@ -123,6 +133,8 @@ export default function Catalog(): ReactElement {
           setCurrentPage={setCurrentPage}
           setSortedBy={setSortedBy}
           setSortOrder={setSortOrder}
+          setPriceTo={setPriceTo}
+          setPriceFrom={setPriceFrom}
         />
         <div className='products-list'>
           {products?.data?.results.map((item) => (
