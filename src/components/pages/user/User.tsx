@@ -5,7 +5,7 @@
 
 import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Profile, UserAddress, DefaultAddress } from '../../../types/api';
+import { Profile, UserAddress, Address } from '../../../types/api';
 
 import { MessageType, notifier } from '../../../utils/notifier';
 import {
@@ -18,15 +18,7 @@ import {
   getChangeEmailRequestLine,
   getSetFirstNameRequestLine,
   getSetLastNameRequestLine,
-  // getAddAddressRequestLine,
-  // getChangeAddressLine,
-  // getRemoveAddressRequestLine,
-  // getSetDefaultShippingAddressRequestLine,
-  // getAddShippingAddressIdRequestLine,
-  // getRemoveShippingAddressIdRequestLine,
-  // getSetDefaultBillingAddressRequestLine,
-  // getAddBillingAddressIdRequestLine,
-  // getRemoveBillingAddressIdRequestLine,
+  getAddAddressRequestLine,
   getSetDateOfBirthRequestLine,
 } from './getRequestLine';
 
@@ -37,14 +29,10 @@ import {
   nameElementParams,
   surnameElementParams,
   birthdateElementParams,
-  addressBillingElementParams,
-  cityBillingElementParams,
-  countryBillingElementParams,
-  postcodeBillingElementParams,
-  defaultBillingCheckboxParams,
-  defaultShippingCheckboxParams,
-  billingCheckboxParams,
-  shippingCheckboxParams,
+  addressElementParams,
+  cityElementParams,
+  countryElementParams,
+  postcodeElementParams,
 } from '../../../utils/forms/inputElements';
 import { InputForm } from '../../../utils/forms/InputForm-component';
 import '../../../utils/forms/FormsStyle.css';
@@ -84,12 +72,11 @@ function User(): ReactElement {
 
   const [dataProfile, setDataProfile] = useState<Profile>();
   const [dataAddresses, setDataAddresses] = useState<Array<UserAddress>>();
-  const [dataShippingAddress, setDataShippingAddresses] = useState<string[]>();
-  const [dataBillingAddress, setDataBillingAddresses] = useState<string[]>();
-  const [dataDefaultShippingAddress, setDataDefaultShippingAddress] =
-    useState<DefaultAddress>();
-  const [dataDefaultBillingAddress, setDataDefaultBillingAddress] =
-    useState<DefaultAddress>();
+  let dataAddressesLabel;
+  let dataShippingAddress;
+  let dataBillingAddress;
+  let dataDefaultShippingAddress;
+  let dataDefaultBillingAddress;
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   const [dataLabels, setDataLabels] = useState<Array<string[]>>([]);
   const [passwordShown, setPasswordShown] = useState(false);
@@ -112,15 +99,15 @@ function User(): ReactElement {
       .then((data) => {
         setDataProfile(data);
         setDataAddresses(data.addresses);
-        setDataShippingAddresses(data.shippingAddressIds);
-        setDataBillingAddresses(data.billingAddressIds);
-        setDataDefaultShippingAddress(data.defaultShippingAddressId);
-        setDataDefaultBillingAddress(data.defaultBillingAddressId);
-
+        dataShippingAddress = data.shippingAddressIds;
+        dataBillingAddress = data.billingAddressIds;
+        dataDefaultShippingAddress = data.defaultShippingAddressId;
+        dataDefaultBillingAddress = data.defaultBillingAddressId;
         dataLabels.length = 0;
-        if (dataAddresses) {
-          for (let i = 0; i < dataAddresses.length; i++) {
-            const el: string = dataAddresses[i].id;
+        dataAddressesLabel = data.addresses;
+        if (dataAddressesLabel) {
+          for (let i = 0; i < dataAddressesLabel.length; i++) {
+            const el: string = dataAddressesLabel[i].id;
 
             const arr: string[] = [];
             if (dataShippingAddress && dataShippingAddress.includes(el)) {
@@ -219,7 +206,7 @@ function User(): ReactElement {
     } else {
       notifier.showMessage(
         MessageType.ERROR,
-        'Changing Name',
+        'Changing Surname',
         resp.message,
         MESSAGE_SHOW_TIME_ERROR,
       );
@@ -248,7 +235,7 @@ function User(): ReactElement {
     } else {
       notifier.showMessage(
         MessageType.ERROR,
-        'Changing Name',
+        'Changing Birthday',
         resp.message,
         MESSAGE_SHOW_TIME_ERROR,
       );
@@ -269,15 +256,15 @@ function User(): ReactElement {
     if (resp.isSuccessful) {
       notifier.showMessage(
         MessageType.SUCCESS,
-        `Everyday ia a Birthday`,
-        `Bithdate successfully changed`,
+        `Changing Email`,
+        `Email successfully changed`,
         MESSAGE_SHOW_TIME_SUCCESS,
       );
       fetchData();
     } else {
       notifier.showMessage(
         MessageType.ERROR,
-        'Changing Name',
+        'Changing Email',
         resp.message,
         MESSAGE_SHOW_TIME_ERROR,
       );
@@ -289,6 +276,42 @@ function User(): ReactElement {
     const { email } = values;
     updateEmail(email);
     methodsEmail.reset();
+  });
+
+  const addAddress = async (address: Address) => {
+    const resp = await api.user.updateProfile([
+      getAddAddressRequestLine(address),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Changing Address`,
+        `Address successfully changed`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Changing Address',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const onSubmitAddAddress = methodsAddress.handleSubmit(() => {
+    const values = methodsAddress.getValues();
+    const { street, city, country, postcode } = values;
+    const AddressObj: Address = {
+      streetName: street,
+      postalCode: postcode,
+      city,
+      country,
+    };
+
+    addAddress(AddressObj);
+    methodsAddress.reset();
   });
 
   return (
@@ -464,7 +487,6 @@ function User(): ReactElement {
               <th className='AddressTableHeader'>Country</th>
               <th className='AddressTableHeader'>Postcode</th>
               <th className='AddressTableHeader'>Labels</th>
-              <th className='AddressTableHeader'>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -480,11 +502,6 @@ function User(): ReactElement {
                     {dataAddress?.postalCode}
                   </td>
                   <td className='AddressTableData'>{dataLabels[index]}</td>
-                  <td className='AddressTableData'>
-                    <button className='FormButton UserFormButton' type='button'>
-                      Delete
-                    </button>
-                  </td>
                 </tr>
               );
             })}
@@ -497,19 +514,15 @@ function User(): ReactElement {
               <h2 className='AddressHeader SectionHeader'>Add new address</h2>
               <button
                 type='button'
-                // onClick={onSubmit}
+                onClick={onSubmitAddAddress}
                 className='FormButton SubmitButton SubmitButtonAddress'
               >
                 Add address
               </button>
-              <InputForm checkbox {...billingCheckboxParams} />
-              <InputForm checkbox {...defaultBillingCheckboxParams} />
-              <InputForm checkbox {...shippingCheckboxParams} />
-              <InputForm checkbox {...defaultShippingCheckboxParams} />
-              <InputForm address {...addressBillingElementParams} />
-              <InputForm address {...cityBillingElementParams} />
-              <InputForm select {...countryBillingElementParams} />
-              <InputForm address {...postcodeBillingElementParams} />
+              <InputForm address {...addressElementParams} />
+              <InputForm address {...cityElementParams} />
+              <InputForm select {...countryElementParams} />
+              <InputForm address {...postcodeElementParams} />
             </div>
           </form>
         </FormProvider>

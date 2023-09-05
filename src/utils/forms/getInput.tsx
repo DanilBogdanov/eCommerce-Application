@@ -88,11 +88,11 @@ export default function GetInput(
   };
 
   const setIsShipping = useState(false)[1];
-  const handleChangeShipping = () => {
+  const handleAddShipping = () => {
     setIsShipping((current) => !current);
   };
   const setIsBilling = useState(false)[1];
-  const handleChangeBilling = () => {
+  const handleAddBilling = () => {
     setIsBilling((current) => !current);
   };
 
@@ -125,22 +125,22 @@ export default function GetInput(
         onChange={handleChangeDefaultShipping}
       />
     );
-  } else if (name === 'shippingOnly') {
+  } else if (name === 'shipping') {
     output = (
       <input
         id={id}
         type={type}
         {...register(name)}
-        onChange={handleChangeShipping}
+        onChange={handleAddShipping}
       />
     );
-  } else if (name === 'billingOnly') {
+  } else if (name === 'billing') {
     output = (
       <input
         id={id}
         type={type}
         {...register(name)}
-        onChange={handleChangeBilling}
+        onChange={handleAddBilling}
       />
     );
   } else {

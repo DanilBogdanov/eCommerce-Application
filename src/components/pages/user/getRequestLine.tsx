@@ -1,4 +1,4 @@
-import { ProfileAction, Action } from '../../../types/api';
+import { ProfileAction, Action, Address } from '../../../types/api';
 
 export const getChangeEmailRequestLine = (email: string) => {
   return { action: Action.ChangeEmail, email };
@@ -12,7 +12,7 @@ export const getSetLastNameRequestLine = (lastName: string) => {
   return { action: Action.SetLastName, lastName };
 };
 
-export const getAddAddressRequestLine = (address: ProfileAction) => {
+export const getAddAddressRequestLine = (address: Address) => {
   return { action: Action.AddAddress, address };
 };
 

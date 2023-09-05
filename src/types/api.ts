@@ -51,7 +51,7 @@ export enum Country {
 export interface Address {
   id?: string;
   key?: string;
-  country: Country;
+  country?: Country;
   streetName?: string;
   postalCode?: string;
   region?: string;
