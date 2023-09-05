@@ -153,6 +153,8 @@ export interface ProductRequestOptions {
   sortField?: 'name' | 'price';
   sortOrder?: 'asc' | 'desc';
   search?: string;
+  priceFrom?: number;
+  priceTo?: number;
 }
 
 export interface ProductsFetchResponse {

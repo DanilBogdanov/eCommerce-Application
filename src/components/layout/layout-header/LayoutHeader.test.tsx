@@ -1,14 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import LayoutHeader from './LayoutHeader';
-import Api from '../../../api/api';
 
 describe('LayoutHeader', () => {
   it('renders without errors', () => {
-    const mockApi = new Api();
     render(
       <MemoryRouter>
-        <LayoutHeader api={mockApi} />
+        <LayoutHeader />
       </MemoryRouter>,
     );
 
@@ -17,32 +15,30 @@ describe('LayoutHeader', () => {
   });
 
   it('marks the active link as active', () => {
-    const mockApi = new Api();
     render(
       <MemoryRouter initialEntries={['/about']}>
-        <LayoutHeader api={mockApi} />
+        <LayoutHeader />
       </MemoryRouter>,
     );
 
     const activeLink = screen.getByText('About Us');
-    expect(activeLink).toHaveClass('active');
+    expect(activeLink).toHaveClass('nav-bar__link nav-bar__link_active');
   });
 
   it('applies appropriate classes to links', () => {
-    const mockApi = new Api();
     render(
       <MemoryRouter>
-        <LayoutHeader api={mockApi} />
+        <LayoutHeader />
       </MemoryRouter>,
     );
 
     const mainLink = screen.getByText('Main');
-    expect(mainLink).toHaveClass('nav-link');
+    expect(mainLink).toHaveClass('nav-bar__link');
 
     const catalogLink = screen.getByText('Catalog');
-    expect(catalogLink).toHaveClass('nav-link');
+    expect(catalogLink).toHaveClass('nav-bar__link');
 
     const aboutLink = screen.getByText('About Us');
-    expect(aboutLink).toHaveClass('nav-link');
+    expect(aboutLink).toHaveClass('nav-bar__link');
   });
 });

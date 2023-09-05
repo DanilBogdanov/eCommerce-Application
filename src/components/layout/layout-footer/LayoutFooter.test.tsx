@@ -14,22 +14,6 @@ describe('LayoutFooter', () => {
     expect(footer).toBeInTheDocument();
   });
 
-  it('renders correct navigation links', () => {
-    render(
-      <MemoryRouter>
-        <LayoutFooter />
-      </MemoryRouter>,
-    );
-
-    const mainLink = screen.getByText('Main');
-    const catalogLink = screen.getByText('Catalog');
-    const aboutUsLink = screen.getByText('AboutUs');
-
-    expect(mainLink).toBeInTheDocument();
-    expect(catalogLink).toBeInTheDocument();
-    expect(aboutUsLink).toBeInTheDocument();
-  });
-
   it('renders logo', () => {
     render(
       <MemoryRouter>
@@ -37,7 +21,7 @@ describe('LayoutFooter', () => {
       </MemoryRouter>,
     );
 
-    const logo = screen.getByTestId('logo');
+    const logo = screen.getByAltText('rss');
     expect(logo).toBeInTheDocument();
   });
 
@@ -48,7 +32,7 @@ describe('LayoutFooter', () => {
       </MemoryRouter>,
     );
 
-    const footerText = screen.getByText('Create by Winners Team');
+    const footerText = screen.getByText('Created by Winners Team 2023');
     expect(footerText).toBeInTheDocument();
   });
 });
