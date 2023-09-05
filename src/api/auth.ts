@@ -6,6 +6,7 @@ import {
   RegisterForm,
   TokenResponse,
   config,
+  Profile,
 } from '../types/api';
 import TokenStore from './tokenStore';
 import handleError from '../utils/api/errorHandler';
@@ -21,7 +22,7 @@ class Auth {
   }
 
   public async login(
-    email: string,
+    email: string | Profile | undefined,
     password: string,
   ): Promise<ApiResponse<void>> {
     try {
@@ -102,7 +103,7 @@ class Auth {
   }
 
   private static async loginUser(
-    email: string,
+    email: string | Profile | undefined,
     password: string,
   ): Promise<TokenResponse> {
     const { data } = await axios<AuthResponse>({

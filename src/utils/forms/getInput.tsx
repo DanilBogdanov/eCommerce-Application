@@ -2,6 +2,7 @@
 
 import { useState, ReactNode } from 'react';
 import { UseFormRegister, FieldValues } from 'react-hook-form';
+import { Profile } from '../../types/api';
 
 export interface FormValues {
   name: string;
@@ -9,7 +10,7 @@ export interface FormValues {
   type?: string;
   id?: string;
   htmlFor?: string;
-  placeholder?: string;
+  placeholder?: string | Profile | undefined;
   validation?: object;
   multiline?: boolean;
   labelCheck?: boolean;
@@ -17,13 +18,13 @@ export interface FormValues {
   checkbox?: boolean;
   className?: string;
   children?: ReactNode;
-  value?: string;
+  value?: string | Profile | undefined;
   address?: boolean;
   ref?: React.RefObject<HTMLInputElement>;
 }
 
 export default function GetInput(
-  { name, type, id, placeholder, validation, className }: FormValues,
+  { name, type, id, placeholder, validation, className, value }: FormValues,
   register: UseFormRegister<FieldValues>,
 ): JSX.Element | undefined {
   const setIsSameAddress = useState(false)[1];
@@ -87,11 +88,11 @@ export default function GetInput(
   };
 
   const setIsShipping = useState(false)[1];
-  const handleChangeShipping = () => {
+  const handleAddShipping = () => {
     setIsShipping((current) => !current);
   };
   const setIsBilling = useState(false)[1];
-  const handleChangeBilling = () => {
+  const handleAddBilling = () => {
     setIsBilling((current) => !current);
   };
 
@@ -124,27 +125,28 @@ export default function GetInput(
         onChange={handleChangeDefaultShipping}
       />
     );
-  } else if (name === 'shippingOnly') {
+  } else if (name === 'shipping') {
     output = (
       <input
         id={id}
         type={type}
         {...register(name)}
-        onChange={handleChangeShipping}
+        onChange={handleAddShipping}
       />
     );
-  } else if (name === 'billingOnly') {
+  } else if (name === 'billing') {
     output = (
       <input
         id={id}
         type={type}
         {...register(name)}
-        onChange={handleChangeBilling}
+        onChange={handleAddBilling}
       />
     );
   } else {
     output = (
       <input
+        value={value}
         className={className}
         placeholder={placeholder}
         id={id}

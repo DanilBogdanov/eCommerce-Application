@@ -19,6 +19,7 @@ export const nameElementParams = {
   type: 'text',
   id: 'name',
   placeholder: 'write your name ...',
+  value: '',
   validation: {
     ...nameValidationRules,
   },
@@ -29,6 +30,7 @@ export const surnameElementParams = {
   name: 'surnam',
   label: 'Surname:',
   type: 'text',
+  value: '',
   id: 'surnam',
   placeholder: 'write your surname ...',
   validation: {
@@ -41,6 +43,7 @@ export const birthdateElementParams = {
   name: 'dateOfBirth',
   label: 'Birthdate:',
   type: 'date',
+  value: '',
   id: 'birthdate',
   placeholder: 'write your date of birth ...',
   validation: {
@@ -116,6 +119,30 @@ export const passwordElementParams = {
   type: 'password',
   id: 'password',
   placeholder: 'type password ...',
+  validation: {
+    ...passwordValidationRules,
+  },
+};
+
+export const currentPasswordElementParams = {
+  className: 'InputForm',
+  name: 'currentPassword',
+  label: 'Current password:',
+  type: 'password',
+  id: 'currentPassword',
+  placeholder: 'type current password ...',
+  validation: {
+    ...passwordValidationRules,
+  },
+};
+
+export const newPasswordElementParams = {
+  className: 'InputForm',
+  name: 'newPassword',
+  label: 'New password:',
+  type: 'password',
+  id: 'newPassword',
+  placeholder: 'type new password ...',
   validation: {
     ...passwordValidationRules,
   },
@@ -230,22 +257,62 @@ export const defaultShippingLabelParams = {
 export const billingCheckboxParams = {
   label: 'Use for billing',
   className: 'checkboxForm',
-  name: 'billingOnly',
+  name: 'billing',
   type: 'checkbox',
   id: 'checkboxBilling',
 };
 export const shippingCheckboxParams = {
-  label: 'Use for billing',
+  label: 'Use for shipping',
   className: 'checkboxForm',
-  name: 'shippingOnly',
+  name: 'shipping',
   type: 'checkbox',
-  id: 'checkboxShiping',
+  id: 'checkboxShipping',
 };
-export const billingLabelParams = {
-  name: 'Use for billing',
-  htmlFor: 'checkboxBilling',
+
+export const addressElementParams = {
+  className: 'InputForm',
+  name: 'street',
+  label: 'Street:',
+  type: 'text',
+  id: 'street',
+  placeholder: 'write your street ...',
+  validation: {
+    ...addressValidationRules,
+  },
 };
-export const shippingLabelParams = {
-  name: 'Use for shipping',
-  htmlFor: 'checkboxShiping',
+
+export const cityElementParams = {
+  className: 'InputForm',
+  name: 'city',
+  label: 'City:',
+  type: 'text',
+  id: 'city',
+  placeholder: 'write your city ...',
+  validation: {
+    ...cityValidationRules,
+  },
+};
+
+export const countryElementParams = {
+  className: 'InputForm',
+  name: 'country',
+  label: 'Country:',
+  type: 'select',
+  id: 'country',
+  placeholder: 'write your country ...',
+  validation: {
+    ...countryValidationRules,
+  },
+};
+
+export const postcodeElementParams = {
+  className: 'InputForm',
+  name: 'postcode',
+  label: 'Postcode:',
+  type: 'text',
+  id: 'postcode',
+  placeholder: 'write your postcode ...',
+  validation: {
+    ...postcodeValidationRules,
+  },
 };

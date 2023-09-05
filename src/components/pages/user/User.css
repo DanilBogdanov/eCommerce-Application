@@ -11,6 +11,16 @@
   color: var(--main-color);
 }
 
+.SectionHeaderWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.UserDataHeader {
+  margin: 0 1rem 0 0;
+}
+
 .UserSectionTitle {
   font-size: 1.5rem;
   margin: 0;
