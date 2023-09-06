@@ -136,3 +136,16 @@ hr {
   background-color: var(--danger-color);
   padding: 0.3rem 0.7rem;
 }
+
+@media screen and (max-width: 470px) {
+  .ChangeWrapper {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 0.7rem;
+    flex-direction: column;
+  }
+
+  .UserInputForm {
+    margin: 1rem 0;
+  }
+}
