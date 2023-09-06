@@ -112,7 +112,8 @@ function User(): ReactElement {
         dataBillingAddress = data.billingAddressIds;
         dataDefaultShippingAddress = data.defaultShippingAddressId;
         dataDefaultBillingAddress = data.defaultBillingAddressId;
-        setDataLabels([]);
+        setDataLabels(dataLabels);
+        dataLabels.length = 0;
         dataAddressesLabel = data.addresses;
         if (dataAddressesLabel) {
           for (let i = 0; i < dataAddressesLabel.length; i++) {
@@ -296,15 +297,15 @@ function User(): ReactElement {
     if (resp.isSuccessful) {
       notifier.showMessage(
         MessageType.SUCCESS,
-        `Changing Address`,
-        `Address successfully changed`,
+        `Success!`,
+        `Address added`,
         MESSAGE_SHOW_TIME_SUCCESS,
       );
       fetchData();
     } else {
       notifier.showMessage(
         MessageType.ERROR,
-        'Changing Address',
+        'Adding Address',
         resp.message,
         MESSAGE_SHOW_TIME_ERROR,
       );
@@ -332,16 +333,16 @@ function User(): ReactElement {
     if (resp.isSuccessful) {
       notifier.showMessage(
         MessageType.SUCCESS,
-        `Email Deleting`,
-        `Email was successfully deleted`,
+        `Success!`,
+        `Address was successfully deleted`,
         MESSAGE_SHOW_TIME_SUCCESS,
       );
       fetchData();
     } else {
       notifier.showMessage(
         MessageType.ERROR,
-        'You have no active label to unset it!',
-        'Label your address first',
+        'Deleting Address',
+        resp.message,
         MESSAGE_SHOW_TIME_ERROR,
       );
     }
@@ -362,8 +363,8 @@ function User(): ReactElement {
     } else {
       notifier.showMessage(
         MessageType.ERROR,
-        'You have no active label to unset it!',
-        'Label your address first',
+        'Changing Address',
+        resp.message,
         MESSAGE_SHOW_TIME_ERROR,
       );
     }
@@ -384,8 +385,8 @@ function User(): ReactElement {
     } else {
       notifier.showMessage(
         MessageType.ERROR,
-        'You have no active label to unset it!',
-        'Label your address first',
+        'Changing Address',
+        resp.message,
         MESSAGE_SHOW_TIME_ERROR,
       );
     }
@@ -406,8 +407,8 @@ function User(): ReactElement {
     } else {
       notifier.showMessage(
         MessageType.ERROR,
-        'You have no active label to unset it!',
-        'Label your address first',
+        'Changing Address',
+        resp.message,
         MESSAGE_SHOW_TIME_ERROR,
       );
     }
@@ -428,8 +429,8 @@ function User(): ReactElement {
     } else {
       notifier.showMessage(
         MessageType.ERROR,
-        'You have no active label to unset it!',
-        'Label your address first',
+        'Changing Address',
+        resp.message,
         MESSAGE_SHOW_TIME_ERROR,
       );
     }
@@ -443,7 +444,7 @@ function User(): ReactElement {
       notifier.showMessage(
         MessageType.SUCCESS,
         `Address chanching`,
-        `Address is set as Default Shipping`,
+        `Address is unset as Default Shipping`,
         MESSAGE_SHOW_TIME_SUCCESS,
       );
       fetchData();
@@ -465,7 +466,7 @@ function User(): ReactElement {
       notifier.showMessage(
         MessageType.SUCCESS,
         `Address changing`,
-        `Address is set as Default Shipping`,
+        `Address is unset as Default Shipping`,
         MESSAGE_SHOW_TIME_SUCCESS,
       );
       fetchData();
