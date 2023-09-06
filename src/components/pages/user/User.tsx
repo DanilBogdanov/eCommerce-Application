@@ -77,8 +77,7 @@ function User(): ReactElement {
   let dataBillingAddress;
   let dataDefaultShippingAddress;
   let dataDefaultBillingAddress;
-  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-  const [dataLabels, setDataLabels] = useState<Array<string[]>>([]);
+  const [dataLabels] = useState<Array<string[]>>([]);
 
   const [passwordShown, setPasswordShown] = useState(false);
 
