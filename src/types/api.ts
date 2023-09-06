@@ -13,7 +13,7 @@ export interface TokenResponse {
   exp: number;
   accessToken: string;
   refreshToken: string;
-  email: string | Profile | undefined;
+  email: string;
 }
 
 export interface AuthResponse {
@@ -69,7 +69,7 @@ export interface ApiResponse<T> {
 export interface Profile {
   id: string;
   version: number;
-  email: string | Profile | undefined;
+  email: string;
   firstName: string;
   lastName: string;
   addresses: Array<UserAddress>; // Address[]
@@ -120,10 +120,7 @@ export enum Action {
   SetDateOfBirth = 'setDateOfBirth',
 }
 
-export type AuthCallback = (
-  isAnonym: boolean,
-  email: string | Profile | undefined,
-) => void;
+export type AuthCallback = (isAnonym: boolean, email: string) => void;
 
 export type CategoriesResponse = {
   results: {

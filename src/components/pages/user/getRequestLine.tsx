@@ -27,41 +27,31 @@ export const getChangeAddressLine = (
   };
 };
 
-export const getRemoveAddressRequestLine = (addressId: ProfileAction) => {
+export const getRemoveAddressRequestLine = (addressId: string) => {
   return { action: Action.RemoveAddress, addressId };
 };
 
-export const getSetDefaultShippingAddressRequestLine = (
-  addressId: ProfileAction,
-) => {
+export const getSetDefaultShippingAddressRequestLine = (addressId: string) => {
   return { action: Action.SetDefaultShippingAddress, addressId };
 };
 
-export const getAddShippingAddressIdRequestLine = (
-  addressId: ProfileAction,
-) => {
+export const getAddShippingAddressIdRequestLine = (addressId: string) => {
   return { action: Action.AddShippingAddressId, addressId };
 };
 
-export const getRemoveShippingAddressIdRequestLine = (
-  addressId: ProfileAction,
-) => {
+export const getRemoveShippingAddressIdRequestLine = (addressId: string) => {
   return { action: Action.RemoveShippingAddressId, addressId };
 };
 
-export const getSetDefaultBillingAddressRequestLine = (
-  addressId: ProfileAction,
-) => {
+export const getSetDefaultBillingAddressRequestLine = (addressId: string) => {
   return { action: Action.SetDefaultBillingAddress, addressId };
 };
 
-export const getAddBillingAddressIdRequestLine = (addressId: ProfileAction) => {
+export const getAddBillingAddressIdRequestLine = (addressId: string) => {
   return { action: Action.AddBillingAddressId, addressId };
 };
 
-export const getRemoveBillingAddressIdRequestLine = (
-  addressId: ProfileAction,
-) => {
+export const getRemoveBillingAddressIdRequestLine = (addressId: string) => {
   return { action: Action.RemoveBillingAddressId, addressId };
 };
 

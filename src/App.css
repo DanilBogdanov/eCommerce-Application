@@ -26,6 +26,8 @@
   --button-background-color: rgb(142, 142, 142);
   --button-background-color-active: rgba(142, 142, 142, 0.856);
   --submit-button-background-color: rgb(128, 178, 94);
+  --set-button-background-color: rgb(49, 121, 255);
+  --unset-button-background-color: rgb(255, 205, 67);
 
   --danger-color: rgb(246, 56, 32);
   --danger-color-light: rgb(254, 227, 225);
