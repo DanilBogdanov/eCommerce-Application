@@ -2,7 +2,6 @@
 
 import { useState, ReactNode } from 'react';
 import { UseFormRegister, FieldValues } from 'react-hook-form';
-import { Profile } from '../../types/api';
 
 export interface FormValues {
   name: string;
@@ -10,7 +9,7 @@ export interface FormValues {
   type?: string;
   id?: string;
   htmlFor?: string;
-  placeholder?: string | Profile | undefined;
+  placeholder?: string | undefined;
   validation?: object;
   multiline?: boolean;
   labelCheck?: boolean;
@@ -18,7 +17,7 @@ export interface FormValues {
   checkbox?: boolean;
   className?: string;
   children?: ReactNode;
-  value?: string | Profile | undefined;
+  value?: string | undefined;
   address?: boolean;
   ref?: React.RefObject<HTMLInputElement>;
 }
