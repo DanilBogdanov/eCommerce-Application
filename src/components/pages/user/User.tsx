@@ -7,6 +7,8 @@ import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Profile, UserAddress, Address } from '../../../types/api';
 
+// import Table from '../../../utils/table/Table';
+
 import { MessageType, notifier } from '../../../utils/notifier';
 import {
   MESSAGE_SHOW_TIME_ERROR,
@@ -20,6 +22,13 @@ import {
   getSetLastNameRequestLine,
   getAddAddressRequestLine,
   getSetDateOfBirthRequestLine,
+  getRemoveAddressRequestLine,
+  getSetDefaultShippingAddressRequestLine,
+  getAddShippingAddressIdRequestLine,
+  getRemoveShippingAddressIdRequestLine,
+  getSetDefaultBillingAddressRequestLine,
+  getAddBillingAddressIdRequestLine,
+  getRemoveBillingAddressIdRequestLine,
 } from './getRequestLine';
 
 import {
@@ -77,7 +86,7 @@ function User(): ReactElement {
   let dataBillingAddress;
   let dataDefaultShippingAddress;
   let dataDefaultBillingAddress;
-  const [dataLabels] = useState<Array<string[]>>([]);
+  const [dataLabels, setDataLabels] = useState<Array<string[]>>([]);
 
   const [passwordShown, setPasswordShown] = useState(false);
 
@@ -103,6 +112,7 @@ function User(): ReactElement {
         dataBillingAddress = data.billingAddressIds;
         dataDefaultShippingAddress = data.defaultShippingAddressId;
         dataDefaultBillingAddress = data.defaultBillingAddressId;
+        setDataLabels(dataLabels);
         dataLabels.length = 0;
         dataAddressesLabel = data.addresses;
         if (dataAddressesLabel) {
@@ -137,7 +147,9 @@ function User(): ReactElement {
   ) => {
     const resp = await api.user.changePassword(currentPassword, newPassword);
     if (resp.isSuccessful) {
-      api.auth.login(dataProfile?.email, newPassword);
+      if (dataProfile) {
+        api.auth.login(dataProfile.email, newPassword);
+      }
       notifier.showMessage(
         MessageType.SUCCESS,
         'Changing password',
@@ -285,15 +297,15 @@ function User(): ReactElement {
     if (resp.isSuccessful) {
       notifier.showMessage(
         MessageType.SUCCESS,
-        `Changing Address`,
-        `Address successfully changed`,
+        `Success!`,
+        `Address added`,
         MESSAGE_SHOW_TIME_SUCCESS,
       );
       fetchData();
     } else {
       notifier.showMessage(
         MessageType.ERROR,
-        'Changing Address',
+        'Adding Address',
         resp.message,
         MESSAGE_SHOW_TIME_ERROR,
       );
@@ -313,6 +325,160 @@ function User(): ReactElement {
     addAddress(AddressObj);
     methodsAddress.reset();
   });
+
+  const deleteAddress = async (id: string) => {
+    const resp = await api.user.updateProfile([
+      getRemoveAddressRequestLine(id),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Success!`,
+        `Address was successfully deleted`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Deleting Address',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const setDefaultShippingAddress = async (id: string) => {
+    const resp = await api.user.updateProfile([
+      getSetDefaultShippingAddressRequestLine(id),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Address chanching`,
+        `Address is set as Default Shipping`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Changing Address',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const setDefaultBillingAddress = async (id: string) => {
+    const resp = await api.user.updateProfile([
+      getSetDefaultBillingAddressRequestLine(id),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Address chanching`,
+        `Address is set as Default Billing`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Changing Address',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const setBillingAddress = async (id: string) => {
+    const resp = await api.user.updateProfile([
+      getAddBillingAddressIdRequestLine(id),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Address chanching`,
+        `Address is set as Billing`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Changing Address',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const setShippingAddress = async (id: string) => {
+    const resp = await api.user.updateProfile([
+      getAddShippingAddressIdRequestLine(id),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Address chanching`,
+        `Address is set as Shipping`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Changing Address',
+        resp.message,
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const unsetBillingAddress = async (id: string) => {
+    const resp = await api.user.updateProfile([
+      getRemoveBillingAddressIdRequestLine(id),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Address chanching`,
+        `Address is unset as Default Shipping`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'You have no active label to unset it!',
+        'Label your address first',
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
+
+  const unsetShippingAddress = async (id: string) => {
+    const resp = await api.user.updateProfile([
+      getRemoveShippingAddressIdRequestLine(id),
+    ]);
+    if (resp.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        `Address changing`,
+        `Address is unset as Default Shipping`,
+        MESSAGE_SHOW_TIME_SUCCESS,
+      );
+      fetchData();
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'You have no active label to unset it!',
+        'Label your address first',
+        MESSAGE_SHOW_TIME_ERROR,
+      );
+    }
+  };
 
   return (
     <div className='UserProfileWrapper'>
@@ -487,6 +653,7 @@ function User(): ReactElement {
               <th className='AddressTableHeader'>Country</th>
               <th className='AddressTableHeader'>Postcode</th>
               <th className='AddressTableHeader'>Labels</th>
+              <th className='AddressTableHeader'>Settings</th>
             </tr>
           </thead>
           <tbody>
@@ -502,6 +669,59 @@ function User(): ReactElement {
                     {dataAddress?.postalCode}
                   </td>
                   <td className='AddressTableData'>{dataLabels[index]}</td>
+                  <td className='AddressTableData'>
+                    <button
+                      type='button'
+                      className='FormButton SetButton'
+                      onClick={() => setDefaultShippingAddress(dataAddress?.id)}
+                    >
+                      Add Default Shipping
+                    </button>
+                    <button
+                      type='button'
+                      className='FormButton SetButton'
+                      onClick={() => setDefaultBillingAddress(dataAddress?.id)}
+                    >
+                      Add Default Billing
+                    </button>
+                    <button
+                      type='button'
+                      className='FormButton SetButton'
+                      onClick={() => setShippingAddress(dataAddress?.id)}
+                    >
+                      Add Shipping
+                    </button>
+                    <button
+                      type='button'
+                      className='FormButton SetButton'
+                      onClick={() => setBillingAddress(dataAddress?.id)}
+                    >
+                      Add Billing
+                    </button>
+
+                    <button
+                      type='button'
+                      className='FormButton UnsetButton'
+                      onClick={() => unsetShippingAddress(dataAddress?.id)}
+                    >
+                      Remove Shipping
+                    </button>
+
+                    <button
+                      type='button'
+                      className='FormButton UnsetButton'
+                      onClick={() => unsetBillingAddress(dataAddress?.id)}
+                    >
+                      Remove Billing
+                    </button>
+                    <button
+                      type='button'
+                      onClick={() => deleteAddress(dataAddress?.id)}
+                      className='FormButton DeleteButton'
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               );
             })}

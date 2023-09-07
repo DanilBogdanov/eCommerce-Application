@@ -68,14 +68,21 @@ hr {
 .AddressTable {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  /* width: 20rem; */
   font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .AddressTableData,
 .AddressTableHeader {
   border: 1px solid #ddd;
   padding: 8px;
+  min-width: 16rem;
+  width: 20rem;
+  flex: 0 0 auto;
 }
 
 .AddressTableRow:nth-child(even) {
@@ -113,4 +120,32 @@ hr {
 
 .SubmitButtonAddress {
   margin-bottom: 2rem;
+}
+
+.SetButton {
+  background-color: var(--set-button-background-color);
+  padding: 0.3rem 0.7rem;
+}
+
+.UnsetButton {
+  background-color: var(--unset-button-background-color);
+  padding: 0.3rem 0.7rem;
+}
+
+.DeleteButton {
+  background-color: var(--danger-color);
+  padding: 0.3rem 0.7rem;
+}
+
+@media screen and (max-width: 470px) {
+  .ChangeWrapper {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 0.7rem;
+    flex-direction: column;
+  }
+
+  .UserInputForm {
+    margin: 1rem 0;
+  }
 }
