@@ -219,3 +219,45 @@ export interface Product {
   price: number;
   salePrice: number | null;
 }
+
+export interface Cart {
+  id: string;
+  version: number;
+  totalLineItemQuantity: number;
+  totalPrice: {
+    centAmount: number;
+  };
+  lineItems: LineItem[];
+}
+
+export interface LineItem {
+  productId: string;
+  productKey: string;
+  name: {
+    'en-US': string;
+  };
+  variant: {
+    images: {
+      url: string;
+      label: string;
+    }[];
+    attributes: {
+      name: string;
+      value: string;
+    }[];
+  };
+  price: {
+    discounted?: {
+      value: {
+        centAmount: number;
+      };
+    };
+    value: {
+      centAmount: number;
+    };
+  };
+  quantity: number;
+  totalPrice: {
+    centAmount: number;
+  };
+}
