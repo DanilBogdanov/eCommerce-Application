@@ -1,4 +1,3 @@
-import './App.css';
 import { ReactElement } from 'react';
 import {
   createBrowserRouter,
@@ -10,11 +9,12 @@ import Main from './components/pages/main/Main';
 import Registration from './components/pages/registration/Registration';
 import Login from './components/pages/login/Login';
 import NotFound from './components/pages/notFound/NotFound';
-import Api from './api/api';
 import AboutUs from './components/pages/about/About';
 import Catalog from './components/pages/catalog/Catalog';
-
-const api = new Api();
+import User from './components/pages/user/User';
+import { api } from './api/api';
+import './App.css';
+import { ProductPage } from './components/pages/product/ProductPage';
 
 const redirectToMain = () => {
   if (!api.user.isAnonymous()) {
@@ -26,20 +26,34 @@ const redirectToMain = () => {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout api={api} />,
+    element: <Layout />,
     children: [
       { index: true, element: <Main /> },
+      { path: '/profile', element: <User /> },
       {
         path: '/registration',
-        element: <Registration api={api} />,
+        element: <Registration />,
         loader: redirectToMain,
       },
       {
         path: '/login',
-        element: <Login api={api} />,
+        element: <Login />,
         loader: redirectToMain,
       },
-      { path: '/catalog', element: <Catalog /> },
+      {
+        path: '/catalog',
+        element: <Catalog />,
+        children: [
+          {
+            path: '/catalog/:category',
+            element: <Catalog />,
+          },
+        ],
+      },
+      {
+        path: '/catalog/:category/:item',
+        element: <ProductPage />,
+      },
       { path: '/about', element: <AboutUs /> },
       { path: '/*', element: <NotFound /> },
     ],

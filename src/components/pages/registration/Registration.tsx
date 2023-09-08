@@ -12,11 +12,11 @@ import {
   nameElementParams,
   surnameElementParams,
   birthdateElementParams,
-  streetBillingElementParams,
+  addressBillingElementParams,
   cityBillingElementParams,
   countryBillingElementParams,
   postcodeBillingElementParams,
-  streetShippingElementParams,
+  addressShippingElementParams,
   cityShippingElementParams,
   countryShippingElementParams,
   postcodeShippingElementParams,
@@ -25,21 +25,17 @@ import {
   defaultShippingCheckboxParams,
 } from '../../../utils/forms/inputElements';
 import { InputForm } from '../../../utils/forms/InputForm-component';
-import Api from '../../../api/api';
 import { RegisterForm } from '../../../types/api';
 import { MessageType, notifier } from '../../../utils/notifier';
 import {
   MESSAGE_SHOW_TIME_ERROR,
   MESSAGE_SHOW_TIME_SUCCESS,
 } from '../../../types/constants';
+import { api } from '../../../api/api';
 
 import '../../../utils/forms/FormsStyle.css';
 
-type RegistrationProps = {
-  api: Api;
-};
-
-function Registration({ api }: RegistrationProps): ReactElement {
+function Registration(): ReactElement {
   const methods = useForm({
     shouldFocusError: false,
     criteriaMode: 'firstError',
@@ -50,7 +46,7 @@ function Registration({ api }: RegistrationProps): ReactElement {
 
   const logup = async (registerForm: RegisterForm) => {
     const resp = await api.auth.registerAndLogin(registerForm);
-    if (resp.result) {
+    if (resp.isSuccessful) {
       notifier.showMessage(
         MessageType.SUCCESS,
         'Registration',
@@ -70,10 +66,14 @@ function Registration({ api }: RegistrationProps): ReactElement {
 
   const onSubmit = methods.handleSubmit(() => {
     const values = methods.getValues();
-    const { email, password } = values;
 
-    //
     const {
+      email,
+      password,
+      surnam,
+      name,
+      dateOfBirth,
+      sameAddress,
       defaultBilling,
       streetBilling,
       cityBilling,
@@ -102,52 +102,46 @@ function Registration({ api }: RegistrationProps): ReactElement {
       country: countryShipping,
     };
 
-    const defaultBillingObj = {
-      key: 'defaultBilling',
-      streetName: streetBilling,
-      postalCode: postcodeBilling,
-      city: cityBilling,
-      country: countryBilling,
-    };
-
-    const defaultShippingObj = {
-      key: 'defaultShipping',
-      streetName: streetShipping,
-      postalCode: postcodeShipping,
-      city: cityShipping,
-      country: countryShipping,
-    };
-
     const addressArr = [];
-    addressArr.push(BillingObj, ShippingObj);
-    if (defaultBilling) {
-      addressArr.push(defaultBillingObj);
-    }
-    if (defaultShipping) {
-      addressArr.push(defaultShippingObj);
-    }
+    addressArr.push(BillingObj);
+
+    const firstName = name;
+    const lastName = surnam;
 
     const registerForm: RegisterForm = {
       email,
       password,
       addresses: addressArr,
+      firstName,
+      lastName,
+      dateOfBirth,
+
       // add rest fields
       // address ID fields add in loop lower
     };
 
-    for (let i = 0; i < registerForm.addresses!.length; i += 1) {
-      const element = registerForm?.addresses[i];
-      if (element.key === 'defaultBilling') {
-        registerForm.defaultBillingAddress = i;
-      } else if (element.key === 'defaultShipping') {
-        registerForm.defaultShippingAddress = i;
-      } else if (element.key === 'billing') {
-        registerForm.billingAddresses = [i];
-      } else if (element.key === 'shipping') {
-        registerForm.shippingAddresses = [i];
-      }
-      delete element.key;
+    const billingIndex = 0;
+    const shippingIndex = 1;
+
+    if (sameAddress) {
+      registerForm.billingAddresses = [billingIndex];
+      registerForm.shippingAddresses = [billingIndex];
+    } else {
+      addressArr.push(ShippingObj);
+      registerForm.billingAddresses = [billingIndex];
+      registerForm.shippingAddresses = [shippingIndex];
     }
+
+    if (defaultBilling) {
+      registerForm.defaultBillingAddress = billingIndex;
+    }
+    if (defaultShipping && sameAddress) {
+      registerForm.defaultShippingAddress = billingIndex;
+    }
+    if (defaultShipping && !sameAddress) {
+      registerForm.defaultShippingAddress = shippingIndex;
+    }
+
     logup(registerForm);
     methods.reset();
     setSuccess(true);
@@ -186,7 +180,7 @@ function Registration({ api }: RegistrationProps): ReactElement {
             <div className='AddressSection FormSection'>
               <h2 className='AddressHeader SectionHeader'>Billing Address</h2>
               <InputForm checkbox {...defaultBillingCheckboxParams} />
-              <InputForm address {...streetBillingElementParams} />
+              <InputForm address {...addressBillingElementParams} />
               <InputForm address {...cityBillingElementParams} />
               <InputForm select {...countryBillingElementParams} />
               <InputForm address {...postcodeBillingElementParams} />
@@ -195,7 +189,7 @@ function Registration({ api }: RegistrationProps): ReactElement {
               <h2 className='AddressHeader SectionHeader'>Shipping Address</h2>
               <InputForm checkbox {...sameAddressCheckboxParams} />
               <InputForm checkbox {...defaultShippingCheckboxParams} />
-              <InputForm address {...streetShippingElementParams} />
+              <InputForm address {...addressShippingElementParams} />
               <InputForm address {...cityShippingElementParams} />
               <InputForm select {...countryShippingElementParams} />
               <InputForm address {...postcodeShippingElementParams} />

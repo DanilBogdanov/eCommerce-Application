@@ -1,13 +1,13 @@
 .InputForm {
-  border-radius: 10px;
-  border-width: 2px;
-  border-color: #028dce;
-  padding: 3%;
+  border-radius: 0.8rem;
+  border-width: 0.1rem;
+  border-color: var(--main-color);
+  padding: 0.8rem;
   outline: none;
   border-style: solid;
   transition: 0.1s;
-  margin: 5px 0 10px 0;
-  width: 100%;
+  margin: 1rem 0 1rem 0;
+  width: 25rem;
   box-sizing: border-box;
 }
 
@@ -20,43 +20,49 @@
 }
 
 .FormSection {
-  width: 240px;
-  max-height: 450px;
+  width: 24rem;
+  max-height: 45rem;
 }
 
 .FormWrapper {
-  padding: 50px;
-  border: 2px solid #028dce;
-  border-radius: 10px;
-  margin: 50px 0;
+  padding: 5rem 5rem 15rem 5rem;
+  border: 0.2rem solid var(--main-color);
+  border-radius: 1rem;
+  margin: 5rem 0;
   display: flex;
   flex-wrap: wrap;
-  row-gap: 50px;
-  column-gap: 100px;
+  row-gap: 5rem;
+  column-gap: 10rem;
   justify-content: center;
-  max-width: 1000px;
+  align-items: center;
+  max-width: 100%;
   max-height: 100%;
 }
 
 .LoginFormWrapper {
-  padding: 0 50px 0 50px;
+  padding: 5rem;
   flex-direction: column;
 }
 
-.SectionHeader,
 .FormHeader {
-  margin: 0 0 15px 0;
+  margin: 0 0 1.5rem 0;
+  font-size: 2.7rem;
+}
+
+.SectionHeader {
+  margin: 0 0 1.5rem 0;
+  font-size: 2rem;
 }
 
 .FormHeader {
-  color: #028dce;
+  color: var(--main-color);
 }
 
 .AddressSectionWrapper {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 100px;
-  row-gap: 25px;
+  column-gap: 10rem;
+  row-gap: 2.5rem;
   justify-content: center;
 }
 
@@ -71,70 +77,75 @@
 #checkboxShipingDefault,
 #checkboxSameAddress,
 #checkboxBillingDefault {
-  margin: 0 5px 15px 0;
+  margin: 0 0.5rem 1.5rem 0;
+}
+
+label {
+  font-size: 1.5rem;
 }
 
 .FormButton {
-  border-radius: 20px;
+  border-radius: 2rem;
   border-width: 0;
-  background-color: #028dce;
-  color: #fff;
-  padding: 10px 15px;
+  background-color: var(--button-background-color);
+  color: var(--secondary-color-light-active);
+  padding: 1rem 1.5rem;
   outline: none;
   transition: 0.1s;
   cursor: pointer;
-  margin: 0 0 10px 0;
+  margin: 0 0 1rem 0;
   display: flex;
-  gap: 5px;
+  gap: 0.5rem;
   box-sizing: border-box;
+  width: fit-content;
 }
 
 .FormButton:hover {
-  background-color: #028dced7;
+  background-color: var(--button-background-color-active);
 }
 
 .FormButton:active {
-  background-color: #028dce;
+  background-color: var(--button-background-color);
 }
 
 .SubmitButton {
-  /* margin-top: 42px; */
   justify-content: center;
-  background-color: #00b300;
-  width: 200px;
+  background-color: var(--submit-button-background-color);
+  width: fit-content;
   margin: 0;
 }
 
 .SubmitButton:hover {
-  background-color: #00b300c7;
+  background-color: var(--main-color);
 }
 
 .SubmitButton:active {
-  background-color: #00b300;
+  background-color: var(--submit-button-background-color);
 }
 
 .ButtonWrapper {
-  height: 35px;
+  height: 3.5rem;
 }
 
 .ValidationMessage {
-  max-width: 220px;
+  max-width: 22rem;
   display: flex;
-  gap: 5px;
-  margin: 5px 0 0 0;
-  color: #ff203e;
+  gap: 0.5rem;
+  margin: 0.5rem 0 0 0;
+  color: var(--danger-color);
 }
 
 .ValidationIcon {
-  min-width: 16px;
+  min-width: 1.6rem;
 }
 
 .SubmitLoginButton {
   margin-top: 0;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1150px) {
   .FormWrapper {
-    max-width: 700px;
+    padding: 5rem;
+    row-gap: 15rem;
   }
 }

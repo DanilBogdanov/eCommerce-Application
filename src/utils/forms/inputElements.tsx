@@ -3,7 +3,7 @@ import {
   nameValidationRules,
   surnameValidationRules,
   birthdateValidationRules,
-  streetValidationRules,
+  addressValidationRules,
   cityValidationRules,
   countryValidationRules,
   postcodeValidationRules,
@@ -19,6 +19,7 @@ export const nameElementParams = {
   type: 'text',
   id: 'name',
   placeholder: 'write your name ...',
+  value: '',
   validation: {
     ...nameValidationRules,
   },
@@ -29,6 +30,7 @@ export const surnameElementParams = {
   name: 'surnam',
   label: 'Surname:',
   type: 'text',
+  value: '',
   id: 'surnam',
   placeholder: 'write your surname ...',
   validation: {
@@ -38,9 +40,10 @@ export const surnameElementParams = {
 
 export const birthdateElementParams = {
   className: 'InputForm',
-  name: 'birthdate',
+  name: 'dateOfBirth',
   label: 'Birthdate:',
   type: 'date',
+  value: '',
   id: 'birthdate',
   placeholder: 'write your date of birth ...',
   validation: {
@@ -48,15 +51,15 @@ export const birthdateElementParams = {
   },
 };
 
-export const streetBillingElementParams = {
+export const addressBillingElementParams = {
   className: 'InputForm',
   name: 'streetBilling',
-  label: 'Street:',
+  label: 'Address:',
   type: 'text',
   id: 'streetBilling',
   placeholder: 'write your street ...',
   validation: {
-    ...streetValidationRules,
+    ...addressValidationRules,
   },
 };
 
@@ -121,6 +124,30 @@ export const passwordElementParams = {
   },
 };
 
+export const currentPasswordElementParams = {
+  className: 'InputForm',
+  name: 'currentPassword',
+  label: 'Current password:',
+  type: 'password',
+  id: 'currentPassword',
+  placeholder: 'type current password ...',
+  validation: {
+    ...passwordValidationRules,
+  },
+};
+
+export const newPasswordElementParams = {
+  className: 'InputForm',
+  name: 'newPassword',
+  label: 'New password:',
+  type: 'password',
+  id: 'newPassword',
+  placeholder: 'type new password ...',
+  validation: {
+    ...passwordValidationRules,
+  },
+};
+
 export const numElementParams = {
   className: 'InputForm',
   name: 'num',
@@ -145,7 +172,7 @@ export const emailElementParams = {
   },
 };
 
-export const streetShippingElementParams = {
+export const addressShippingElementParams = {
   className: 'InputForm',
   name: 'streetShipping',
   label: 'Street:',
@@ -153,7 +180,7 @@ export const streetShippingElementParams = {
   id: 'streetShipping',
   placeholder: 'write your street ...',
   validation: {
-    ...streetValidationRules,
+    ...addressValidationRules,
   },
 };
 
@@ -225,4 +252,67 @@ export const defaultBillingLabelParams = {
 export const defaultShippingLabelParams = {
   name: 'Make address default for shipping',
   htmlFor: 'checkboxShipingDefault',
+};
+
+export const billingCheckboxParams = {
+  label: 'Use for billing',
+  className: 'checkboxForm',
+  name: 'billing',
+  type: 'checkbox',
+  id: 'checkboxBilling',
+};
+export const shippingCheckboxParams = {
+  label: 'Use for shipping',
+  className: 'checkboxForm',
+  name: 'shipping',
+  type: 'checkbox',
+  id: 'checkboxShipping',
+};
+
+export const addressElementParams = {
+  className: 'InputForm',
+  name: 'street',
+  label: 'Street:',
+  type: 'text',
+  id: 'street',
+  placeholder: 'write your street ...',
+  validation: {
+    ...addressValidationRules,
+  },
+};
+
+export const cityElementParams = {
+  className: 'InputForm',
+  name: 'city',
+  label: 'City:',
+  type: 'text',
+  id: 'city',
+  placeholder: 'write your city ...',
+  validation: {
+    ...cityValidationRules,
+  },
+};
+
+export const countryElementParams = {
+  className: 'InputForm',
+  name: 'country',
+  label: 'Country:',
+  type: 'select',
+  id: 'country',
+  placeholder: 'write your country ...',
+  validation: {
+    ...countryValidationRules,
+  },
+};
+
+export const postcodeElementParams = {
+  className: 'InputForm',
+  name: 'postcode',
+  label: 'Postcode:',
+  type: 'text',
+  id: 'postcode',
+  placeholder: 'write your postcode ...',
+  validation: {
+    ...postcodeValidationRules,
+  },
 };

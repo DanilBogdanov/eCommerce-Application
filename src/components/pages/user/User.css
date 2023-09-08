@@ -1,0 +1,151 @@
+.UserFormHeader {
+  margin: 0;
+}
+
+.UserProfileWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.SectionHeader {
+  color: var(--main-color);
+}
+
+.SectionHeaderWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.UserDataHeader {
+  margin: 0 1rem 0 0;
+}
+
+.UserSectionTitle {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.UserSectionValue {
+  font-size: 2rem;
+  color: var(--main-color);
+}
+
+hr {
+  width: 100%;
+  background-color: var(--main-color);
+  margin: 2rem 0 2rem 0;
+}
+
+.TitleSection {
+  display: flex;
+  align-items: center;
+  column-gap: 0.7rem;
+}
+
+.UserSectionElement {
+  margin-bottom: 1rem;
+}
+
+.ChangeWrapper {
+  display: flex;
+  align-items: center;
+  column-gap: 0.7rem;
+}
+
+.UserInputForm {
+  margin: 0;
+}
+
+.UserFormButton {
+  margin: 0;
+}
+
+.PasswordInputForm {
+  margin: 0.3rem 0 1rem 0;
+}
+
+.AddressTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  /* width: 20rem; */
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.AddressTableData,
+.AddressTableHeader {
+  border: 1px solid #ddd;
+  padding: 8px;
+  min-width: 16rem;
+  width: 20rem;
+  flex: 0 0 auto;
+}
+
+.AddressTableRow:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.AddressTableRow:hover {
+  background-color: #ddd;
+  transition: 0.15s;
+}
+
+.AddressTableHeader {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--main-color);
+  color: white;
+}
+
+.checkboxShiping,
+.checkboxBilling {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+#checkboxShiping,
+#checkboxBilling {
+  margin: 0 0.5rem 1.5rem 0;
+}
+
+.UserSectionAddress {
+  margin-bottom: 10rem;
+}
+
+.SubmitButtonAddress {
+  margin-bottom: 2rem;
+}
+
+.SetButton {
+  background-color: var(--set-button-background-color);
+  padding: 0.3rem 0.7rem;
+}
+
+.UnsetButton {
+  background-color: var(--unset-button-background-color);
+  padding: 0.3rem 0.7rem;
+}
+
+.DeleteButton {
+  background-color: var(--danger-color);
+  padding: 0.3rem 0.7rem;
+}
+
+@media screen and (max-width: 470px) {
+  .ChangeWrapper {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 0.7rem;
+    flex-direction: column;
+  }
+
+  .UserInputForm {
+    margin: 1rem 0;
+  }
+}

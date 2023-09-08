@@ -1,76 +1,80 @@
 .user-bar {
+  position: relative;
   display: flex;
   align-items: center;
-  column-gap: 10px;
+  column-gap: 0.5rem;
+  padding-left: 1rem;
+  color: var(--secondary-color-light);
+  font-size: 1.6rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-left: 0.2rem solid var(--secondary-color-light);
 }
 
-.login-link_container {
-  display: flex;
-  gap: 5px;
+.burger .user-bar {
+  padding-left: 0;
+  padding-bottom: 1.1rem;
+  border-left: none;
+  border-bottom: 0.1rem solid var(--main-color);
 }
 
-.login-link {
+.user-bar__img {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 5px 10px;
-  width: 50px;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
   cursor: pointer;
-  color: #209ed8;
-  font-size: 0.9rem;
-  border: 1px solid #209ed8;
-  border-radius: 5px;
-  transition: 300ms ease-in-out;
 }
 
-.login-link svg {
-  width: 20px;
-  height: 20px;
+.user-bar__link {
+  padding: 0 0.3rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--secondary-color-light);
+  text-decoration: none;
+  transition-duration: 0.3s;
 }
 
-.login-link:hover {
-  background-color: #d0eeff;
-  transition: 300ms ease-in-out;
-}
-
-.login-link.active {
+.user-bar__link_active {
   display: none;
 }
 
-.user-container {
-  display: flex;
-  flex-direction: column;
+.user-bar__link:hover {
+  text-decoration: underline;
+  color: var(--secondary-color-light-active);
 }
 
-.logut-btn {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 5px 10px;
-  width: 70px;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
+.user-bar:has(.user-bar__link_active) .user-bar__separator {
+  display: none;
+}
+
+.user-bar__btn {
+  border: none;
+  background: none;
   cursor: pointer;
-  color: #209ed8;
-  font-size: 0.9rem;
-  background-color: transparent;
-  border: 1px solid #209ed8;
-  border-radius: 5px;
-  transition: 300ms ease-in-out;
+  font-size: 1.6rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--secondary-color-light);
+  transition-duration: 0.3s;
 }
 
-.logut-btn svg {
-  width: 30px;
-  height: 30px;
+.user-bar__btn:hover {
+  text-decoration: underline;
+  color: var(--secondary-color-light-active);
 }
 
-.logut-btn:hover {
-  background-color: #d0eeff;
-  transition: 300ms ease-in-out;
+.user-bar__info {
+  position: absolute;
+  display: none;
+  top: 4rem;
+  right: 0;
+  color: var(--main-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 500;
+}
+
+.user-bar__img:hover ~ .user-bar__info {
+  display: block;
+  padding: 0.5rem 3rem;
+  border-bottom: 0.2rem solid var(--main-color);
+  background-color: var(--main-color-013);
+}
+
+.burger .user-bar__img:hover ~ .user-bar__info {
+  display: none;
 }

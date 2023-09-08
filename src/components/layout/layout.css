@@ -1,10 +1,23 @@
-.layout_container {
-  display: grid;
+.main {
+  min-height: calc(100vh - 5rem);
   width: 100%;
-  min-height: 100vh;
+  padding: 6rem var(--content-padding-large) 1rem;
+  background-color: rgb(249, 252, 255);
 }
 
-.outlet-container {
-  display: flex;
-  justify-content: center;
+.main__container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 6rem var(--content-padding-medium) 1rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .main {
+    padding: 6rem var(--content-padding-small) 1rem;
+  }
 }

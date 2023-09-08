@@ -1,0 +1,103 @@
+.prodoct-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 23.5rem;
+  height: 32rem;
+  background-color: var(--secondary-color-light-active);
+  border-radius: 1.5rem;
+  border-bottom: 0.5rem solid var(--main-color);
+  box-shadow: 0 0 0.8rem 0 var(--shadow-color);
+}
+
+.product-card__header {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.1rem;
+  font-style: italic;
+  overflow: hidden;
+  color: var(--font-author-color);
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  padding-inline: 1.3rem;
+}
+
+.product-card__author-name {
+  font-family: Inter;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.product-card__bookmark {
+  position: absolute;
+  right: 1rem;
+  transition: 1s ease-in;
+}
+
+.product-card__bookmark__svg path {
+  fill-opacity: 0.15;
+  transition: 0.5s ease-in;
+}
+
+.product-card__bookmark.active .product-card__bookmark__svg path {
+  fill-opacity: 1;
+  transition: 0.5s ease-in;
+}
+
+.product-card_img-container {
+  position: relative;
+  height: 20.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prodoct-card__img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  transition: 1s ease-in-out;
+}
+
+.prodoct-card__img:hover {
+  position: absolute;
+  scale: 2;
+  z-index: 2;
+}
+
+.product-card__attributs {
+  height: 8rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--secondary-background-color);
+  gap: 0.5rem;
+  border-top: 0.2rem solid var(--main-color);
+  padding: 0.5rem 0.7rem 1.3rem 1.7rem;
+  border-bottom-left-radius: 1.2rem;
+  border-bottom-right-radius: 1.2rem;
+}
+
+.product-card__item-name {
+  color: var(--secondary-color-light-active);
+  font-family: Inder;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.product-card__bookmark {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.5s ease-in;
+}

@@ -1,0 +1,39 @@
+.burger__background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  transition-duration: 0.3s;
+  background-color: var(--secondary-background-color);
+  opacity: 0;
+}
+
+.burger_active .burger__background {
+  opacity: 0.5;
+  pointer-events: all;
+}
+
+.burger__container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  row-gap: 1.1rem;
+  width: 30rem;
+  padding: 1.3rem 1rem 1rem 1rem;
+  background-color: var(--main-background-color);
+  z-index: 10;
+  transform: translateX(100%);
+  transition-duration: 0.3s;
+  opacity: 0;
+}
+
+.burger_active .burger__container {
+  transform: translateX(0);
+  opacity: 1;
+}

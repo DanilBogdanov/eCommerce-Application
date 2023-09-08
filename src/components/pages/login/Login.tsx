@@ -11,18 +11,14 @@ import {
   passwordElementParams,
 } from '../../../utils/forms/inputElements';
 import { InputForm } from '../../../utils/forms/InputForm-component';
-import Api from '../../../api/api';
 import { MessageType, notifier } from '../../../utils/notifier';
 import {
   MESSAGE_SHOW_TIME_ERROR,
   MESSAGE_SHOW_TIME_SUCCESS,
 } from '../../../types/constants';
+import { api } from '../../../api/api';
 
-type LoginProps = {
-  api: Api;
-};
-
-function Login({ api }: LoginProps): ReactElement {
+function Login(): ReactElement {
   const methods = useForm({
     shouldFocusError: false,
     criteriaMode: 'firstError',
@@ -36,7 +32,7 @@ function Login({ api }: LoginProps): ReactElement {
     const values = methods.getValues();
     const { email, password } = values;
     const resp = await api.auth.login(email, password);
-    if (resp.result) {
+    if (resp.isSuccessful) {
       notifier.showMessage(
         MessageType.SUCCESS,
         'Login',

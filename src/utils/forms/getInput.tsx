@@ -9,7 +9,7 @@ export interface FormValues {
   type?: string;
   id?: string;
   htmlFor?: string;
-  placeholder?: string;
+  placeholder?: string | undefined;
   validation?: object;
   multiline?: boolean;
   labelCheck?: boolean;
@@ -17,17 +17,15 @@ export interface FormValues {
   checkbox?: boolean;
   className?: string;
   children?: ReactNode;
-  value?: string;
+  value?: string | undefined;
   address?: boolean;
   ref?: React.RefObject<HTMLInputElement>;
 }
 
 export default function GetInput(
-  { name, type, id, placeholder, validation, className }: FormValues,
+  { name, type, id, placeholder, validation, className, value }: FormValues,
   register: UseFormRegister<FieldValues>,
 ): JSX.Element | undefined {
-  let output;
-
   const setIsSameAddress = useState(false)[1];
   const handleChangeSameAddress = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -88,12 +86,23 @@ export default function GetInput(
     setIsDefaultShipping((current) => !current);
   };
 
+  const setIsShipping = useState(false)[1];
+  const handleAddShipping = () => {
+    setIsShipping((current) => !current);
+  };
+  const setIsBilling = useState(false)[1];
+  const handleAddBilling = () => {
+    setIsBilling((current) => !current);
+  };
+
+  let output;
+
   if (name === 'sameAddress') {
     output = (
       <input
-        name={name}
         id={id}
         type={type}
+        {...register(name)}
         onChange={handleChangeSameAddress}
       />
     );
@@ -115,9 +124,28 @@ export default function GetInput(
         onChange={handleChangeDefaultShipping}
       />
     );
+  } else if (name === 'shipping') {
+    output = (
+      <input
+        id={id}
+        type={type}
+        {...register(name)}
+        onChange={handleAddShipping}
+      />
+    );
+  } else if (name === 'billing') {
+    output = (
+      <input
+        id={id}
+        type={type}
+        {...register(name)}
+        onChange={handleAddBilling}
+      />
+    );
   } else {
     output = (
       <input
+        value={value}
         className={className}
         placeholder={placeholder}
         id={id}
