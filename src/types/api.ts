@@ -120,6 +120,7 @@ export enum Action {
   SetDateOfBirth = 'setDateOfBirth',
   AddLineItem = 'addLineItem',
   RemoveLineItem = 'removeLineItem',
+  ChangeLineItemQuantity = 'changeLineItemQuantity',
 }
 
 export type AuthCallback = (isAnonym: boolean, email: string) => void;
