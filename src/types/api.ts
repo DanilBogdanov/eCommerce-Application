@@ -118,6 +118,7 @@ export enum Action {
   AddBillingAddressId = 'addBillingAddressId',
   RemoveBillingAddressId = 'removeBillingAddressId',
   SetDateOfBirth = 'setDateOfBirth',
+  AddLineItem = 'addLineItem',
 }
 
 export type AuthCallback = (isAnonym: boolean, email: string) => void;

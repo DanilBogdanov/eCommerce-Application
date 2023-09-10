@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { ApiResponse, Cart, config } from '../types/api';
+import { Action, ApiResponse, Cart, config } from '../types/api';
 import TokenStore from './tokenStore';
+import handleError from '../utils/api/errorHandler';
 
 class Carts {
   private tokenStore: TokenStore;
@@ -32,6 +33,60 @@ class Carts {
         };
       }
     }
+  }
+
+  public async addProduct(
+    productId: string,
+    quantity: number = 1,
+  ): Promise<ApiResponse<Cart>> {
+    const cartResp = await this.getCart();
+    if (cartResp.isSuccessful && cartResp.data) {
+      const cart = cartResp.data;
+      try {
+        const updatedCart = await this.fetchAddProduct(
+          cart,
+          productId,
+          quantity,
+        );
+        return {
+          isSuccessful: true,
+          message: 'Success added product',
+          data: updatedCart,
+        };
+      } catch (e) {
+        return handleError<Cart>(e);
+      }
+    }
+
+    return {
+      isSuccessful: false,
+      message: `Can't get active cart`,
+    };
+  }
+
+  private async fetchAddProduct(
+    cart: Cart,
+    productId: string,
+    quantity: number,
+  ) {
+    const token = await this.getToken();
+    const { data } = await axios.post<Cart>(
+      `${config.apiUrl}/${config.projectKey}/me/carts/${cart.id}`,
+      {
+        version: cart.version,
+        actions: [
+          {
+            action: Action.AddLineItem,
+            productId,
+            quantity,
+          },
+        ],
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+    return data;
   }
 
   private async getActiveCart(): Promise<Cart> {
