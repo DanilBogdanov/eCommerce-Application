@@ -64,6 +64,48 @@ class Carts {
     };
   }
 
+  public async removeLineItem(lineItemId: string) {
+    const cartResp = await this.getCart();
+    if (cartResp.isSuccessful && cartResp.data) {
+      const cart = cartResp.data;
+      try {
+        const updatedCart = await this.fetchRemoveLineItem(cart, lineItemId);
+        return {
+          isSuccessful: true,
+          message: 'Success removed lineItem',
+          data: updatedCart,
+        };
+      } catch (e) {
+        return handleError<Cart>(e);
+      }
+    }
+
+    return {
+      isSuccessful: false,
+      message: `Can't get active cart`,
+    };
+  }
+
+  public async fetchRemoveLineItem(cart: Cart, lineItemId: string) {
+    const token = await this.getToken();
+    const { data } = await axios.post<Cart>(
+      `${config.apiUrl}/${config.projectKey}/me/carts/${cart.id}`,
+      {
+        version: cart.version,
+        actions: [
+          {
+            action: Action.RemoveLineItem,
+            lineItemId,
+          },
+        ],
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+    return data;
+  }
+
   private async fetchAddProduct(
     cart: Cart,
     productId: string,
