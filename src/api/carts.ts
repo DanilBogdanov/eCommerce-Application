@@ -64,7 +64,36 @@ class Carts {
     };
   }
 
-  public async removeLineItem(lineItemId: string) {
+  public async removeProduct(productId: string) {
+    const cartResp = await this.getCart();
+    if (cartResp.isSuccessful && cartResp.data) {
+      const cart = cartResp.data;
+      const lineItem = cart.lineItems.find((li) => li.productId === productId);
+      if (!lineItem) {
+        return {
+          isSuccessful: false,
+          message: `The cart does not contain a line item with this product`,
+        };
+      }
+      try {
+        const updatedCart = await this.fetchRemoveLineItem(cart, lineItem.id);
+        return {
+          isSuccessful: true,
+          message: 'Success removed lineItem',
+          data: updatedCart,
+        };
+      } catch (e) {
+        return handleError<Cart>(e);
+      }
+    }
+
+    return {
+      isSuccessful: false,
+      message: `Can't get active cart`,
+    };
+  }
+
+  public async removeLineItem(lineItemId: string): Promise<ApiResponse<Cart>> {
     const cartResp = await this.getCart();
     if (cartResp.isSuccessful && cartResp.data) {
       const cart = cartResp.data;
@@ -86,7 +115,10 @@ class Carts {
     };
   }
 
-  public async fetchRemoveLineItem(cart: Cart, lineItemId: string) {
+  public async fetchRemoveLineItem(
+    cart: Cart,
+    lineItemId: string,
+  ): Promise<Cart> {
     const token = await this.getToken();
     const { data } = await axios.post<Cart>(
       `${config.apiUrl}/${config.projectKey}/me/carts/${cart.id}`,
