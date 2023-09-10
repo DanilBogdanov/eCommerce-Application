@@ -226,7 +226,7 @@ export interface Product {
 export interface Cart {
   id: string;
   version: number;
-  totalLineItemQuantity: number;
+  totalLineItemQuantity?: number;
   totalPrice: {
     centAmount: number;
   };

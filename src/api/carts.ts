@@ -115,6 +115,28 @@ class Carts {
     };
   }
 
+  public async cleanCart(): Promise<ApiResponse<Cart>> {
+    const cartResp = await this.getCart();
+    if (cartResp.isSuccessful && cartResp.data) {
+      const cart = cartResp.data;
+      try {
+        const updatedCart = await this.fetchCleanCart(cart);
+        return {
+          isSuccessful: true,
+          message: 'Success clean cart',
+          data: updatedCart,
+        };
+      } catch (e) {
+        return handleError<Cart>(e);
+      }
+    }
+
+    return {
+      isSuccessful: false,
+      message: `Can't get active cart`,
+    };
+  }
+
   public async changeLineItemQuantity(
     lineItemId: string,
     quantity: number,
@@ -184,6 +206,27 @@ class Carts {
             lineItemId,
           },
         ],
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+    return data;
+  }
+
+  private async fetchCleanCart(cart: Cart): Promise<Cart> {
+    const token = await this.getToken();
+    const actions = cart.lineItems.map((li) => {
+      return {
+        action: Action.RemoveLineItem,
+        lineItemId: li.id,
+      };
+    });
+    const { data } = await axios.post<Cart>(
+      `${config.apiUrl}/${config.projectKey}/me/carts/${cart.id}`,
+      {
+        version: cart.version,
+        actions,
       },
       {
         headers: { Authorization: `Bearer ${token}` },
