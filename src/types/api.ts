@@ -118,6 +118,9 @@ export enum Action {
   AddBillingAddressId = 'addBillingAddressId',
   RemoveBillingAddressId = 'removeBillingAddressId',
   SetDateOfBirth = 'setDateOfBirth',
+  AddLineItem = 'addLineItem',
+  RemoveLineItem = 'removeLineItem',
+  ChangeLineItemQuantity = 'changeLineItemQuantity',
 }
 
 export type AuthCallback = (isAnonym: boolean, email: string) => void;
@@ -223,7 +226,7 @@ export interface Product {
 export interface Cart {
   id: string;
   version: number;
-  totalLineItemQuantity: number;
+  totalLineItemQuantity?: number;
   totalPrice: {
     centAmount: number;
   };
@@ -231,6 +234,7 @@ export interface Cart {
 }
 
 export interface LineItem {
+  id: string;
   productId: string;
   productKey: string;
   name: {
