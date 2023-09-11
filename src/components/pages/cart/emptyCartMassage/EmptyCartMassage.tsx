@@ -1,11 +1,16 @@
 import { NavLink } from 'react-router-dom';
-import './EmptyCartMassage.css';
 import emptyCartImage from '../../../../assets/img/empty-cart.png';
+import './EmptyCartMassage.css';
+
+enum EmptyCartText {
+  TITLE = 'Cart is empty',
+  PARAGRAPH = 'Find some cool stuff in',
+}
 
 export function EmptyCartMassage() {
   return (
     <div className='empty-cart'>
-      <h1 className='empty-cart__header'>Cart is empty</h1>
+      <h1 className='empty-cart__header'>{EmptyCartText.TITLE}</h1>
       <div className='empty-cart__img-container'>
         <img
           src={emptyCartImage}
@@ -14,7 +19,7 @@ export function EmptyCartMassage() {
         />
       </div>
       <div className='empty-cart__link-container'>
-        <p className='empty-cart__paragraph'>Find some cool stuff in</p>
+        <p className='empty-cart__paragraph'>{EmptyCartText.PARAGRAPH}</p>
         <NavLink to='/catalog' className='emty-cart__link'>
           Catalog
         </NavLink>
