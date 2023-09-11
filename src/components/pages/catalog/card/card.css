@@ -24,7 +24,7 @@
   height: 3.1rem;
   font-style: italic;
   overflow: hidden;
-  color: var(--font-author-color);
+  color: var(--font-color);
   border-top-left-radius: 1.5rem;
   border-top-right-radius: 1.5rem;
   padding-inline: 1.3rem;
