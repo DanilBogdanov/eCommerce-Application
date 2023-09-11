@@ -8,6 +8,12 @@
   border-radius: 1.5rem;
   border-bottom: 0.5rem solid var(--main-color);
   box-shadow: 0 0 0.8rem 0 var(--shadow-color);
+  transition: 0.5s ease-in-out;
+  overflow: hidden;
+}
+
+.prodoct-card:hover {
+  scale: 1.05;
 }
 
 .product-card__header {
@@ -18,7 +24,7 @@
   height: 3.1rem;
   font-style: italic;
   overflow: hidden;
-  color: var(--font-author-color);
+  color: var(--font-color);
   border-top-left-radius: 1.5rem;
   border-top-right-radius: 1.5rem;
   padding-inline: 1.3rem;
@@ -62,12 +68,12 @@
   object-fit: contain;
   max-width: 100%;
   max-height: 100%;
-  transition: 1s ease-in-out;
+  transition: 1.5s ease-in-out;
 }
 
 .prodoct-card__img:hover {
   position: absolute;
-  scale: 2;
+  scale: 3;
   z-index: 2;
 }
 
@@ -90,6 +96,11 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  transition: 0.5s ease-in-out;
+}
+
+.prodoct-card:hover .product-card__item-name {
+  color: var(--main-color);
 }
 
 .product-card__bookmark {

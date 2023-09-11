@@ -22,7 +22,7 @@
 }
 
 .breadcrumbs-link a:hover {
-  color: var(--font-author-color);
+  color: var(--font-color);
 }
 
 @media (max-width: 400px) {

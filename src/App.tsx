@@ -15,6 +15,7 @@ import User from './components/pages/user/User';
 import { api } from './api/api';
 import './App.css';
 import { ProductPage } from './components/pages/product/ProductPage';
+import { CartPage } from './components/pages/cart/CartPage';
 
 const redirectToMain = () => {
   if (!api.user.isAnonymous()) {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Main /> },
-      { path: '/profile', element: <User /> },
+      { path: '/profile', element: <User />, loader: redirectToMain },
       {
         path: '/registration',
         element: <Registration />,
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
         path: '/catalog/:category/:item',
         element: <ProductPage />,
       },
+      { path: '/cart', element: <CartPage /> },
       { path: '/about', element: <AboutUs /> },
       { path: '/*', element: <NotFound /> },
     ],
