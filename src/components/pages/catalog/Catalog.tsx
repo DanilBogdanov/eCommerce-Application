@@ -37,7 +37,6 @@ export default function Catalog(): ReactElement {
   );
 
   const navigate = useNavigate();
-
   const location = useLocation();
   useEffect(() => {
     const searchParam = searchParams.get('search');

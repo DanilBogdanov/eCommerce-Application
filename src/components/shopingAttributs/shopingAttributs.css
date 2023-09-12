@@ -91,14 +91,11 @@
   fill: var(--secondary-color-light);
   transition: 0.5s ease-in;
 }
-.basket.active .basket_svg path {
-  fill: var(--main-color);
-}
 
 .basket:hover .basket_svg path {
   fill: var(--secondary-color-light-active);
 }
 
-.basket.active:hover .basket_svg path {
-  fill: var(--main-color-light);
+.basket:hover:active .basket_svg path {
+  fill: var(--main-color);
 }

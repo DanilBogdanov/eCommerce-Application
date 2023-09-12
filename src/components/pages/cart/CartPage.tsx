@@ -12,7 +12,7 @@ export function CartPage() {
       setCart(cartData);
     };
     chekCart();
-  });
+  }, []);
   if (cart?.data?.lineItems.length === 0) return <EmptyCartMassage />;
-  return <div>{cart?.data?.id}</div>;
+  return <div>Корзина</div>;
 }

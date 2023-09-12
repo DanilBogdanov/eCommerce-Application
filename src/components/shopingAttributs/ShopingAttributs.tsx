@@ -1,5 +1,6 @@
-import { useRef, useState, ReactElement } from 'react';
+import { useState, ReactElement, useCallback } from 'react';
 import { Product } from '../../types/api';
+import { api } from '../../api/api';
 import './shopingAttributs.css';
 
 type ShopinAttributsProps = {
@@ -7,19 +8,12 @@ type ShopinAttributsProps = {
 };
 
 export function ShopingAttributs({ item }: ShopinAttributsProps): ReactElement {
-  const [itemCounter, setItemCounter] = useState(0);
-  const buttonBasketRef = useRef<HTMLButtonElement | null>(null);
+  const [itemCounter, setItemCounter] = useState(1);
 
-  function addToBusket() {
-    if (buttonBasketRef && buttonBasketRef.current) {
-      const currentClass = buttonBasketRef.current.classList;
-      if (currentClass.contains('active')) {
-        currentClass.remove('active');
-      } else {
-        currentClass.add('active');
-      }
-    }
-  }
+  const addProductCallback = useCallback(() => {
+    api.carts.addProduct(item.id, itemCounter);
+    setItemCounter(1);
+  }, [item.id, itemCounter]);
 
   return (
     <div className='shoping-attributs'>
@@ -34,7 +28,9 @@ export function ShopingAttributs({ item }: ShopinAttributsProps): ReactElement {
           type='button'
           className='decrise-counter'
           onClick={() =>
-            setItemCounter(itemCounter ? itemCounter - 1 : itemCounter)
+            setItemCounter((prevCounter) =>
+              prevCounter ? prevCounter + 1 : prevCounter,
+            )
           }
         >
           –
@@ -45,7 +41,7 @@ export function ShopingAttributs({ item }: ShopinAttributsProps): ReactElement {
         <button
           type='button'
           className='incrise-counter'
-          onClick={() => setItemCounter(itemCounter + 1)}
+          onClick={() => setItemCounter((prevCounter) => prevCounter + 1)}
         >
           +
         </button>
@@ -53,8 +49,7 @@ export function ShopingAttributs({ item }: ShopinAttributsProps): ReactElement {
       <button
         type='button'
         className='basket'
-        onClick={addToBusket}
-        ref={buttonBasketRef}
+        onClick={addProductCallback}
         data-testid='basket'
       >
         <svg
