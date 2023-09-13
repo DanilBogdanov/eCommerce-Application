@@ -166,6 +166,64 @@ class Carts {
     };
   }
 
+  public async addDiscountCode(code: string): Promise<ApiResponse<Cart>> {
+    const cartResp = await this.getCart();
+    if (cartResp.isSuccessful && cartResp.data) {
+      const cart = cartResp.data;
+      try {
+        const updatedCart = await this.fetchAddDiscountCode(cart, code);
+        return {
+          isSuccessful: true,
+          message: 'Success added discount code',
+          data: updatedCart,
+        };
+      } catch (e) {
+        return handleError<Cart>(e);
+      }
+    }
+
+    return {
+      isSuccessful: false,
+      message: `Can't get active cart`,
+    };
+  }
+
+  private async fetchAddDiscountCode(cart: Cart, code: string): Promise<Cart> {
+    const token = await this.getToken();
+    let actions;
+    if (cart.discountCodes && cart.discountCodes[0]) {
+      const discount = cart.discountCodes[0];
+      actions = [
+        {
+          action: Action.AddDiscountCode,
+          code,
+        },
+        {
+          action: Action.RemoveDiscountCode,
+          discountCode: discount.discountCode,
+        },
+      ];
+    } else {
+      actions = [
+        {
+          action: Action.AddDiscountCode,
+          code,
+        },
+      ];
+    }
+    const { data } = await axios.post<Cart>(
+      `${config.apiUrl}/${config.projectKey}/me/carts/${cart.id}`,
+      {
+        version: cart.version,
+        actions,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+    return data;
+  }
+
   private async fetchChangeLineItemQuantity(
     cart: Cart,
     lineItemId: string,
