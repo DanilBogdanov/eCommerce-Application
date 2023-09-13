@@ -1,18 +1,35 @@
 import axios from 'axios';
-import { Action, ApiResponse, Cart, config } from '../types/api';
+import { Action, ApiResponse, Cart, CartCallback, config } from '../types/api';
 import TokenStore from './tokenStore';
 import handleError from '../utils/api/errorHandler';
 
 class Carts {
   private tokenStore: TokenStore;
 
+  public currentQuantity: number = 0;
+
+  private callback?: CartCallback;
+
   constructor(tokenStore: TokenStore) {
     this.tokenStore = tokenStore;
+    this.getCart();
+  }
+
+  public onChangeQuantity(callback: CartCallback): void {
+    this.callback = callback;
+  }
+
+  public changeQuantity(quantity: number): void {
+    this.currentQuantity = quantity;
+    if (this.callback) {
+      this.callback(this.currentQuantity);
+    }
   }
 
   public async getCart(): Promise<ApiResponse<Cart>> {
     try {
       const cart = await this.getActiveCart();
+      this.changeQuantity(cart.totalLineItemQuantity || 0);
       return {
         isSuccessful: true,
         message: 'Cart',
@@ -21,6 +38,7 @@ class Carts {
     } catch {
       try {
         const cart = await this.createCart();
+        this.changeQuantity(cart.totalLineItemQuantity || 0);
         return {
           isSuccessful: true,
           message: 'Cart',
@@ -48,6 +66,7 @@ class Carts {
           productId,
           quantity,
         );
+        this.changeQuantity(updatedCart.totalLineItemQuantity || 0);
         return {
           isSuccessful: true,
           message: 'Success added product',
@@ -77,6 +96,7 @@ class Carts {
       }
       try {
         const updatedCart = await this.fetchRemoveLineItem(cart, lineItem.id);
+        this.changeQuantity(updatedCart.totalLineItemQuantity || 0);
         return {
           isSuccessful: true,
           message: 'Success removed lineItem',
@@ -99,6 +119,7 @@ class Carts {
       const cart = cartResp.data;
       try {
         const updatedCart = await this.fetchRemoveLineItem(cart, lineItemId);
+        this.changeQuantity(updatedCart.totalLineItemQuantity || 0);
         return {
           isSuccessful: true,
           message: 'Success removed lineItem',
@@ -121,6 +142,7 @@ class Carts {
       const cart = cartResp.data;
       try {
         const updatedCart = await this.fetchCleanCart(cart);
+        this.changeQuantity(updatedCart.totalLineItemQuantity || 0);
         return {
           isSuccessful: true,
           message: 'Success clean cart',
@@ -150,6 +172,7 @@ class Carts {
           lineItemId,
           quantity,
         );
+        this.changeQuantity(updatedCart.totalLineItemQuantity || 0);
         return {
           isSuccessful: true,
           message: 'Success change quantity',
@@ -164,6 +187,65 @@ class Carts {
       isSuccessful: false,
       message: `Can't get active cart`,
     };
+  }
+
+  public async addDiscountCode(code: string): Promise<ApiResponse<Cart>> {
+    const cartResp = await this.getCart();
+    if (cartResp.isSuccessful && cartResp.data) {
+      const cart = cartResp.data;
+      try {
+        const updatedCart = await this.fetchAddDiscountCode(cart, code);
+        this.changeQuantity(updatedCart.totalLineItemQuantity || 0);
+        return {
+          isSuccessful: true,
+          message: 'Success added discount code',
+          data: updatedCart,
+        };
+      } catch (e) {
+        return handleError<Cart>(e);
+      }
+    }
+
+    return {
+      isSuccessful: false,
+      message: `Can't get active cart`,
+    };
+  }
+
+  private async fetchAddDiscountCode(cart: Cart, code: string): Promise<Cart> {
+    const token = await this.getToken();
+    let actions;
+    if (cart.discountCodes && cart.discountCodes[0]) {
+      const discount = cart.discountCodes[0];
+      actions = [
+        {
+          action: Action.AddDiscountCode,
+          code,
+        },
+        {
+          action: Action.RemoveDiscountCode,
+          discountCode: discount.discountCode,
+        },
+      ];
+    } else {
+      actions = [
+        {
+          action: Action.AddDiscountCode,
+          code,
+        },
+      ];
+    }
+    const { data } = await axios.post<Cart>(
+      `${config.apiUrl}/${config.projectKey}/me/carts/${cart.id}`,
+      {
+        version: cart.version,
+        actions,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+    return data;
   }
 
   private async fetchChangeLineItemQuantity(

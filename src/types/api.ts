@@ -121,6 +121,8 @@ export enum Action {
   AddLineItem = 'addLineItem',
   RemoveLineItem = 'removeLineItem',
   ChangeLineItemQuantity = 'changeLineItemQuantity',
+  AddDiscountCode = 'addDiscountCode',
+  RemoveDiscountCode = 'removeDiscountCode',
 }
 
 export type AuthCallback = (isAnonym: boolean, email: string) => void;
@@ -231,6 +233,12 @@ export interface Cart {
     centAmount: number;
   };
   lineItems: LineItem[];
+  discountCodes: {
+    discountCode: {
+      typeId: string;
+      id: string;
+    };
+  }[];
 }
 
 export interface LineItem {
@@ -264,4 +272,11 @@ export interface LineItem {
   totalPrice: {
     centAmount: number;
   };
+  discountedPrice?: {
+    value: {
+      centAmount: number;
+    };
+  };
 }
+
+export type CartCallback = (quantity: number) => void;
