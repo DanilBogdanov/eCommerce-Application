@@ -27,6 +27,7 @@ export default function UserBar(): ReactElement {
     api.auth.onChangeUser((isAnonym, userEmail) => {
       setAnonymous(isAnonym);
       setEmail(userEmail);
+      api.carts.getCart();
     });
   }, []);
 

@@ -278,3 +278,5 @@ export interface LineItem {
     };
   };
 }
+
+export type CartCallback = (quantity: number) => void;
