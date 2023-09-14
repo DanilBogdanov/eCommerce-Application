@@ -35,9 +35,22 @@ export default function Catalog(): ReactElement {
   const [cateoguriesNames, setCateoguriesNames] = useState<string[][] | null>(
     null,
   );
+  const [cart, setCart] = useState<string[] | null>(null);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    const loadCart = async () => {
+      const cartResp = await api.carts.getCart();
+      if (cartResp.isSuccessful && cartResp.data) {
+        const cartItems = cartResp.data.lineItems.map((line) => line.productId);
+        setCart(cartItems);
+      }
+    };
+    loadCart();
+  }, [currentPage]);
+
   useEffect(() => {
     const searchParam = searchParams.get('search');
     setSearch(searchParam || undefined);
@@ -141,6 +154,7 @@ export default function Catalog(): ReactElement {
               item={item}
               key={item.id}
               cateoguriesNames={cateoguriesNames}
+              itemInCart={cart ? cart.includes(item.id) : false}
             />
           ))}
         </div>

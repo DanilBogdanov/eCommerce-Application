@@ -26,36 +26,7 @@
   font-size: 1.4rem;
 }
 
-.counter {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  color: var(--secondary-color-light);
-  font-family: Inter;
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  min-width: 5.8rem;
-  height: 2.2rem;
-  flex-shrink: 0;
-  border-radius: 0.5rem;
-  border: 0.1rem solid var(--main-color);
-}
-
-.counter-data {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.3rem;
-  height: 2.2rem;
-  flex-shrink: 0;
-  border: 1px solid var(--main-color);
-}
-
-.basket,
-.decrise-counter,
-.incrise-counter {
+.basket {
   padding: 0;
   border: none;
   font: inherit;
@@ -63,24 +34,6 @@
   background-color: transparent;
   cursor: pointer;
   transition: 0.5s ease-in;
-}
-
-.decrise-counter,
-.incrise-counter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--main-color);
-  text-align: center;
-}
-.decrise-counter {
-  padding-left: 0.1rem;
-  padding-bottom: 0.2rem;
-}
-
-.incrise-counter {
-  padding-right: 0.2rem;
-  padding-top: 0.1rem;
 }
 
 .basket:hover {
@@ -97,5 +50,9 @@
 }
 
 .basket:hover:active .basket_svg path {
+  fill: var(--main-color);
+}
+
+.basket.active .basket_svg path {
   fill: var(--main-color);
 }

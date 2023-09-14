@@ -1,19 +1,37 @@
 import { useState, ReactElement, useCallback } from 'react';
 import { Product } from '../../types/api';
 import { api } from '../../api/api';
+import { MessageType, notifier } from '../../utils/notifier';
 import './shopingAttributs.css';
 
 type ShopinAttributsProps = {
   item: Product;
+  itemInCart: boolean;
 };
 
-export function ShopingAttributs({ item }: ShopinAttributsProps): ReactElement {
-  const [itemCounter, setItemCounter] = useState(1);
-
-  const addProductCallback = useCallback(() => {
-    api.carts.addProduct(item.id, itemCounter);
-    setItemCounter(1);
-  }, [item.id, itemCounter]);
+export function ShopingAttributs({
+  item,
+  itemInCart,
+}: ShopinAttributsProps): ReactElement {
+  const [inCart, setInCart] = useState(itemInCart);
+  const addProduct = useCallback(() => {
+    if (inCart) {
+      api.carts.removeProduct(item.id);
+      notifier.showMessage(
+        MessageType.INFO,
+        'Cart',
+        `Remove ${item.name} from cart`,
+      );
+    } else {
+      api.carts.addProduct(item.id);
+      notifier.showMessage(
+        MessageType.INFO,
+        'Cart',
+        `Add ${item.name} to cart`,
+      );
+    }
+    setInCart((prev) => !prev);
+  }, [inCart, item.id, item.name]);
 
   return (
     <div className='shoping-attributs'>
@@ -23,33 +41,10 @@ export function ShopingAttributs({ item }: ShopinAttributsProps): ReactElement {
         </div>
         {item.salePrice && <div className='full-price'>$ {item.price}</div>}
       </div>
-      <div className='counter'>
-        <button
-          type='button'
-          className='decrise-counter'
-          onClick={() =>
-            setItemCounter((prevCounter) =>
-              prevCounter ? prevCounter + 1 : prevCounter,
-            )
-          }
-        >
-          –
-        </button>
-        <div className='counter-data' data-testid='counter-data'>
-          {itemCounter}
-        </div>
-        <button
-          type='button'
-          className='incrise-counter'
-          onClick={() => setItemCounter((prevCounter) => prevCounter + 1)}
-        >
-          +
-        </button>
-      </div>
       <button
         type='button'
-        className='basket'
-        onClick={addProductCallback}
+        className={`basket ${inCart ? 'active' : ''}`}
+        onClick={addProduct}
         data-testid='basket'
       >
         <svg
