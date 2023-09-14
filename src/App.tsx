@@ -24,13 +24,20 @@ const redirectToMain = () => {
   return null;
 };
 
+const redirectFromProfile = () => {
+  if (api.user.isAnonymous()) {
+    return redirect('/');
+  }
+  return null;
+};
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
     children: [
       { index: true, element: <Main /> },
-      { path: '/profile', element: <User />, loader: redirectToMain },
+      { path: '/profile', element: <User />, loader: redirectFromProfile },
       {
         path: '/registration',
         element: <Registration />,
