@@ -4,6 +4,7 @@ import { api } from '../../../api/api';
 import { Cart } from '../../../types/api';
 import './cart.css';
 import { Line } from './line/Line';
+import { MessageType, notifier } from '../../../utils/notifier';
 
 export function CartPage() {
   const [cart, setCart] = useState<Cart | null>(null);
@@ -13,7 +14,25 @@ export function CartPage() {
     setInputValue(e.target.value);
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
+    const fetchPromoResponse = await api.carts.addDiscountCode(inputValue);
+    if (fetchPromoResponse.isSuccessful) {
+      notifier.showMessage(
+        MessageType.SUCCESS,
+        'Promocode',
+        fetchPromoResponse.message,
+      );
+      setCart((prev) =>
+        fetchPromoResponse.data ? fetchPromoResponse.data : prev,
+      );
+    } else {
+      notifier.showMessage(
+        MessageType.ERROR,
+        'Promocode',
+        fetchPromoResponse.message,
+      );
+    }
+
     setInputValue('');
   };
 

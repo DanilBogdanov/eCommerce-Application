@@ -41,19 +41,29 @@ export function Line({
       <div className='line__prices'>
         <div
           className={`line__full-price ${
-            line.price.discounted ? 'strikethrough' : ''
+            line.price.discounted || line.discountedPrice ? 'strikethrough' : ''
           }`}
         >
           $ {line.price.value.centAmount / 100}
         </div>
         {line.price.discounted?.value ? (
-          <div className='line__discont-price'>
+          <div
+            className={`line__discont-price ${
+              line.discountedPrice ? 'strikethrough' : ''
+            }`}
+          >
             $ {line.price.discounted.value.centAmount / 100}
           </div>
         ) : (
           <div />
         )}
-        <div className='line__promo-price' />
+        {line.discountedPrice?.value.centAmount ? (
+          <div className='line__promo-price'>
+            $ {Number(line.discountedPrice?.value.centAmount) / 100}
+          </div>
+        ) : (
+          <div />
+        )}
       </div>
       <div className='line__quantitiy-container'>
         <div className='line__quantity-settings'>
