@@ -14,23 +14,23 @@ export default function AboutUs(): ReactElement {
       title: 'Elmadyn Mekhdikhanov',
       content: (
         <div>
-          <table className='AddressTable'>
-            <thead className='AddressTableHead'>
-              <tr className='AddressTableRow'>
-                <th className='AddressTableHeader' colSpan={2}>
+          <table className='Table'>
+            <thead className='TableHead'>
+              <tr className='TableRow'>
+                <th className='TableHeader' colSpan={2}>
                   Task
                 </th>
-                <th className='AddressTableHeader' colSpan={2}>
+                <th className='TableHeader' colSpan={2}>
                   Sprint number
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr className='AddressTableRow'>
-                <td className='AddressTableData'>
+              <tr className='TableRow'>
+                <td className='TableData'>
                   1. Add or Remove Product from Cart
                 </td>
-                <td className='AddressTableData'>Sprint 1</td>
+                <td className='TableData'>Sprint 1</td>
               </tr>
             </tbody>
           </table>

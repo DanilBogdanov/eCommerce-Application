@@ -645,31 +645,27 @@ function User(): ReactElement {
       <div className=' UserSection'>
         <hr />
         <h2 className='SectionHeader'>Addresses</h2>
-        <table className='AddressTable'>
-          <thead className='AddressTableHead'>
-            <tr className='AddressTableRow'>
-              <th className='AddressTableHeader'>Address</th>
-              <th className='AddressTableHeader'>City</th>
-              <th className='AddressTableHeader'>Country</th>
-              <th className='AddressTableHeader'>Postcode</th>
-              <th className='AddressTableHeader'>Labels</th>
-              <th className='AddressTableHeader'>Settings</th>
+        <table className='Table'>
+          <thead className='TableHead'>
+            <tr className='TableRow'>
+              <th className='TableHeader'>Address</th>
+              <th className='TableHeader'>City</th>
+              <th className='TableHeader'>Country</th>
+              <th className='TableHeader'>Postcode</th>
+              <th className='TableHeader'>Labels</th>
+              <th className='TableHeader'>Settings</th>
             </tr>
           </thead>
           <tbody>
             {dataAddresses?.map((dataAddress: UserAddress, index: number) => {
               return (
                 <tr key={index} className='AddressTableRow'>
-                  <td className='AddressTableData'>
-                    {dataAddress?.streetName}
-                  </td>
-                  <td className='AddressTableData'>{dataAddress?.city}</td>
-                  <td className='AddressTableData'>{dataAddress?.country}</td>
-                  <td className='AddressTableData'>
-                    {dataAddress?.postalCode}
-                  </td>
-                  <td className='AddressTableData'>{dataLabels[index]}</td>
-                  <td className='AddressTableData'>
+                  <td className='TableData'>{dataAddress?.streetName}</td>
+                  <td className='TableData'>{dataAddress?.city}</td>
+                  <td className='TableData'>{dataAddress?.country}</td>
+                  <td className='TableData'>{dataAddress?.postalCode}</td>
+                  <td className='TableData'>{dataLabels[index]}</td>
+                  <td className='TableData'>
                     <button
                       type='button'
                       className='FormButton SetButton'
