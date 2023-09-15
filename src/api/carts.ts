@@ -213,33 +213,42 @@ class Carts {
   }
 
   private async fetchAddDiscountCode(cart: Cart, code: string): Promise<Cart> {
+    let currentCart = cart;
     const token = await this.getToken();
-    let actions;
-    if (cart.discountCodes && cart.discountCodes[0]) {
-      const discount = cart.discountCodes[0];
-      actions = [
-        {
-          action: Action.AddDiscountCode,
-          code,
-        },
+
+    if (currentCart.discountCodes && currentCart.discountCodes[0]) {
+      const discount = currentCart.discountCodes[0];
+      const actions = [
         {
           action: Action.RemoveDiscountCode,
           discountCode: discount.discountCode,
         },
       ];
-    } else {
-      actions = [
+
+      const { data } = await axios.post<Cart>(
+        `${config.apiUrl}/${config.projectKey}/me/carts/${cart.id}`,
         {
-          action: Action.AddDiscountCode,
-          code,
+          version: currentCart.version,
+          actions,
         },
-      ];
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+
+      currentCart = data;
     }
+
     const { data } = await axios.post<Cart>(
       `${config.apiUrl}/${config.projectKey}/me/carts/${cart.id}`,
       {
-        version: cart.version,
-        actions,
+        version: currentCart.version,
+        actions: [
+          {
+            action: Action.AddDiscountCode,
+            code,
+          },
+        ],
       },
       {
         headers: { Authorization: `Bearer ${token}` },
