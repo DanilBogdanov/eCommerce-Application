@@ -61,7 +61,7 @@
 .user-bar__info {
   position: absolute;
   display: none;
-  top: 4rem;
+  top: 3.7rem;
   right: 0;
   color: var(--main-color);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -72,7 +72,7 @@
   display: block;
   padding: 0.5rem 3rem;
   border-bottom: 0.2rem solid var(--main-color);
-  background-color: var(--main-color-013);
+  background-color: var(--secondary-color-light-active);
 }
 
 .burger .user-bar__img:hover ~ .user-bar__info {
