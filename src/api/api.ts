@@ -17,10 +17,10 @@ class Api {
 
   constructor() {
     this.tokenStore = new TokenStore();
-    this.auth = new Auth(this.tokenStore);
+    this.carts = new Carts(this.tokenStore);
+    this.auth = new Auth(this.tokenStore, this.carts);
     this.user = new User(this.tokenStore);
     this.catalog = new Catalog(this.tokenStore);
-    this.carts = new Carts(this.tokenStore);
   }
 }
 

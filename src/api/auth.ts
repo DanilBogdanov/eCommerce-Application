@@ -10,14 +10,18 @@ import {
 import TokenStore from './tokenStore';
 import handleError from '../utils/api/errorHandler';
 import { MSEC_IN_SEC } from '../types/constants';
+import Carts from './carts';
 
 class Auth {
   private tokenStore: TokenStore;
 
+  private carts: Carts;
+
   private callback?: AuthCallback;
 
-  constructor(tokenStore: TokenStore) {
+  constructor(tokenStore: TokenStore, carts: Carts) {
     this.tokenStore = tokenStore;
+    this.carts = carts;
   }
 
   public async login(
@@ -25,10 +29,14 @@ class Auth {
     password: string,
   ): Promise<ApiResponse<void>> {
     try {
+      const anonymCart = await this.carts.getCart();
       const tokenResponse = await Auth.loginUser(email, password);
       this.tokenStore.update(tokenResponse);
       if (this.callback) {
         this.callback(false, email);
+      }
+      if (anonymCart.data) {
+        await this.carts.addProducts(anonymCart.data.lineItems);
       }
       return {
         isSuccessful: true,
