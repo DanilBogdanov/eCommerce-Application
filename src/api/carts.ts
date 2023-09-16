@@ -53,6 +53,31 @@ class Carts {
     }
   }
 
+  public async addProducts(
+    products: { productId: string; quantity: number }[],
+  ): Promise<ApiResponse<Cart>> {
+    const cartResp = await this.getCart();
+    if (cartResp.isSuccessful && cartResp.data) {
+      const cart = cartResp.data;
+      try {
+        const updatedCart = await this.fetchAddProducts(cart, products);
+        this.changeQuantity(updatedCart.totalLineItemQuantity || 0);
+        return {
+          isSuccessful: true,
+          message: 'Success added product',
+          data: updatedCart,
+        };
+      } catch (e) {
+        return handleError<Cart>(e);
+      }
+    }
+
+    return {
+      isSuccessful: false,
+      message: `Can't get active cart`,
+    };
+  }
+
   public async addProduct(
     productId: string,
     quantity: number = 1,
@@ -343,6 +368,31 @@ class Carts {
             quantity,
           },
         ],
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+    return data;
+  }
+
+  private async fetchAddProducts(
+    cart: Cart,
+    products: { productId: string; quantity: number }[],
+  ) {
+    const token = await this.getToken();
+    const actions = products.map((item) => {
+      return {
+        action: Action.AddLineItem,
+        productId: item.productId,
+        quantity: item.quantity,
+      };
+    });
+    const { data } = await axios.post<Cart>(
+      `${config.apiUrl}/${config.projectKey}/me/carts/${cart.id}`,
+      {
+        version: cart.version,
+        actions,
       },
       {
         headers: { Authorization: `Bearer ${token}` },
