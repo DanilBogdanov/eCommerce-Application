@@ -24,7 +24,18 @@ export function ProductPage(): ReactElement {
   const [modalActive, setModalActive] = useState(false);
   const location = useLocation();
   const locationArray = location.pathname.split('/');
+  const [cart, setCart] = useState<string[] | null>(null);
 
+  useEffect(() => {
+    const loadCart = async () => {
+      const cartResp = await api.carts.getCart();
+      if (cartResp.isSuccessful && cartResp.data) {
+        const cartItems = cartResp.data.lineItems.map((line) => line.productId);
+        setCart(cartItems);
+      }
+    };
+    loadCart();
+  }, []);
   function handleKeyPress(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       setModalActive(false);
@@ -157,7 +168,12 @@ export function ProductPage(): ReactElement {
               </div>
             </div>
             <div className='product-page__shoping-attributs'>
-              {productData.data && <ShopingAttributs item={productData.data} />}
+              {productData.data && (
+                <ShopingAttributs
+                  item={productData.data}
+                  itemInCart={cart ? cart.includes(productData.data.id) : false}
+                />
+              )}
             </div>
           </div>
         </div>

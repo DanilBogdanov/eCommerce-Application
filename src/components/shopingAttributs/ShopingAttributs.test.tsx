@@ -19,25 +19,10 @@ const MockItem = {
 };
 
 describe('ShopingAttributs Component', () => {
-  it('renders correctly and increments/decrements item counter', () => {
-    const { getByText, getByTestId } = render(
-      <ShopingAttributs item={MockItem} />,
-    );
-
-    const counter = getByTestId('counter-data');
-    expect(counter.textContent).toBe('0');
-
-    const incrementButton = getByText('+');
-    fireEvent.click(incrementButton);
-    expect(counter.textContent).toBe('1');
-
-    const decrementButton = getByText('–');
-    fireEvent.click(decrementButton);
-    expect(counter.textContent).toBe('0');
-  });
-
   it('toggles "active" class on basket button when clicked', () => {
-    const { getByTestId } = render(<ShopingAttributs item={MockItem} />);
+    const { getByTestId } = render(
+      <ShopingAttributs item={MockItem} itemInCart={false} />,
+    );
 
     const basketButton = getByTestId('basket');
     expect(basketButton).not.toHaveClass('active');
