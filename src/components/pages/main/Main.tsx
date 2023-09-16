@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
-import Discount from './discount/discount';
+import Discount from './discount/Discount';
 import './main.css';
 
 export default function Main(): ReactElement {
