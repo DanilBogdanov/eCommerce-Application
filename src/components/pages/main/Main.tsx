@@ -1,24 +1,29 @@
 import { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
-import Discount from './discount/discount';
+import Discount from './discount/Discount';
 import './main.css';
 
 export default function Main(): ReactElement {
   return (
     <div className='home'>
-      <div className='intro'>
+      <div className='intro' data-testid='intro'>
         <img
           className='intro__img'
           src='/img/main-background.png'
           alt='home-intro'
+          data-testid='intro-img'
         />
-        <h1 className='intro__title'>Digital Dream Weave</h1>
-        <p className='intro__subtitle'>AI Dreams 4 U</p>
+        <h1 className='intro__title' data-testid='home-title'>
+          Digital Dream Weave
+        </h1>
+        <p className='intro__subtitle' data-testid='home-subtitle'>
+          AI Dreams 4 U
+        </p>
         <NavLink className='intro__link' to='/catalog'>
           START BUY
         </NavLink>
       </div>
-      <div className='discounts'>
+      <div className='discounts' data-testid='discounts'>
         <div className='discounts__container'>
           <Discount
             title='Discount for orders over 2 pieces'
