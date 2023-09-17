@@ -16,10 +16,6 @@ module.exports = {
     'vite.config.ts',
     'jest.config.ts',
     'setupTests.ts',
-    'prettify.js',
-    'block-navigation.js',
-    'sorter.js',
-
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
