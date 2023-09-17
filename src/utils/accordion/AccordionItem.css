@@ -1,17 +1,17 @@
-.accordion-item {
+.AccordionItem {
   border: 1px solid #ccc;
 }
 
-.accordion-item:not(:first-of-type) {
+.AccordionItem:not(:first-of-type) {
   border-top: 0;
 }
 
-.accordion-item-title {
+.AccordionItemTitle {
   width: 100%;
   margin: 0;
 }
 
-.accordion-item-btn {
+.AccordionItemBtn {
   display: flex;
   align-items: center;
   width: 100%;
@@ -24,7 +24,7 @@
   user-select: none;
 }
 
-.accordion-item-btn::after {
+.AccordionItemBtn::after {
   content: '';
   flex-shrink: 0;
   width: 18px;
@@ -36,17 +36,26 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.accordion-item.active .accordion-item-btn::after {
+.AccordionItem.active .AccordionItemBtn::after {
   transform: rotate(-180deg);
 }
 
-.accordion-item-container {
+.AccordionItemContainer {
   transition: height 0.2s ease-in-out;
-  overflow: hidden;
+  overflow: auto;
+  row-gap: 2rem;
 }
 
-.accordion-item-content {
-  border-top: 1px solid #cccccc;
+.AccordionItemContent {
   padding: 15px 20px;
   font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  max-width: 70%;
+}
+
+@media screen and (max-width: 700px) {
+  .AccordionItemContent {
+    max-width: 100%;
+  }
 }

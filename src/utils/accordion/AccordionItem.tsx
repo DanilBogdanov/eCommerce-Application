@@ -23,18 +23,14 @@ function AccordionItem({
     }
   }, [isOpen]);
   return (
-    <li className={`accordion-item ${isOpen ? 'active' : ''}`}>
-      <h2 className='accordion-item-title'>
-        <button
-          type='button'
-          className='accordion-item-btn'
-          onClick={btnOnClick}
-        >
+    <li className={`AccordionItem ${isOpen ? 'active' : ''}`}>
+      <h2 className='AccordionItemTitle'>
+        <button type='button' className='AccordionItemBtn' onClick={btnOnClick}>
           {data.title}
         </button>
       </h2>
-      <div className='accordion-item-container' style={{ height }}>
-        <div ref={contentRef} className='accordion-item-content'>
+      <div className='AccordionItemContainer' style={{ height }}>
+        <div ref={contentRef} className='AccordionItemContent'>
           {data.content}
         </div>
       </div>

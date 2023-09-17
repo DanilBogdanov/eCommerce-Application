@@ -9,7 +9,7 @@ function Accordion({ items }: { items: Array<AccordionData> }) {
     setCurrentIdx((currentValue) => (currentValue !== idx ? idx : -1));
   };
   return (
-    <ul className='accordion'>
+    <ul className='Accordion'>
       {items.map((item, idx) => (
         <AccordionItem
           key={item.id}

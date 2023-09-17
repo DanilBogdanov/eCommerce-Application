@@ -76,8 +76,8 @@ hr {
   overflow-x: auto;
 }
 
-.TableData,
-.TableHeader {
+.AddressTableData,
+.AddressTableHeader {
   border: 1px solid #ddd;
   padding: 8px;
   min-width: 16rem;
@@ -94,7 +94,7 @@ hr {
   transition: 0.15s;
 }
 
-.TableHeader {
+.AddressTableHeader {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
