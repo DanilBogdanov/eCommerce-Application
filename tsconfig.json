@@ -25,6 +25,7 @@
     "noImplicitAny": true
   },
   "include": [
+    "./tsconfig.json",
     ".eslinrc.cjs",
     "src",
     "setupTests.ts"

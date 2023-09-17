@@ -1,0 +1,136 @@
+.AboutMainContainer {
+  width: 80vw;
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.AboutSection {
+  margin-bottom: 3rem;
+}
+
+.AboutProjectText {
+  font-size: 2rem;
+  text-indent: 1rem;
+  text-align: justify;
+  margin: 20px 0 0 0;
+}
+
+.AboutMemberName {
+  color: var(--font-header-color);
+  margin: 0;
+}
+
+.AboutMemberRole {
+  font-size: 2rem;
+  color: var(--set-button-background-color);
+  margin: 0;
+}
+
+.AboutMemberImage {
+  width: 20rem;
+}
+
+.AboutMemberLink {
+  text-decoration: none;
+  font-size: 2rem;
+  color: var(--font-header-color);
+}
+
+.AboutMemberLink:hover {
+  color: var(--main-color);
+}
+
+.AboutMemberLink:active {
+  color: var(--font-header-color);
+}
+
+.AboutNameLinkContainer {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.AccordionItemContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.AboutBioText {
+  text-indent: 1rem;
+  text-align: justify;
+  background-color: var(--bio-background-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  margin: 1rem 0;
+}
+
+.AboutContributionHeader {
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--font-header-color);
+  margin: 0;
+}
+
+.AboutContributionUL {
+  text-align: center;
+  padding: 0;
+  list-style-type: none;
+}
+
+.AbolutLogoContainer {
+  display: flex;
+  column-gap: 2rem;
+}
+
+.AboutLogoCard {
+  background-color: var(--bio-background-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.AboutLogoCard:hover {
+  background-color: var(--main-color-light);
+}
+
+.AboutLogoCard:active {
+  background-color: var(--button-background-color-active);
+}
+
+.AboutThanksImage {
+  width: 15rem;
+}
+
+.AboutContributionLI {
+  margin-bottom: 1rem;
+  border-bottom: solid 0.1rem var(--main-color-013);
+}
+
+@media screen and (max-width: 550px) {
+  .AbolutLogoContainer {
+    row-gap: 2rem;
+    column-gap: 0;
+    flex-direction: column;
+    width: fit-content;
+  }
+
+  .AboutNameLinkContainer {
+    flex-direction: column;
+    row-gap: 1rem;
+    column-gap: 0;
+  }
+
+  .AboutMemberName {
+    text-align: center;
+  }
+
+  .AboutMemberRole {
+    text-align: center;
+  }
+
+  .AboutContributionContainer {
+    text-align: center;
+  }
+}
