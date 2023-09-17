@@ -67,13 +67,16 @@
 }
 
 .AboutContributionHeader {
-  font-size: 2rem;
+  text-align: center;
+  font-size: 2.2rem;
   color: var(--font-header-color);
   margin: 0;
 }
 
 .AboutContributionUL {
+  text-align: center;
   padding: 0;
+  list-style-type: none;
 }
 
 .AbolutLogoContainer {
@@ -101,10 +104,6 @@
 }
 
 .AboutContributionLI {
-  /* background-color: var(--bio-background-color);
-    padding: 0.5rem 1rem;
-    border-radius: 1rem;
-    background-color: var(--main-color-light); */
   margin-bottom: 1rem;
   border-bottom: solid 0.1rem var(--main-color-013);
 }
