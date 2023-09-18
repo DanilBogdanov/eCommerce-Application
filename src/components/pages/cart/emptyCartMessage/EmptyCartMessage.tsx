@@ -1,13 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import emptyCartImage from '../../../../assets/img/empty-cart.png';
-import './EmptyCartMassage.css';
+import './EmptyCartMessage.css';
 
 enum EmptyCartText {
   TITLE = 'Cart is empty',
   PARAGRAPH = 'Find some cool stuff in',
 }
 
-export function EmptyCartMassage() {
+export function EmptyCartMessage() {
   return (
     <div className='empty-cart'>
       <h1 className='empty-cart__header'>{EmptyCartText.TITLE}</h1>

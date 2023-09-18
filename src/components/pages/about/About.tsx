@@ -41,7 +41,7 @@ export default function AboutUs(): ReactElement {
           </p>
           <div className='AboutContributionContainer'>
             <h3 className='AboutContributionHeader'>Contribution</h3>
-            <p className='AboutContributionText'>
+            <div className='AboutContributionText'>
               <ul className='AboutContributionUL'>
                 <li className='AboutContributionLI'>
                   Commercetools API implementation
@@ -49,7 +49,7 @@ export default function AboutUs(): ReactElement {
                 <li className='AboutContributionLI'>Design</li>
                 <li className='AboutContributionLI'>GitHub Board</li>
               </ul>
-            </p>
+            </div>
           </div>
         </div>
       ),
@@ -81,7 +81,7 @@ export default function AboutUs(): ReactElement {
           </p>
           <div className='AboutContributionContainer'>
             <h3 className='AboutContributionHeader'>Contribution</h3>
-            <p className='AboutContributionText'>
+            <div className='AboutContributionText'>
               <ul className='AboutContributionUL'>
                 <li className='AboutContributionLI'>Catalog Page</li>
                 <li className='AboutContributionLI'>Routing and Navigation</li>
@@ -89,7 +89,7 @@ export default function AboutUs(): ReactElement {
                 <li className='AboutContributionLI'>Search Implementation</li>
                 <li className='AboutContributionLI'>Cart Page</li>
               </ul>
-            </p>
+            </div>
           </div>
         </div>
       ),
@@ -121,14 +121,14 @@ export default function AboutUs(): ReactElement {
           </p>
           <div className='AboutContributionContainer'>
             <h3 className='AboutContributionHeader'>Contribution</h3>
-            <p className='AboutContributionText'>
+            <div className='AboutContributionText'>
               <ul className='AboutContributionUL'>
                 <li className='AboutContributionLI'>LogIn Page</li>
                 <li className='AboutContributionLI'>Registration Page</li>
                 <li className='AboutContributionLI'>AboutUs Page</li>
                 <li className='AboutContributionLI'>Profile Page</li>
               </ul>
-            </p>
+            </div>
           </div>
         </div>
       ),
@@ -160,7 +160,7 @@ export default function AboutUs(): ReactElement {
           The application is a Single Page Application (SPA) i.e. dynamically
           rewrites a current web page with new data from the web server.
         </p>
-        <p className='AboutProjectText'>
+        <div className='AboutProjectText'>
           Key pages in the application include:
           <ul>
             <li>Login and Registration pages 🖥️</li>
@@ -171,7 +171,7 @@ export default function AboutUs(): ReactElement {
             <li>Basket page 🛒</li>
             <li>About Us page 🙋‍♂️🙋‍♀️</li>
           </ul>
-        </p>
+        </div>
         <p className='AboutProjectText'>
           The application is powered by CommerceTools 🌐, a leading provider of
           commerce solutions for B2C and B2B enterprises. CommerceTools offers a

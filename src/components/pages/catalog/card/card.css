@@ -31,7 +31,6 @@
 }
 
 .product-card__author-name {
-  font-family: Inter;
   font-size: 1.5rem;
   font-style: italic;
   font-weight: 400;
@@ -91,7 +90,6 @@
 
 .product-card__item-name {
   color: var(--secondary-color-light-active);
-  font-family: Inder;
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
