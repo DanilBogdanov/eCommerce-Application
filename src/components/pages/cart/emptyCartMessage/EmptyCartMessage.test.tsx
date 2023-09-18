@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { EmptyCartMassage } from './EmptyCartMassage';
+import { EmptyCartMessage } from './EmptyCartMessage';
 
 describe('EmptyCartMassage Component', () => {
   it('should render with correct title and paragraph', () => {
     const { getByText } = render(
       <MemoryRouter>
-        <EmptyCartMassage />
+        <EmptyCartMessage />
       </MemoryRouter>,
     );
 
@@ -20,7 +20,7 @@ describe('EmptyCartMassage Component', () => {
   it('should render the "Catalog" NavLink', () => {
     const { getByText } = render(
       <MemoryRouter>
-        <EmptyCartMassage />
+        <EmptyCartMessage />
       </MemoryRouter>,
     );
 
@@ -32,7 +32,7 @@ describe('EmptyCartMassage Component', () => {
   it('should render the empty cart image', () => {
     const { getByAltText } = render(
       <MemoryRouter>
-        <EmptyCartMassage />
+        <EmptyCartMessage />
       </MemoryRouter>,
     );
 

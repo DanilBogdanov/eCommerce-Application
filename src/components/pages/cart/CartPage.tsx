@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { EmptyCartMassage } from './emptyCartMassage/EmptyCartMassage';
+import { EmptyCartMessage } from './emptyCartMessage/EmptyCartMessage';
 import { api } from '../../../api/api';
 import { Cart } from '../../../types/api';
 import './cart.css';
@@ -70,7 +70,7 @@ export function CartPage() {
     }
   };
 
-  if (!cart || cart.lineItems.length === 0) return <EmptyCartMassage />;
+  if (!cart || cart.lineItems.length === 0) return <EmptyCartMessage />;
 
   return (
     <div className='cart__container'>
