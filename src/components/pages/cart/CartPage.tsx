@@ -1,14 +1,16 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { EmptyCartMessage } from './emptyCartMessage/EmptyCartMessage';
+import { Line } from './line/Line';
+import { Modal } from './modal/Modal';
 import { api } from '../../../api/api';
 import { Cart } from '../../../types/api';
-import './cart.css';
-import { Line } from './line/Line';
 import { MessageType, notifier } from '../../../utils/notifier';
+import './cart.css';
 
 export function CartPage() {
   const [cart, setCart] = useState<Cart | null>(null);
   const [inputValue, setInputValue] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -68,6 +70,7 @@ export function CartPage() {
     if (cartResp.isSuccessful && cartResp.data) {
       setCart(cartResp.data);
     }
+    setShowModal(false);
   };
 
   if (!cart || cart.lineItems.length === 0) return <EmptyCartMessage />;
@@ -111,12 +114,19 @@ export function CartPage() {
         <button
           className='button cart__clear-button'
           type='button'
-          onClick={() => clearCart()}
+          onClick={() => setShowModal(true)}
         >
           clear cart
         </button>
       </div>
       <div />
+      {showModal && (
+        <Modal
+          callback={clearCart}
+          isShow={setShowModal}
+          message='Delete all products?'
+        />
+      )}
     </div>
   );
 }
