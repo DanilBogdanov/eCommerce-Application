@@ -19,7 +19,6 @@
   --secondary-color-light-active: rgb(255, 255, 255);
 
   --font-color: rgba(0, 0, 0, 0.35);
-  --font-author-color: rgba(0, 0, 0, 0.35);
   --shadow-color: rgba(185, 212, 238, 0.92);
   --font-header-color: rgb(128, 178, 94);
   --btns-bg-color: rgba(128, 178, 94, 0.13);
@@ -31,4 +30,6 @@
 
   --danger-color: rgb(246, 56, 32);
   --danger-color-light: rgb(254, 227, 225);
+
+  --bio-background-color: rgb(239, 239, 239);
 }

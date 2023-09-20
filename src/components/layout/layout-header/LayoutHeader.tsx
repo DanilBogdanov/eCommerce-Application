@@ -10,6 +10,7 @@ import SearchBar from './searchBar/SearchBar';
 import { BURGER_BREAKPOINT } from '../../../types/constants';
 
 import './layoutHeader.css';
+import CartBar from './cartBar/CartBar';
 
 export default function LayoutHeader(): ReactElement {
   const [hasBurger, setHasBurger] = useState(false);
@@ -51,15 +52,19 @@ export default function LayoutHeader(): ReactElement {
             <NavBar />
             <div className='header__control'>
               <SearchBar />
+              <CartBar />
               <UserBar />
             </div>
           </>
         )}
         {hasBurger && (
-          <BurgerBtn
-            isActive={isBurgerActive}
-            onClick={() => setIsBurgerActive((prev) => !prev)}
-          />
+          <>
+            <CartBar />
+            <BurgerBtn
+              isActive={isBurgerActive}
+              onClick={() => setIsBurgerActive((prev) => !prev)}
+            />
+          </>
         )}
       </div>
       {hasBurger && (

@@ -27,7 +27,7 @@
 }
 
 .search-bar:has(:focus) .search-bar__input {
-  width: 15rem;
+  width: 12rem;
   color: inherit;
 }
 

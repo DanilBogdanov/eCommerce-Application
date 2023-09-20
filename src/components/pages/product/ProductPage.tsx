@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ReactElement } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -13,7 +13,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-export function ProductPage() {
+export function ProductPage(): ReactElement {
   const [categories, setCategories] = useState<ApiResponse<Category[]> | null>(
     null,
   );
@@ -24,7 +24,18 @@ export function ProductPage() {
   const [modalActive, setModalActive] = useState(false);
   const location = useLocation();
   const locationArray = location.pathname.split('/');
+  const [cart, setCart] = useState<string[] | null>(null);
 
+  useEffect(() => {
+    const loadCart = async () => {
+      const cartResp = await api.carts.getCart();
+      if (cartResp.isSuccessful && cartResp.data) {
+        const cartItems = cartResp.data.lineItems.map((line) => line.productId);
+        setCart(cartItems);
+      }
+    };
+    loadCart();
+  }, []);
   function handleKeyPress(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       setModalActive(false);
@@ -59,6 +70,8 @@ export function ProductPage() {
     }
   }, [currentImage, productData]);
 
+  if (!productData || !productData.data) return <div>Loading...</div>;
+
   return (
     <main className='product-page'>
       <Sidebar categories={categories} />
@@ -81,32 +94,26 @@ export function ProductPage() {
                 )}
               </button>
               <div className='product-page__images-navigation'>
-                {productData &&
-                  productData.data &&
-                  productData.data.imagesUrl.map((imageUrl) => (
-                    <button
-                      type='button'
-                      onClick={() => {
-                        setCurrentImage(imageUrl);
-                      }}
-                      key={imageUrl}
-                      className={`product-page__image-container ${
-                        imageUrl === currentImage
-                          ? 'product-page__image-container_active'
-                          : null
-                      }`}
-                    >
-                      <img
-                        className='product-page__image'
-                        src={imageUrl}
-                        alt={
-                          productData &&
-                          productData.data &&
-                          productData.data.name
-                        }
-                      />
-                    </button>
-                  ))}
+                {productData.data.imagesUrl.map((imageUrl) => (
+                  <button
+                    type='button'
+                    onClick={() => {
+                      setCurrentImage(imageUrl);
+                    }}
+                    key={imageUrl}
+                    className={`product-page__image-container ${
+                      imageUrl === currentImage
+                        ? 'product-page__image-container_active'
+                        : null
+                    }`}
+                  >
+                    <img
+                      className='product-page__image'
+                      src={imageUrl}
+                      alt={productData.data && productData.data.name}
+                    />
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -127,22 +134,20 @@ export function ProductPage() {
                   pagination={{ clickable: true }}
                   scrollbar={{ draggable: true }}
                   initialSlide={
-                    productData && productData.data && currentImage
+                    currentImage
                       ? productData.data.imagesUrl.indexOf(currentImage)
                       : 0
                   }
                 >
-                  {productData &&
-                    productData.data &&
-                    productData.data.imagesUrl.map((imageUrl, index) => (
-                      <SwiperSlide key={imageUrl}>
-                        <img
-                          src={imageUrl}
-                          alt={`slide ${index}`}
-                          className='slider-image'
-                        />
-                      </SwiperSlide>
-                    ))}
+                  {productData.data.imagesUrl.map((imageUrl, index) => (
+                    <SwiperSlide key={imageUrl}>
+                      <img
+                        src={imageUrl}
+                        alt={`slide ${index}`}
+                        className='slider-image'
+                      />
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
               </div>
             </div>
@@ -163,8 +168,11 @@ export function ProductPage() {
               </div>
             </div>
             <div className='product-page__shoping-attributs'>
-              {productData && productData.data && (
-                <ShopingAttributs item={productData.data} />
+              {productData.data && (
+                <ShopingAttributs
+                  item={productData.data}
+                  itemInCart={cart ? cart.includes(productData.data.id) : false}
+                />
               )}
             </div>
           </div>

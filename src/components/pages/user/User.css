@@ -65,7 +65,7 @@ hr {
   margin: 0.3rem 0 1rem 0;
 }
 
-.AddressTable {
+.Table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   /* width: 20rem; */
@@ -85,11 +85,11 @@ hr {
   flex: 0 0 auto;
 }
 
-.AddressTableRow:nth-child(even) {
+.TableRow:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.AddressTableRow:hover {
+.TableRow:hover {
   background-color: #ddd;
   transition: 0.15s;
 }

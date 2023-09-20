@@ -1,0 +1,104 @@
+.home {
+  max-width: 100rem;
+  margin: 1rem auto;
+}
+
+.intro {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 1rem 0.1rem var(--main-background-color);
+}
+
+.intro__img {
+  width: 100%;
+  margin-bottom: -0.5rem;
+}
+
+.intro__title {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  color: var(--secondary-color-light-active);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  font-size: 6rem;
+  font-weight: 100;
+  text-shadow: 0 0 6px rgba(9, 4, 4, 1);
+}
+
+.intro__subtitle {
+  position: absolute;
+  top: 12%;
+  left: 5%;
+  color: var(--secondary-color-light-active);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 4rem;
+  font-weight: 100;
+  text-shadow: 0 0 6px rgba(9, 4, 4, 1);
+}
+
+.intro__link {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+  display: flex;
+  padding: 1.5rem 3.5rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  text-decoration: none;
+  color: var(--secondary-background-color);
+  background-color: var(--secondary-color-light);
+  border-radius: 1rem;
+  box-shadow: 0 0 0.3rem 0.3rem var(--secondary-color-light);
+  transition-duration: 0.3s;
+}
+
+.intro__link:hover {
+  background-color: var(--main-color);
+  box-shadow: 0 0 0.3rem 0.3rem var(--main-color);
+}
+
+@media (max-width: 768px) {
+  .intro__title {
+    font-size: 4rem;
+  }
+
+  .intro__subtitle {
+    font-size: 3rem;
+  }
+
+  .intro__link {
+    right: 5%;
+    padding: 1rem 2rem;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .intro__title {
+    font-size: 2.9rem;
+  }
+
+  .intro__subtitle {
+    top: 17%;
+    font-size: 1.7rem;
+  }
+
+  .intro__link {
+    right: 5%;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+.discounts__container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 4rem;
+  row-gap: 3rem;
+  padding-top: 2rem;
+}

@@ -84,7 +84,7 @@
   background-color: transparent;
   cursor: pointer;
   transition: 0.5s ease-in;
-  border: 0.1rem solid var(--font-author-color);
+  border: 0.1rem solid var(--font-color);
   transition: 0.5s ease-in-out;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -120,16 +120,14 @@
   color: var(--font-header-color);
   margin: 0;
   padding: 1rem 1.5rem;
-  font-family: Inter;
   font-size: 2.6rem;
   font-weight: 700;
   line-height: normal;
   text-shadow: 2px 2px 4px var(--shadow-color);
 }
 .product-page__author {
-  color: var(--font-author-color);
+  color: var(--font-color);
   padding-inline: 1.5rem;
-  font-family: Inter;
   font-size: 2rem;
   font-weight: 500;
   line-height: normal;
@@ -138,8 +136,7 @@
 .product-page__description {
   margin-top: 2rem;
   padding-inline: 1.5rem;
-  color: var(--font-author-color);
-  font-family: Inter;
+  color: var(--font-color);
   font-size: 1.6rem;
   font-weight: 500;
   line-height: normal;

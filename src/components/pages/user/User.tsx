@@ -645,9 +645,9 @@ function User(): ReactElement {
       <div className=' UserSection'>
         <hr />
         <h2 className='SectionHeader'>Addresses</h2>
-        <table className='AddressTable'>
-          <thead className='AddressTableHead'>
-            <tr className='AddressTableRow'>
+        <table className='Table'>
+          <thead className='TableHead'>
+            <tr className='TableRow'>
               <th className='AddressTableHeader'>Address</th>
               <th className='AddressTableHeader'>City</th>
               <th className='AddressTableHeader'>Country</th>

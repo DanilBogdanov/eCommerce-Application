@@ -20,7 +20,7 @@
   font: inherit;
   font-size: 1.5rem;
   font-weight: bold;
-  color: var(--font-author-color);
+  color: var(--font-color);
   background-color: var(--secondary-color-light);
   cursor: pointer;
   transition: 0.5s ease-in;
@@ -44,7 +44,7 @@
   font: inherit;
   font-size: 1.5rem;
   font-weight: bold;
-  color: var(--font-author-color);
+  color: var(--font-color);
   background-color: var(--secondary-color-light);
   cursor: pointer;
   transition: 0.5s ease-in;

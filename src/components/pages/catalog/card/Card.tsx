@@ -7,9 +7,14 @@ import { ShopingAttributs } from '../../../shopingAttributs/ShopingAttributs';
 type CardProps = {
   item: Product;
   cateoguriesNames: string[][] | null;
+  itemInCart: boolean;
 };
 
-export function Card({ item, cateoguriesNames }: CardProps): ReactElement {
+export function Card({
+  item,
+  cateoguriesNames,
+  itemInCart,
+}: CardProps): ReactElement {
   const [correctPath, setCorrectPath] = useState<string | null>(null);
   const buttonBookMarkRef = useRef<HTMLButtonElement | null>(null);
   const location = useLocation();
@@ -87,7 +92,7 @@ export function Card({ item, cateoguriesNames }: CardProps): ReactElement {
             ? `${item.name.substring(0, 15)}...`
             : item.name}
         </div>
-        <ShopingAttributs item={item} />
+        <ShopingAttributs item={item} itemInCart={itemInCart} />
       </div>
     </div>
   );
