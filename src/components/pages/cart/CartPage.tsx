@@ -1,11 +1,11 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { EmptyCartMessage } from './emptyCartMessage/EmptyCartMessage';
+import { Line } from './line/Line';
+import { Modal } from './modal/Modal';
 import { api } from '../../../api/api';
 import { Cart } from '../../../types/api';
-import './cart.css';
-import { Line } from './line/Line';
 import { MessageType, notifier } from '../../../utils/notifier';
-import { Modal } from './modal/Modal';
+import './cart.css';
 
 export function CartPage() {
   const [cart, setCart] = useState<Cart | null>(null);
