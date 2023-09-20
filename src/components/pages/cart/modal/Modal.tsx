@@ -12,11 +12,7 @@ export function Modal({ callback, isShow, message }: ModalProps) {
       <div className='modal__wrapper'>
         <div className='modal__message'>{message}</div>
         <div className='modal__buttons-wrapper'>
-          <button
-            type='button'
-            onClick={callback}
-            className='button  modal__confirm'
-          >
+          <button type='button' onClick={callback} className='modal__confirm'>
             confirm
           </button>
           <button
@@ -24,7 +20,7 @@ export function Modal({ callback, isShow, message }: ModalProps) {
             onClick={() => {
               isShow(false);
             }}
-            className='button modal__cancel'
+            className='modal__cancel'
           >
             cancel
           </button>
